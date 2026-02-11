@@ -705,3 +705,9 @@ Entries:
       message: You VVill Gulp
   id: 90
   time: '2026-02-11T13:34:23.0000000+00:00'
+- author: DecemberEpsilon
+  changes:
+    - type: Tweak
+      message: explosion chem bombs are BVCK
+  id: 91
+  time: '2026-02-11T13:34:45.0000000+00:00'

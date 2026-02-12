@@ -2,7 +2,7 @@
 # SPDX-FileCopyrightText: 2025 slarticodefast
 # SPDX-FileCopyrightText: 2026 LaCumbiaDelCoronavirus
 #
-# SPDX-License-Identifier: MPL-2.0
+# SPDX-License-Identifier: MIT
 
 - type: entity
   parent: [BaseWeaponBallisticTurret, BaseSyndicateContraband]
@@ -113,7 +113,7 @@
     soundGunshot: /Audio/Weapons/Xeno/alien_spitacid.ogg
   - type: HTN
     rootTask:
-      task: EnergyTurretCompound
+      task: TurretCompound
     blackboard:
       SoundTargetInLOS: !type:SoundPathSpecifier
         path: /Audio/Animals/snake_hiss.ogg

@@ -22,12 +22,12 @@ namespace Content.Shared.Body.Part
     public enum BodyPartType
     {
         Other = 0,
-        Torso,
-        Head,
-        Arm,
-        Hand,
-        Leg,
-        Foot,
-        Tail
+        Torso = 1 << 0 /* KS14 change: added value */,
+        Head = 1 << 1 /* KS14 change: added value */,
+        Arm = 1 << 2 /* KS14 change: added value */,
+        Hand = 1 << 3 /* KS14 change: added value */,
+        Leg = 1 << 4 /* KS14 change: added value */,
+        Foot = 1 << 5 /* KS14 change: added value */,
+        Tail = 1 << 6 /* KS14 change: added value */
     }
 }

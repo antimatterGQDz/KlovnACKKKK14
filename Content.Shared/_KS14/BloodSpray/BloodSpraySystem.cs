@@ -54,6 +54,7 @@ public sealed class BloodSpraySystem : EntitySystem
     // - [x] Tested, works.
     // TODO: Clean up code
     // Coder's Ultimatum
+    // TODO LCDC: FUCKING FIX THIS HOLY SHIT! IITS SO EASY
     public void HandleBleedEffects(Entity<BloodstreamComponent> entity, float bloodloss, Vector2 targetWorldPosition, TransformComponent targetTransform, EntityUid parentUid, Vector2 worldDeltaUnit, EntityUid? originUid = null)
     {
         // it shouldnt be 0 ever anyway

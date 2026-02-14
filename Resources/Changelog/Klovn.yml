@@ -717,3 +717,17 @@ Entries:
       message: Egg
   id: 92
   time: '2026-02-13T05:00:04.0000000+00:00'
+- author: DeusMaldPr
+  changes:
+    - type: Tweak
+      message: Tricordizene now heals you if you aren't crit, not just up to 50 damage.
+    - type: Tweak
+      message: >-
+        Epinephrine heals slightly more and will now heal to 90 damage (instead
+        of just 100, ie, slightly over crit, not just right at it)
+    - type: Tweak
+      message: >-
+        Potassium iodine will heal SLIGHT amounts of rad damage aswell as
+        metabolize 50% slower than before. 
+  id: 93
+  time: '2026-02-14T15:38:49.0000000+00:00'

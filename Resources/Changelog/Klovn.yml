@@ -731,3 +731,9 @@ Entries:
         metabolize 50% slower than before. 
   id: 93
   time: '2026-02-14T15:38:49.0000000+00:00'
+- author: LaCumbiaDelCoronavirus
+  changes:
+    - type: Add
+      message: You can now be delimbed from explosions.
+  id: 94
+  time: '2026-02-14T18:25:49.0000000+00:00'

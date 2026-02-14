@@ -34,5 +34,5 @@ cooldown_seconds = 0.05
 [hub]
 advertise = true
 tags = "lang:en,region:eu_w,rp:low"
-hub_urls = "https://hub.simplestation.org/, https://hub.singularity14.co.uk/"
+hub_urls = "https://hub.singularity14.co.uk/" # SimpleStation hub likes to not work and crash the game
 server_url = "ss14://game.klovnstation.org"

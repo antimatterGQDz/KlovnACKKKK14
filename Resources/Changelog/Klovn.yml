@@ -737,3 +737,15 @@ Entries:
       message: You can now be delimbed from explosions.
   id: 94
   time: '2026-02-14T18:25:49.0000000+00:00'
+- author: LaCumbiaDelCoronavirus
+  changes:
+    - type: Tweak
+      message: Sutures, meshes, and gauze now heal 2x faster.
+    - type: Tweak
+      message: >-
+        Tourniquets now heal the user instantly but heal slightly less bleeding.
+        They also don't do any brute damage anymore.
+    - type: Tweak
+      message: Survival boxes are now 2x2 in bags, but still hold 3x3 storage inside.
+  id: 95
+  time: '2026-02-15T19:05:19.0000000+00:00'

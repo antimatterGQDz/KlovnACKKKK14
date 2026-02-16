@@ -26,7 +26,7 @@ public sealed partial class KsCCVars
     /// </summary>
     [CVarControl(AdminFlags.Debug)]
     public static readonly CVarDef<string> AnnouncementWebhookInterface =
-        CVarDef.Create("klovn.announcementwebhook.port", "http://localhost:8065/", CVar.SERVERONLY);
+        CVarDef.Create("klovn.announcementwebhook.interface", "http://localhost:8065/", CVar.SERVERONLY);
 
     /// <summary>
     ///     Should overlay stains be drawn more expensively?

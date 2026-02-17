@@ -35,7 +35,7 @@ jobs:
 
         JSON_PAYLOAD=$(jq -n \
           --arg token "${{ secrets.ANNOUNCEMENT_WEBHOOK_TOKEN }}" \
-          --arg message $MESSAGE \
+          --arg message "$MESSAGE" \
           '{Token: $token, Message: $message}')
 
         curl -s -o /dev/null -w "%{http_code}" \

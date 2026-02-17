@@ -13,10 +13,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Send PR notification
+      env:
+        SUFFIX: "${{ github.event.pull_request.title }} by ${{ github.event.pull_request.user.login }}"
       run: |
         PR_NUMBER="${{ github.event.pull_request.number }}"
-        PR_TITLE="${{ github.event.pull_request.title }}"
-        PR_AUTHOR="${{ github.event.pull_request.user.login }}"
 
         # Build and send JSON
         JSON_PAYLOAD=$null
@@ -25,12 +25,12 @@ jobs:
 
         if [[ "${{ github.event.action }}" == "closed" ]]; then
           if [[ "${{ github.event.pull_request.merged }}" == "true" ]]; then
-            MESSAGE = "$PREFIX was merged: ${PR_TITLE} by ${PR_AUTHOR}"
+            MESSAGE="$PREFIX was merged: $SUFFIX"
           else
-            MESSAGE = "$PREFIX was closed without merging: ${PR_TITLE} by ${PR_AUTHOR}"
+            MESSAGE="$PREFIX was closed without merging: $SUFFIX"
           fi
         else
-          MESSAGE = "$PREFIX was opened: ${PR_TITLE} by ${PR_AUTHOR}"
+          MESSAGE="$PREFIX was opened: $SUFFIX"
         fi
 
           JSON_PAYLOAD=$(jq -n \

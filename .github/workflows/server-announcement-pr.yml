@@ -21,25 +21,22 @@ jobs:
         # Build and send JSON
         JSON_PAYLOAD=$null
         PREFIX="(Space-Klovns/Klovnstation14) PR #${PR_NUMBER}"
+        MESSAGE="FUCK"
 
         if [[ "${{ github.event.action }}" == "closed" ]]; then
           if [[ "${{ github.event.pull_request.merged }}" == "true" ]]; then
-            JSON_PAYLOAD=$(jq -n \
-              --arg token "${{ secrets.ANNOUNCEMENT_WEBHOOK_TOKEN }}" \
-              --arg message "$PREFIX was merged: ${PR_TITLE} by ${PR_AUTHOR}" \
-              '{Token: $token, Message: $message}')
+            MESSAGE = "$PREFIX was merged: ${PR_TITLE} by ${PR_AUTHOR}"
           else
-            JSON_PAYLOAD=$(jq -n \
-              --arg token "${{ secrets.ANNOUNCEMENT_WEBHOOK_TOKEN }}" \
-              --arg message "$PREFIX was closed without merging: ${PR_TITLE} by ${PR_AUTHOR}" \
-              '{Token: $token, Message: $message}')
+            MESSAGE = "$PREFIX was closed without merging: ${PR_TITLE} by ${PR_AUTHOR}"
           fi
         else
+          MESSAGE = "$PREFIX was opened: ${PR_TITLE} by ${PR_AUTHOR}"
+        fi
+
           JSON_PAYLOAD=$(jq -n \
             --arg token "${{ secrets.ANNOUNCEMENT_WEBHOOK_TOKEN }}" \
-            --arg message "$PREFIX was opened: ${PR_TITLE} by ${PR_AUTHOR}" \
+            --arg message $MESSAGE \
             '{Token: $token, Message: $message}')
-        fi
 
         curl -s -o /dev/null -w "%{http_code}" \
           -X POST \

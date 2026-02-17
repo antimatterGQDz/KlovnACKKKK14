@@ -171,8 +171,8 @@
 ### Tank body
 
 - type: entity
-  parent: VehicleTankBodyJointedTurret
-  id: VehicleTankBodyJointedTurretNpcAllHostile
+  parent: VehicleTankBody
+  id: VehicleTankBodyNpcAllHostile
   suffix: NPC, All Hostile
   description: Holy shit! It doesn't seem friendly at all.
   components:

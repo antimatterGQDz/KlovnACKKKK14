@@ -80,15 +80,6 @@
           radius: 1.35
         density: 30
 
-- type: entity
-  parent: VehicleTankBody
-  id: VehicleTankBodyJointedTurret
-  suffix: With turret
-  components:
-  - type: EnsureWeldJointedEntity
-    spawnedEntityId: VehicleTankTurret
-    canCollideConnected: false
-
 ### Tank turret
 
 - type: entity
@@ -182,11 +173,9 @@
 - type: entity
   parent: VehicleTankBodyJointedTurret
   id: VehicleTankBodyJointedTurretNpcAllHostile
-  suffix: NPC, All Hostile, With turret
+  suffix: NPC, All Hostile
   description: Holy shit! It doesn't seem friendly at all.
   components:
-  - type: EnsureWeldJointedEntity
-    spawnedEntityId: VehicleTankTurretNpcAllHostile
   - type: MobMover
   - type: HTN
     rootTask:

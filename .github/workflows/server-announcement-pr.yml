@@ -2,7 +2,7 @@
 #
 # SPDX-License-Identifier: MPL-2.0
 
-name: Server Announcement on PR opened
+name: Server Announcement on PR status update
 
 on:
   pull_request:
@@ -20,7 +20,7 @@ jobs:
 
         # Build and send JSON
         JSON_PAYLOAD=$null
-        PREFIX="(Space-Klovns/Klovnstation14) PR #${PR_NUMBER}
+        PREFIX="(Space-Klovns/Klovnstation14) PR #${PR_NUMBER}"
 
         if [[ "${{ github.event.action }}" == "closed" ]]; then
           if [[ "${{ github.event.pull_request.merged }}" == "true" ]]; then

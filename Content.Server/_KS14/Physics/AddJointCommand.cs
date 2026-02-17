@@ -35,7 +35,7 @@ public sealed class AddJointCommand : LocalizedEntityCommands
 
     public override void Execute(IConsoleShell shell, string argStr, string[] args)
     {
-        if (args.Length != 3 || args.Length != 4)
+        if (args.Length != 3 && args.Length != 4)
         {
             shell.WriteError(Loc.GetString("cmd-addjoint-invalid-args"));
             return;
@@ -128,7 +128,7 @@ public sealed class AddJointCommand : LocalizedEntityCommands
 
     private void SetupTypesIfNecessary()
     {
-        if (!_areJointsRecognised)
+        if (_areJointsRecognised)
             return;
 
         _areJointsRecognised = true;

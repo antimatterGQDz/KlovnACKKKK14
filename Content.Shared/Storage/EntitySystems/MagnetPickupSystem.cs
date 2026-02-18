@@ -9,10 +9,11 @@
 // SPDX-FileCopyrightText: 2025 DrSmugleaf
 // SPDX-FileCopyrightText: 2025 Kyle Tyo
 // SPDX-FileCopyrightText: 2025 kosticia
-// SPDX-FileCopyrightText: 2025 nabegator220
+// SPDX-FileCopyrightText: 2026 FrauZj
 // SPDX-FileCopyrightText: 2026 FrauzJ
 // SPDX-FileCopyrightText: 2026 LaCumbiaDelCoronavirus
 // SPDX-FileCopyrightText: 2026 github_actions[bot]
+// SPDX-FileCopyrightText: 2026 nabegator220
 //
 // SPDX-License-Identifier: MIT
 
@@ -21,6 +22,7 @@ using Content.Shared.Storage.Components;
 using Content.Shared.Whitelist;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Timing;
+using Robust.Shared.Network;
 
 namespace Content.Shared.Storage.EntitySystems;
 
@@ -30,6 +32,7 @@ namespace Content.Shared.Storage.EntitySystems;
 public sealed class MagnetPickupSystem : EntitySystem
 {
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
@@ -56,6 +59,12 @@ public sealed class MagnetPickupSystem : EntitySystem
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
+
+        //evil KS14 hack
+        if (!_net.IsServer)
+            return;
+        //evil KS14 hack end
+
         var query = EntityQueryEnumerator<MagnetPickupComponent, StorageComponent, TransformComponent, MetaDataComponent>();
         var currentTime = _timing.CurTime;
 
@@ -67,10 +76,10 @@ public sealed class MagnetPickupSystem : EntitySystem
             comp.NextScan += ScanDelay;
             Dirty(uid, comp);
 
-            if (!_inventory.TryGetContainingSlot((uid, xform, meta), out var slotDef))
+            if (!_inventory.TryGetContainingSlot((uid, xform, meta), out var slotDef) && comp.SlotIrrespective == false) //KS14
                 continue;
 
-            if ((slotDef.SlotFlags & comp.SlotFlags) == 0x0)
+            if (slotDef != null && (slotDef.SlotFlags & comp.SlotFlags) == 0x0 && comp.SlotIrrespective == false) //KS14
                 continue;
 
             // No space

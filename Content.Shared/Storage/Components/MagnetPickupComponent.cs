@@ -3,10 +3,11 @@
 // SPDX-FileCopyrightText: 2024 Pieter-Jan Briers
 // SPDX-FileCopyrightText: 2025 DrSmugleaf
 // SPDX-FileCopyrightText: 2025 kosticia
-// SPDX-FileCopyrightText: 2025 nabegator220
+// SPDX-FileCopyrightText: 2026 FrauZj
 // SPDX-FileCopyrightText: 2026 FrauzJ
 // SPDX-FileCopyrightText: 2026 LaCumbiaDelCoronavirus
 // SPDX-FileCopyrightText: 2026 github_actions[bot]
+// SPDX-FileCopyrightText: 2026 nabegator220
 //
 // SPDX-License-Identifier: MIT
 
@@ -36,4 +37,8 @@ public sealed partial class MagnetPickupComponent : Component
 
     [ViewVariables(VVAccess.ReadWrite), DataField("range")]
     public float Range = 1f;
+
+    //KS14
+    [ViewVariables(VVAccess.ReadWrite), DataField("slotIrrespective")]
+    public bool SlotIrrespective = false;
 }

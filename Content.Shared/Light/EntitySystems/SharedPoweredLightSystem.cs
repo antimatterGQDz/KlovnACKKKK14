@@ -1,3 +1,11 @@
+// SPDX-FileCopyrightText: 2025 LaCumbiaDelCoronavirus
+// SPDX-FileCopyrightText: 2025 Perry Fraser
+// SPDX-FileCopyrightText: 2025 metalgearsloth
+// SPDX-FileCopyrightText: 2025 slarticodefast
+// SPDX-FileCopyrightText: 2026 nabegator220
+//
+// SPDX-License-Identifier: MPL-2.0
+
 using Content.Shared.Audio;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
@@ -211,9 +219,10 @@ public abstract class SharedPoweredLightSystem : EntitySystem
     ///     Try to replace current bulb with a new one
     ///     If succeed old bulb just drops on floor
     /// </summary>
-    public bool ReplaceBulb(EntityUid uid, EntityUid bulb, PoweredLightComponent? light = null)
+    /// KS14 GOOBSTATION PORT THIS FUNCTION HAS BEEN MODIFIED
+    public bool ReplaceBulb(EntityUid uid, EntityUid bulb, out EntityUid? oldBulb, PoweredLightComponent? light = null)
     {
-        EjectBulb(uid, null, light);
+        oldBulb = EjectBulb(uid, null, light);
         return InsertBulb(uid, bulb, light);
     }
 

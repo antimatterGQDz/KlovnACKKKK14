@@ -1,3 +1,24 @@
+// SPDX-FileCopyrightText: 2021 Alex Evgrashin
+// SPDX-FileCopyrightText: 2021 DrSmugleaf
+// SPDX-FileCopyrightText: 2021 Paul
+// SPDX-FileCopyrightText: 2021 ShadowCommander
+// SPDX-FileCopyrightText: 2021 Vera Aguilera Puerto
+// SPDX-FileCopyrightText: 2021 Visne
+// SPDX-FileCopyrightText: 2022 Leon Friedrich
+// SPDX-FileCopyrightText: 2022 keronshb
+// SPDX-FileCopyrightText: 2022 wrexbe
+// SPDX-FileCopyrightText: 2023 Nemanja
+// SPDX-FileCopyrightText: 2023 Pieter-Jan Briers
+// SPDX-FileCopyrightText: 2023 TemporalOroboros
+// SPDX-FileCopyrightText: 2023 deltanedas
+// SPDX-FileCopyrightText: 2023 metalgearsloth
+// SPDX-FileCopyrightText: 2024 Kara
+// SPDX-FileCopyrightText: 2024 Magnus Larsen
+// SPDX-FileCopyrightText: 2024 lzk
+// SPDX-FileCopyrightText: 2026 nabegator220
+//
+// SPDX-License-Identifier: MPL-2.0
+
 using System.Linq;
 using Content.Server.Light.Components;
 using Content.Shared.Examine;
@@ -55,6 +76,10 @@ public sealed class LightReplacerSystem : SharedLightReplacerSystem
             {
                 args.PushMarkup(Loc.GetString("comp-light-replacer-light-listing", ("amount", amount), ("name", name)));
             }
+            // KS14 Goobstation port start
+            var percent = component.GlassRecycled / component.GlassRequired * 100;
+            args.PushMarkup(Loc.GetString("comp-light-replacer-recycle-progress", ("num", percent)));
+            // KS14 Goobstation port end
         }
     }
 
@@ -158,10 +183,20 @@ public sealed class LightReplacerSystem : SharedLightReplacerSystem
         }
 
         // insert it into fixture
-        var wasReplaced = _poweredLight.ReplaceBulb(fixtureUid, bulb, fixture);
+        var wasReplaced = _poweredLight.ReplaceBulb(fixtureUid, bulb, out var oldBulb, fixture); // KS14 Goobstation port - Recycle bulbs!
         if (wasReplaced)
         {
             _audio.PlayPvs(replacer.Sound, replacerUid);
+            // KS14 Goobstation port start
+            Del(oldBulb);
+            replacer.GlassRecycled += replacer.GlassPerBulb;
+
+            if (replacer.GlassRecycled >= replacer.GlassRequired)
+            {
+                replacer.GlassRecycled -= replacer.GlassRequired;
+                TrySpawnInContainer(replacer.LightBulbProto, replacerUid, "light_replacer_storage", out _);
+            }
+            // KS14 Goobstation port end
         }
 
         return wasReplaced;

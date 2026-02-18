@@ -1,3 +1,15 @@
+// SPDX-FileCopyrightText: 2024 Nemanja
+// SPDX-FileCopyrightText: 2025 ArtisticRoomba
+// SPDX-FileCopyrightText: 2025 TemporalOroboros
+// SPDX-FileCopyrightText: 2025 chromiumboy
+// SPDX-FileCopyrightText: 2025 metalgearsloth
+// SPDX-FileCopyrightText: 2026 Rinary
+// SPDX-FileCopyrightText: 2026 github_actions[bot]
+//
+// SPDX-License-Identifier: MPL-2.0
+
+// Starlight Start: Move to Shared ``Content.Shared\_Starlight\Atmos\EntitySystems\PipeRestrictOverlapSystem.cs``
+/*
 using System.Linq;
 using Content.Server.Atmos.Components;
 using Content.Server.NodeContainer;
@@ -123,3 +135,6 @@ public sealed class PipeRestrictOverlapSystem : EntitySystem
         }
     }
 }
+
+*/
+// Starlight End: Move to Shared

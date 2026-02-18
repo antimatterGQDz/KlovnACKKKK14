@@ -1,3 +1,11 @@
+// SPDX-FileCopyrightText: 2025 ArtisticRoomba
+// SPDX-FileCopyrightText: 2025 Perry Fraser
+// SPDX-FileCopyrightText: 2025 chromiumboy
+// SPDX-FileCopyrightText: 2026 Rinary
+// SPDX-FileCopyrightText: 2026 github_actions[bot]
+//
+// SPDX-License-Identifier: MPL-2.0
+
 using Content.Server.Atmos.Components;
 using Content.Server.NodeContainer.EntitySystems;
 using Content.Server.NodeContainer.NodeGroups;
@@ -7,6 +15,10 @@ using Content.Shared.Atmos.EntitySystems;
 using Content.Shared.Construction.Components;
 using Content.Shared.NodeContainer;
 using Content.Shared.Popups;
+// Starlight Start
+using Content.Shared._Starlight.Atmos.EntitySystems;
+using Content.Shared._Starlight.Atmos.Components;
+// Starlight End
 
 namespace Content.Server.Atmos.EntitySystems;
 

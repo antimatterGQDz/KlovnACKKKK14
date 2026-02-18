@@ -779,3 +779,11 @@ Entries:
       message: Getting damaged while standing up no longer cancels standing do-after.
   id: 98
   time: '2026-02-17T14:42:51.0000000+00:00'
+- author: nabegator220
+  changes:
+    - type: Tweak
+      message: >-
+        Ore bags and janitor bags now magnet from anywhere. Janitor bags have a
+        magnet.
+  id: 99
+  time: '2026-02-18T16:59:00.0000000+00:00'

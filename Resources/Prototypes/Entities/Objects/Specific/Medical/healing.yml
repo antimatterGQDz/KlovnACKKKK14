@@ -43,7 +43,6 @@
 # SPDX-FileCopyrightText: 2025 FrauzJ
 # SPDX-FileCopyrightText: 2025 J
 # SPDX-FileCopyrightText: 2025 Killerqu00
-# SPDX-FileCopyrightText: 2025 LaCumbiaDelCoronavirus
 # SPDX-FileCopyrightText: 2025 Nox
 # SPDX-FileCopyrightText: 2025 ScarKy0
 # SPDX-FileCopyrightText: 2025 SeamLesss
@@ -390,7 +389,7 @@
     delay: 1 # KS14: halved delay
     damage:
       types:
-        Bruise: -3 #klovn, at least something lol
+        Blunt: -3 #klovn, at least something lol
         Slash: -5
         Piercing: -13 #klovn
     bloodlossModifier: -10

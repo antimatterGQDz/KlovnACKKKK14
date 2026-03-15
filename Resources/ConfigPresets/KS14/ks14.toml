@@ -19,7 +19,7 @@ website    = "https://klovnstation.org"
 wiki       = "https://klovnstation14.miraheze.org/wiki/Main_Page"
 
 #[auth] - not working with our shit apparently
-#server = "https://auth.simplestation.org/"
+server = "https://auth.simplestation.org/"
 
 
 [ooc]

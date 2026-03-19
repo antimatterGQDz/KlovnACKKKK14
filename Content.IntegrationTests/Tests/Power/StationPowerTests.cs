@@ -31,7 +31,7 @@ public sealed class StationPowerTests
     /// </summary>
     private const float MinimumPowerDurationSeconds = 10 * 60;
 
-    // KS14: DONT make this use PostMapInitTest.GameMaps
+    //private static readonly string[] GameMaps = PostMapInitTest.GameMaps; // KS14: Use this instead
     private static readonly string[] GameMaps =
     [
         "Bagel",

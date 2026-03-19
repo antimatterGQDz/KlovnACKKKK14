@@ -86,9 +86,9 @@
   - type: DamageOnHighSpeedImpact
     damage:
       types:
-        Brute: 25
+        Blunt: 40
     minimumSpeed: 3
-    speedDamageFactor: 4
+    speedDamageFactor: 2
     soundHit:
       collection: MetalThud
     damageCooldown: 0.8
@@ -161,7 +161,6 @@
     emptiedContainerId: storagebase
     dropStoragePort: FpvDroneTrigger
   - type: SurveillanceCamera
-    mobile: True  # Goobstation - mobile cameras fix
   - type: Item
     size: Ginormous
 

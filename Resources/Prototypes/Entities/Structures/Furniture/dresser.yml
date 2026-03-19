@@ -360,8 +360,7 @@
       weight: 0.03
     - id: ClothingHeadHatBeret
       weight: 0.03
-    - id: PlushieLizard
-      weight: 0.03
+    # KS14: Removed slop
     - id: ClothingHeadHatXmasCrown
       weight: 0.02
     - id: ClothingHeadHatBeretBrigmedic

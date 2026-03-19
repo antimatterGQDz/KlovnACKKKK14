@@ -290,7 +290,7 @@
   description: uplink-rigged-boxing-gloves-desc
   icon: { sprite: Clothing/Hands/Gloves/Boxing/boxingblue.rsi, state: icon }
   productEntity: ClothingHandsGlovesBoxingRiggedBlue # TODO Replace this with the random spawner when it's not bugged
-  discountCategory: veryRareDiscounts
+  # # discountCategory: veryRareDiscounts # KS14: Removed veryRareDiscounts # KS14: Removed veryRareDiscounts
   discountDownTo:
     Telecrystal: 8 # KS14 Change: x3
   cost:
@@ -332,7 +332,7 @@
   description: uplink-c20r-desc
   icon: { sprite: /Textures/Objects/Weapons/Guns/SMGs/c20r.rsi, state: icon }
   productEntity: BriefcaseWeaponC20Filled
-  discountCategory: veryRareDiscounts
+  # discountCategory: veryRareDiscounts # KS14: Removed veryRareDiscounts
   discountDownTo:
     Telecrystal: 30 # KS14 Change: x3
   cost:
@@ -370,7 +370,7 @@
   description: uplink-bulldog-desc
   icon: { sprite: /Textures/Objects/Weapons/Guns/Shotguns/bulldog.rsi, state: icon }
   productEntity: BriefcaseWeaponBulldogFilled
-  discountCategory: veryRareDiscounts
+  # discountCategory: veryRareDiscounts # KS14: Removed veryRareDiscounts
   discountDownTo:
     Telecrystal: 30 # KS14 Change: x3
   cost:
@@ -389,7 +389,7 @@
   description: uplink-bulldog-bundle-desc
   icon: { sprite: /Textures/Objects/Weapons/Guns/Shotguns/bulldog.rsi, state: icon }
   productEntity: ClothingBackpackDuffelSyndicateFilledShotgun
-  discountCategory: veryRareDiscounts
+  # discountCategory: veryRareDiscounts # KS14: Removed veryRareDiscounts
   discountDownTo:
     Telecrystal: 12 # KS14 Change: x3
   cost:

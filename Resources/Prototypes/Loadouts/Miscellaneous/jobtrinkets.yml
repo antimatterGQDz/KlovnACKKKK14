@@ -12,17 +12,7 @@
     back:
     - GoldenPlunger
 
-- type: loadout
-  id: FlowerWaterClown
-  effects:
-  - !type:JobRequirementLoadoutEffect
-    requirement:
-      !type:RoleTimeRequirement
-      role: JobClown
-      time: 4h
-  storage:
-    back:
-    - SprayFlowerPin
+# KS14: Removed flower water pin
 
 - type: loadout
   id: SecStar

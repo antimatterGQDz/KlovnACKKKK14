@@ -34,7 +34,7 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
     [Dependency] private readonly UserInterfaceSystem _userInterface = default!;
     [Dependency] private readonly EmagSystem _emag = default!;
 
-    private static readonly ProtoId<SiliconLawsetPrototype> DefaultCrewLawset = "Crewsimov";
+    private static readonly ProtoId<SiliconLawsetPrototype> DefaultCrewLawset = "Asimov"; // KS14: Crewismov -> Asimov
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -145,7 +145,7 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
             component.Subverted = true;
 
             // new laws may allow antagonist behaviour so make it clear for admins
-            if(_mind.TryGetMind(uid, out var mindId, out _))
+            if (_mind.TryGetMind(uid, out var mindId, out _))
                 EnsureSubvertedSiliconRole(mindId);
 
         }

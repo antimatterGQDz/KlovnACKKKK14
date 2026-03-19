@@ -595,12 +595,7 @@
   - EmergencyOxygenClown
   - LoadoutSpeciesVoxNitrogen
 
-- type: loadoutGroup
-  id: ClownJobTrinkets
-  name: loadout-group-jobtrinkets
-  minLimit: 0
-  loadouts:
-  - FlowerWaterClown
+# KS14: Removed flower water pin, and thus entirety of clown trinkets
 
 - type: loadoutGroup
   id: MimeHead

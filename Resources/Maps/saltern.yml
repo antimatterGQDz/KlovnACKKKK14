@@ -38276,13 +38276,6 @@ entities:
             43809: 93,-52
     - type: ExplosionAirtightGrid
     - type: StatusEffectContainer
-    - type: ContainerContainer
-      containers:
-        status-effects: !type:Container
-          showEnts: True
-          occludes: False
-          ents:
-          - 4939
   - uid: 2
     components:
     - type: MetaData

@@ -41,11 +41,4 @@ public sealed partial class SurveillanceCameraMonitorComponent : Component
     [ViewVariables]
     // The subnets known by this camera monitor.
     public Dictionary<string, string> KnownSubnets { get; } = new();
-
-    // KS14 Change: FPVs
-    /// <summary>
-    ///     Never automatically do update.
-    /// </summary>
-    [DataField, ViewVariables]
-    public bool NeverAutomaticallyHeartbeat = false;
 }

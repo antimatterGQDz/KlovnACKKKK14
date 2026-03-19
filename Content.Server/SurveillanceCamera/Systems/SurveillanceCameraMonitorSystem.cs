@@ -242,7 +242,7 @@ public sealed class SurveillanceCameraMonitorSystem : EntitySystem
         _deviceNetworkSystem.QueuePacket(uid, subnetAddress, payload);
     }
 
-    private void DisconnectCamera(EntityUid uid, bool removeViewers, SurveillanceCameraMonitorComponent? monitor = null)
+    public /* KS14 Change: FPV drones */ void DisconnectCamera(EntityUid uid, bool removeViewers, SurveillanceCameraMonitorComponent? monitor = null)
     {
         if (!Resolve(uid, ref monitor))
         {
@@ -451,7 +451,7 @@ public sealed class SurveillanceCameraMonitorSystem : EntitySystem
 
     // Attempts to switch over the current viewed camera on this monitor
     // to the new camera.
-    private void TrySwitchCameraByUid(EntityUid uid, EntityUid newCamera, SurveillanceCameraMonitorComponent? monitor = null)
+    public /* KS14 Change: made public, FPV drones */ void TrySwitchCameraByUid(EntityUid uid, EntityUid newCamera, SurveillanceCameraMonitorComponent? monitor = null)
     {
         if (!Resolve(uid, ref monitor))
         {
@@ -494,7 +494,7 @@ public sealed class SurveillanceCameraMonitorSystem : EntitySystem
         AddViewer(uid, player);
     }
 
-    private void UpdateUserInterface(EntityUid uid, SurveillanceCameraMonitorComponent? monitor = null, EntityUid? player = null)
+    public /* KS14 Change: made public, FPV drones */ void UpdateUserInterface(EntityUid uid, SurveillanceCameraMonitorComponent? monitor = null, EntityUid? player = null)
     {
         if (!Resolve(uid, ref monitor))
         {

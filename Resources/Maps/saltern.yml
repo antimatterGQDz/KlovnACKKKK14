@@ -120477,15 +120477,6 @@ entities:
     - type: Transform
       pos: -35.20547,-23.785456
       parent: 2
-- proto: WeatherSnowfallLight
-  entities:
-  - uid: 4939
-    components:
-    - type: Transform
-      parent: 2
-    - type: StatusEffect
-      applied: True
-      appliedTo: 1
 - proto: Welder
   entities:
   - uid: 12734

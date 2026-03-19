@@ -38275,7 +38275,6 @@ entities:
             43805: 92,-52
             43809: 93,-52
     - type: ExplosionAirtightGrid
-    - type: StatusEffectContainer
   - uid: 2
     components:
     - type: MetaData

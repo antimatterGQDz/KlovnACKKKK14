@@ -34,7 +34,6 @@ using Content.Shared.Damage.Prototypes;
 using Content.Shared.Damage.Systems;
 using Content.Shared.FixedPoint;
 using Robust.Shared.Audio.Systems;
-using Content.Shared.Destructible;
 using Content.Shared.Destructible.Thresholds.Triggers;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Prototypes;

@@ -28,12 +28,13 @@ public abstract class SharedGasCanisterSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<GasCanisterComponent, ComponentInit>(OnCanisterInit); // KS14 Addition
-        SubscribeLocalEvent<GasCanisterComponent, MapInitEvent>(OnCanisterMapInited); // KS14 Addition
 
         SubscribeLocalEvent<GasCanisterComponent, EntInsertedIntoContainerMessage>(OnCanisterContainerModified);
         SubscribeLocalEvent<GasCanisterComponent, EntRemovedFromContainerMessage>(OnCanisterContainerModified);
         SubscribeLocalEvent<GasCanisterComponent, ItemSlotInsertAttemptEvent>(OnCanisterInsertAttempt);
         SubscribeLocalEvent<GasCanisterComponent, ComponentStartup>(OnCanisterStartup);
+        SubscribeLocalEvent<GasCanisterComponent, MapInitEvent>(OnCanisterMapInit);
+        SubscribeLocalEvent<GasCanisterComponent, BoundUIOpenedEvent>(OnCanisterUIOpened);
 
         // Bound UI subscriptions
         SubscribeLocalEvent<GasCanisterComponent, GasCanisterHoldingTankEjectMessage>(OnHoldingTankEjectMessage);
@@ -45,13 +46,6 @@ public abstract class SharedGasCanisterSystem : EntitySystem
     private void OnCanisterInit(Entity<GasCanisterComponent> ent, ref ComponentInit args)
     {
         ent.Comp.AppearanceGasPercentages = new byte[GasTileOverlaySystem.VisibleGasId.Length];
-    }
-
-    // KS14
-    private void OnCanisterMapInited(Entity<GasCanisterComponent> ent, ref MapInitEvent args)
-    {
-        // This can be called in init/startup just fine afaict but whatever
-        UpdateCanisterAppearance(ent, ent);
     }
 
     // KS14
@@ -76,6 +70,23 @@ public abstract class SharedGasCanisterSystem : EntitySystem
         // don't dirty if entire array was the same
         if (similars != GasTileOverlaySystem.VisibleGasId.Length)
             DirtyField(uid, canister, nameof(canister.AppearanceGasPercentages));
+    }
+
+    private void OnCanisterUIOpened(Entity<GasCanisterComponent> ent, ref BoundUIOpenedEvent args)
+    {
+        // Fixes all canisters not populating UI elements before MapInit. Mappers rejoice
+        // We still need to DirtyUI after MapInit because this has latency, bad UX for players.
+        DirtyUI(ent.Owner, ent);
+    }
+
+    private void OnCanisterMapInit(Entity<GasCanisterComponent> ent, ref MapInitEvent args)
+    {
+        // Fixes empty canisters not populating UI elements
+        DirtyUI(ent.Owner, ent);
+
+        // KS14 Addition
+        // This can be called in init/startup just fine afaict but whatever
+        UpdateCanisterAppearance(ent, ent);
     }
 
     private void OnCanisterStartup(Entity<GasCanisterComponent> ent, ref ComponentStartup args)

@@ -24,7 +24,7 @@
   flavor: nutriment
   color: "#24591F"
   metabolisms:
-    Food:
+    Metabolites:
       effects:
       - !type:SatiateHunger
       - !type:HealthChange #klovnstart
@@ -52,14 +52,13 @@
   flavor: vitamin
   color: "#D3D3D3"
   metabolisms:
-    Food: #This makes it not compete with medicines, a large bonus for something that can heal
+    Metabolites: #This makes it not compete with medicines, a large bonus for something that can heal
       effects:
-      - !type:HealthChange
-#        probability: 0.5, klovn
+      - !type:EvenHealthChange
+        #probability: 0.5 # KS14: No probability
         damage:
-          groups:
-            Brute: -0.5 #vitamin will heal 1 dmg per 1u
-            Burn: -0.5
+          Brute: -0.5
+          Burn: -0.5
       # Helps you stop bleeding to an extent.
       - !type:ModifyBleed
         amount: -0.25
@@ -81,13 +80,12 @@
   flavor: protein
   color: "#FFFFE5"
   metabolisms:
-    Food:
+    Metabolites:
       effects:
-      - !type:HealthChange
-#        probability: 0.5, klovn
+      - !type:EvenHealthChange
+        #probability: 0.5 # KS14: No probability
         damage:
-          groups:
-            Brute: -0.8 #klovn, was -0.4
+          Brute: -0.4
       - !type:ModifyBloodLevel
         amount: 2 # weaker than iron but pretty good all things considered, klovn, was 1
       - !type:SatiateHunger
@@ -103,7 +101,7 @@
   color: white
   meltingPoint: 146.0
   metabolisms:
-    Food:
+    Metabolites:
       effects:
       - !type:SatiateHunger
         conditions:

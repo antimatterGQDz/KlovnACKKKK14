@@ -55,8 +55,8 @@ public sealed class PredictedHandsSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<HandsComponent, DisarmedEvent>(OnDisarmed, before: new[] {typeof(SharedStunSystem), typeof(SharedStaminaSystem)});
-            SubscribeLocalEvent<HandsComponent, DropHandItemsEvent>(OnDropHandItems);
+        SubscribeLocalEvent<HandsComponent, DisarmedEvent>(OnDisarmed, before: new[] { typeof(SharedStunSystem), typeof(SharedStaminaSystem) });
+        SubscribeLocalEvent<HandsComponent, DropHandItemsEvent>(OnDropHandItems);
 
         CommandBinds.Builder
             .Bind(ContentKeyFunctions.ThrowItemInHand, new PointerInputCmdHandler(HandleThrowItem))
@@ -78,7 +78,7 @@ public sealed class PredictedHandsSystem : EntitySystem
         if (args.Handled)
             return;
 
-        var seed = SharedRandomExtensions.HashCodeCombine((int) _timing.CurTick.Value, GetNetEntity(ent).Id);
+        var seed = SharedRandomExtensions.HashCodeCombine((int)_timing.CurTick.Value, GetNetEntity(ent).Id);
         var rand = new System.Random(seed);
         if (!rand.Prob(args.DisarmProbability))
             return;
@@ -100,7 +100,7 @@ public sealed class PredictedHandsSystem : EntitySystem
 
     private bool HandleThrowItem(ICommonSession? session, EntityCoordinates coordinates, EntityUid entity)
     {
-        if (session?.AttachedEntity is not {} player || !Exists(player) || !coordinates.IsValid(EntityManager))
+        if (session?.AttachedEntity is not { } player || !Exists(player) || !coordinates.IsValid(EntityManager))
             return false;
 
         ThrowHeldItem(player, coordinates);

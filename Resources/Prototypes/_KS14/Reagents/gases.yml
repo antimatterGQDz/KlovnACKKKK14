@@ -15,11 +15,16 @@
   flavor: minty
   color: "#b924bf"
   metabolisms:
-    Bloodstream: # Without a Respiration metabolism, zipion will get transfered to bloodstream so its ez
+    Respiration:
+      effects:
+      - !type:AddReagentToBlood
+        reagent: Zipium
+        amount: 2.5
+    Bloodstream:
       effects:
       - !type:AdjustReagent
         conditions:
-        - !type:ReagentCondition
+        - !type:BloodReagentCondition
           reagent: Zipion
           min: 1
         reagent: Zipium

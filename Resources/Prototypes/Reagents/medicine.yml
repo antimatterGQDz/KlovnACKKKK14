@@ -416,8 +416,6 @@
         #klovn start
 #        - !type:MobStateCondition
 #          mobstate: Critical
-        - !type:TotalDamageCondition #theoreitcally this fucks over mobs with less than 100 hp, ideally it should apply for both
-          min: 90
           #Klovn end
         - !type:ReagentCondition
           reagent: Epinephrine

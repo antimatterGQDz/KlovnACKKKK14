@@ -6,8 +6,6 @@ using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 using Content.Shared._KS14.Random.Helpers;
 using Content.Shared.Body;
-using Robust.Shared.Collections;
-using Robust.Shared.Containers;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
@@ -23,18 +21,6 @@ namespace Content.Shared._KS14.Klovnmed;
 public sealed class OrganSearchSystem : EntitySystem
 {
     [Dependency] private readonly IGameTiming _gameTiming = default!;
-    [Dependency] private readonly SharedContainerSystem _containerSystem = default!;
-
-    private EntityQuery<OrganComponent> _organQuery;
-    private EntityQuery<ContainerManagerComponent> _containerManagerQuery;
-
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        _organQuery = GetEntityQuery<OrganComponent>();
-        _containerManagerQuery = GetEntityQuery<ContainerManagerComponent>();
-    }
 
     public static BodyPartType GetPartType(ProtoId<OrganCategoryPrototype>? protoId)
     {

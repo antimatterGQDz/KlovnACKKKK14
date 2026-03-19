@@ -48,20 +48,13 @@ public sealed class ClothingGrantingSystem : EntitySystem
         //    return;
         //}
 
-        foreach (var (name, data) in component.Components)
+
+        // KS14: Made this less abhorrent WTF is wrong with goobcoders?
+        EntityManager.AddComponents(args.Equipee, component.Components, removeExisting: false);
+        foreach (var (name, _) in component.Components)
         {
-            var newComp = (Component) _componentFactory.GetComponent(name);
-
-            if (HasComp(args.Equipee, newComp.GetType()))
-                continue;
-
-            newComp.Owner = args.Equipee;
-
-            var temp = (object) newComp;
-            _serializationManager.CopyTo(data.Component, ref temp);
-            EntityManager.AddComponent(args.Equipee, (Component)temp!);
-
-            component.Active[name] = true; // Goobstation
+            var compRegistration = _componentFactory.GetRegistration(name);
+            component.Active[name] |= HasComp(args.Equipee, compRegistration.Type);
         }
     }
 
@@ -76,7 +69,7 @@ public sealed class ClothingGrantingSystem : EntitySystem
             if (!component.Active.ContainsKey(name) || !component.Active[name])
                 continue;
 
-            var newComp = (Component) _componentFactory.GetComponent(name);
+            var newComp = (Component)_componentFactory.GetComponent(name);
 
             RemComp(args.Equipee, newComp.GetType());
             component.Active[name] = false; // Goobstation

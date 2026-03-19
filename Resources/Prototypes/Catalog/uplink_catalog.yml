@@ -422,25 +422,6 @@
       - NukeOpsUplink
 
 - type: listing
-  id: UplinkBulldogBundle
-  name: uplink-buldog-bundle-name
-  description: uplink-buldog-bundle-desc
-  icon: { sprite: /Textures/Objects/Weapons/Guns/Shotguns/bulldog.rsi, state: icon }
-  productEntity: ClothingBackpackDuffelSyndicateFilledShotgun
-  discountCategory: rareDiscounts #KS14 change - im not a big fan of 0.0001% chances
-  discountDownTo:
-    Telecrystal: 36 # KS14 Change: x3
-  cost:
-    Telecrystal: 60 # KS14 Change: x3
-  categories:
-  - UplinkWeaponry
-  conditions:
-  - !type:StoreWhitelistCondition
-    blacklist:
-      tags:
-      - NukeOpsUplink
-
-- type: listing
   id: UplinkGrenadeLauncherBundle
   name: uplink-grenade-launcher-bundle-name
   description: uplink-grenade-launcher-bundle-desc
@@ -2077,16 +2058,6 @@
           - NukeOpsUplink
 
 - type: listing
-  id: UplinkClothingConductingGloves
-  name: uplink-clothing-conducting-gloves-name
-  description: uplink-clothing-conducting-gloves-desc
-  productEntity: ClothingHandsGlovesConducting
-  cost:
-    Telecrystal: 3 # KS14 Change: x3
-  categories:
-  - UplinkWearables
-
-- type: listing
   id: UplinkBackpackSyndicate
   name: uplink-backpack-syndicate-name
   description: uplink-backpack-syndicate-desc
@@ -2317,23 +2288,6 @@
   - !type:BuyerJobCondition
     whitelist:
     - Botanist
-
-- type: listing
-  id: uplinkRiggedBoxingGloves # KS14: Removed 'boxer' suffix
-  name: uplink-rigged-boxing-gloves-name
-  description: uplink-rigged-boxing-gloves-desc
-  productEntity: ClothingHandsGlovesBoxingRigged
-  discountCategory: usualDiscounts
-  discountDownTo:
-    Telecrystal: 6 # KS14 Change: x3
-  cost:
-    Telecrystal: 12 # KS14 Change: x3
-  categories:
-    - UplinkJob
-  conditions:
-    - !type:BuyerJobCondition
-      whitelist:
-      - Passenger # KS14: Changed from boxer to passenger
 
 - type: listing
   id: uplinkNecronomicon

@@ -40,7 +40,7 @@ public abstract class SharedTurbineSystem : EntitySystem
         if (!Resolve(entity, ref damageableComponent, logMissing: false))
             return 0;
 
-        var damage = damageableComponent.TotalDamage;
+        var damage = DamageableSystem.GetTotalDamage(entity.Owner);
         var damageThreshold = entity.Comp.BladeBreakingPoint;
 
         if (damageThreshold == 0)

@@ -14,7 +14,7 @@ namespace Content.Shared.Chemistry.Components;
 /// <para>Once reagents and materials have been merged this component should be depricated in favor of using a combination of <see cref="PhysicalCompositionComponent"/> and <see cref="Content.Server.Temperature.Components.TemperatureComponent"/>. May require minor reworks to both.</para>
 /// </remarks>
 [RegisterComponent, NetworkedComponent]
-[Access(typeof(SharedSolutionContainerSystem))]
+[Access(typeof(SharedSolutionContainerSystem), Other = AccessPermissions.ReadExecute /* KS14 */)]
 public sealed partial class SolutionComponent : Component
 {
     /// <summary>

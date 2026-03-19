@@ -28,6 +28,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 using Robust.Shared.Serialization;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Generic;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.Dictionary;
 
 namespace Content.Shared.Damage
 {
@@ -231,13 +232,13 @@ namespace Content.Shared.Damage
 
                 if (modifierSet.Coefficients.TryGetValue(key, out var coefficient))
                 {
-                    var percentileReduction = 1-coefficient; //coefficient is how much of the dmg you take. if its .7, that means the actual damage reduction is 30%
+                    var percentileReduction = 1 - coefficient; //coefficient is how much of the dmg you take. if its .7, that means the actual damage reduction is 30%
                     if (percentilePenDict.TryGetValue(key, out var percentilePenetrationForDamType))
                     {
                         var multiplier = 1 - percentilePenetrationForDamType; //penetration is similarly a coefficient. if its .2, we strip away 8O% of the enemys defense
                         percentileReduction *= multiplier;  //if the enemy reduces 30% of incoming damage, and we punch through half that, that means the result is 15%
                     }
-                    newValuePercentile *= (1-percentileReduction); //if we now reduce 15% of incoming damage, that means the damage needs to be multiplied by .85
+                    newValuePercentile *= (1 - percentileReduction); //if we now reduce 15% of incoming damage, that means the damage needs to be multiplied by .85
                     // coefficients can also heal you, e.g. cauterizing bleeding
                 }
 
@@ -435,8 +436,7 @@ namespace Content.Shared.Damage
         {
             //KS14 start
             DamageSpecifier newDamage = new(damageSpec);
-            var keys = new List<string>(newDamage.DamageDict.Keys);
-            foreach (var key in keys)
+            foreach (var key in newDamage.DamageDict.Keys)
             {
                 newDamage.DamageDict[key] = newDamage.DamageDict[key] * factor;
             }
@@ -448,8 +448,7 @@ namespace Content.Shared.Damage
         {
             //KS14 start
             DamageSpecifier newDamage = new(damageSpec);
-            var keys = new List<string>(newDamage.DamageDict.Keys);
-            foreach (var key in keys)
+            foreach (var key in newDamage.DamageDict.Keys)
             {
                 newDamage.DamageDict[key] = newDamage.DamageDict[key] * factor;
             }
@@ -471,8 +470,7 @@ namespace Content.Shared.Damage
         {
             //KS14 start
             DamageSpecifier newDamage = new(damageSpec);
-            var keys = new List<string>(newDamage.DamageDict.Keys);
-            foreach (var key in keys)
+            foreach (var key in newDamage.DamageDict.Keys)
             {
                 newDamage.DamageDict[key] = newDamage.DamageDict[key] / factor;
             }

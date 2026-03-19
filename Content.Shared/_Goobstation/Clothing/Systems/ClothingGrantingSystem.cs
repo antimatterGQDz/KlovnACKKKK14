@@ -15,11 +15,13 @@ using Content.Shared.Clothing.Components;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Tag;
 using Robust.Shared.Serialization.Manager;
+using Robust.Shared.Timing;
 
 namespace Content.Shared._Goobstation.Clothing.Systems;
 
 public sealed class ClothingGrantingSystem : EntitySystem
 {
+    [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly IComponentFactory _componentFactory = default!;
     [Dependency] private readonly TagSystem _tagSystem = default!;
 
@@ -47,8 +49,10 @@ public sealed class ClothingGrantingSystem : EntitySystem
         //    return;
         //}
 
-
         // KS14: Made this less abhorrent WTF is wrong with goobcoders?
+        if (_gameTiming.ApplyingState)
+            return;
+
         EntityManager.AddComponents(args.Equipee, component.Components, removeExisting: false);
         UpdateActivity(args.Equipee, component);
     }
@@ -59,6 +63,9 @@ public sealed class ClothingGrantingSystem : EntitySystem
         //if (!component.IsActive) return;
 
         // KS14: Made this less abhorrent WTF is wrong with goobcoders?
+        if (_gameTiming.ApplyingState)
+            return;
+
         EntityManager.RemoveComponents(args.Equipee, component.Components);
         UpdateActivity(args.Equipee, component);
 

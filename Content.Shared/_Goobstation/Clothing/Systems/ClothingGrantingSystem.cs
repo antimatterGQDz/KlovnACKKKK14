@@ -50,11 +50,7 @@ public sealed class ClothingGrantingSystem : EntitySystem
 
         // KS14: Made this less abhorrent WTF is wrong with goobcoders?
         EntityManager.AddComponents(args.Equipee, component.Components, removeExisting: false);
-        foreach (var (name, _) in component.Components)
-        {
-            var compRegistration = _componentFactory.GetRegistration(name);
-            component.Active[name] = HasComp(args.Equipee, compRegistration.Type);
-        }
+        UpdateActivity(args.Equipee, component);
     }
 
     private void OnCompUnequip(EntityUid uid, ClothingGrantComponentComponent component, GotUnequippedEvent args)
@@ -62,22 +58,22 @@ public sealed class ClothingGrantingSystem : EntitySystem
         // Goobstation
         //if (!component.IsActive) return;
 
-        foreach (var (name, data) in component.Components)
-        {
-            // Goobstation
-            if (!component.Active.ContainsKey(name) || !component.Active[name])
-                continue;
-
-            var newComp = (Component)_componentFactory.GetComponent(name);
-
-            RemComp(args.Equipee, newComp.GetType());
-            component.Active[name] = false; // Goobstation
-        }
+        // KS14: Made this less abhorrent WTF is wrong with goobcoders?
+        EntityManager.RemoveComponents(args.Equipee, component.Components);
+        UpdateActivity(args.Equipee, component);
 
         // Goobstation
         //component.IsActive = false;
     }
 
+    private void UpdateActivity(EntityUid equippe, ClothingGrantComponentComponent component)
+    {
+        foreach (var (name, _) in component.Components)
+        {
+            var compRegistration = _componentFactory.GetRegistration(name);
+            component.Active[name] = HasComp(equippe, compRegistration.Type);
+        }
+    }
 
     private void OnTagEquip(EntityUid uid, ClothingGrantTagComponent component, GotEquippedEvent args)
     {

@@ -24,3 +24,6 @@
 
 - type: Tag
   id: BorgModuleSecurity # KS14 - secborgs
+
+- type: Tag # Unaffected by arcflash lightning bolts
+  id: ArcFlashInsulated

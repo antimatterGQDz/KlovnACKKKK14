@@ -53,7 +53,7 @@ public sealed class ClothingGrantingSystem : EntitySystem
         foreach (var (name, _) in component.Components)
         {
             var compRegistration = _componentFactory.GetRegistration(name);
-            component.Active[name] |= HasComp(args.Equipee, compRegistration.Type);
+            component.Active[name] = HasComp(args.Equipee, compRegistration.Type);
         }
     }
 

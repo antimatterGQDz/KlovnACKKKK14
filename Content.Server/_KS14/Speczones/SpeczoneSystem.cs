@@ -181,12 +181,12 @@ public sealed partial class SpeczoneSystem : SharedSpeczoneSystem
 
     /// <summary>
     ///     Adds new speczone entry-points to their current map's <see cref="SpeczoneComponent.EntryMarkers"/>.
-    ///         Does not remove any. Only adds. 
+    ///         Does not remove any. Only adds.
     /// </summary>
     private void UpdateSpeczoneEntryPoints()
     {
         // include paused
-        var speczoneEntryEnumerator = EntityManager.AllEntityQueryEnumerator<SpeczoneEntryComponent, TransformComponent>();
+        var speczoneEntryEnumerator = AllEntityQuery<SpeczoneEntryComponent, TransformComponent>();
         while (speczoneEntryEnumerator.MoveNext(out var uid, out var _, out var transformComponent))
         {
             if (!_speczoneQuery.TryGetComponent(transformComponent.MapUid, out var speczoneComponent))
@@ -224,7 +224,7 @@ public sealed partial class SpeczoneSystem : SharedSpeczoneSystem
     ///         Specified speczone defaults to first one available
     ///         if none was specified. Does nothing if there are no
     ///         entry points to the speczone.
-    /// 
+    ///
     ///     Unpauses the speczone if necessary.
     /// </summary>
     /// <returns>True if the entity was moved.</returns>

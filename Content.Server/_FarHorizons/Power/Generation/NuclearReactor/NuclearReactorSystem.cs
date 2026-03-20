@@ -42,7 +42,6 @@ public sealed class NuclearReactorSystem : SharedNuclearReactorSystem
     // The great wall of dependencies
     [Dependency] private readonly AtmosphereSystem _atmosphereSystem = default!;
     [Dependency] private readonly EntityManager _entityManager = default!;
-    [Dependency] private readonly MetaDataSystem _metaDataSystem = default!;
     [Dependency] private readonly NodeContainerSystem _nodeContainer = default!;
     [Dependency] private readonly NodeGroupSystem _nodeGroupSystem = default!;
     [Dependency] private readonly ReactorPartSystem _partSystem = default!;

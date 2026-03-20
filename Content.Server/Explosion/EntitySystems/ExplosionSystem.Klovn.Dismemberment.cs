@@ -4,9 +4,10 @@
 
 using System.Numerics;
 using Content.Shared._KS14.BloodSpray;
+using Content.Shared._KS14.Klovnmed;
 using Content.Shared._KS14.Klovnmed.Dismemberment;
+using Content.Shared.Body;
 using Content.Shared.Body.Components;
-using Content.Shared.Body.Part;
 
 namespace Content.Server.Explosion.EntitySystems;
 

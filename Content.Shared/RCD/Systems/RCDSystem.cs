@@ -13,10 +13,13 @@
 // SPDX-FileCopyrightText: 2025 TemporalOroboros
 // SPDX-FileCopyrightText: 2025 gus
 // SPDX-FileCopyrightText: 2025 metalgearsloth
-// SPDX-FileCopyrightText: 2025 nabegator220
 // SPDX-FileCopyrightText: 2025 slarticodefast
 // SPDX-FileCopyrightText: 2026 LaCumbiaDelCoronavirus
+// SPDX-FileCopyrightText: 2026 TriviaSolari
+// SPDX-FileCopyrightText: 2026 Vasilis The Pikachu
+// SPDX-FileCopyrightText: 2026 Velken
 // SPDX-FileCopyrightText: 2026 github_actions[bot]
+// SPDX-FileCopyrightText: 2026 nabegator220
 //
 // SPDX-License-Identifier: MIT
 
@@ -64,6 +67,7 @@ namespace Content.Shared.RCD.Systems;
 
 public sealed class RCDSystem : EntitySystem
 {
+    [Dependency] private readonly _KS14.Speczones.SharedSpeczoneSystem _speczoneSystem = default!; // KS14
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
     [Dependency] private readonly ITileDefinitionManager _tileDefMan = default!;
@@ -269,10 +273,7 @@ public sealed class RCDSystem : EntitySystem
             return;
 
         // KS14 Start
-        var attemptRcdEvent = new AttemptUseRcdEvent(uid, args.User, false);
-        RaiseLocalEvent(ref attemptRcdEvent);
-
-        if (attemptRcdEvent.Cancelled)
+        if (_speczoneSystem.AttemptInterfere(uid, user: args.User, predicted: true))
             return;
         // KS14 End
 

@@ -829,3 +829,13 @@ Entries:
       message: Removed spire map because it was pissing me off
   id: 104
   time: '2026-03-20T13:46:48.0000000+00:00'
+- author: LaCumbiaDelCoronavirus
+  changes:
+    - type: Add
+      message: Security gasmask is now a pseudo sec hailer.
+    - type: Add
+      message: New ambience
+    - type: Remove
+      message: Removed some old ambience
+  id: 105
+  time: '2026-03-23T19:59:56.0000000+00:00'

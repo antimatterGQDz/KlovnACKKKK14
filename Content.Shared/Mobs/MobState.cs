@@ -1,7 +1,7 @@
 // SPDX-FileCopyrightText: 2023 Jezithyr
 // SPDX-FileCopyrightText: 2026 LaCumbiaDelCoronavirus
 //
-// SPDX-License-Identifier: MPL-2.0
+// SPDX-License-Identifier: MIT
 
 using Content.Shared.Inventory; // ks14: MOBSTATERELAY
 using Content.Shared.Mobs.Components;

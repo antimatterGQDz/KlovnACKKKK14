@@ -37,7 +37,7 @@
 // SPDX-FileCopyrightText: 2026 LaCumbiaDelCoronavirus
 // SPDX-FileCopyrightText: 2026 Leah
 //
-// SPDX-License-Identifier: MPL-2.0
+// SPDX-License-Identifier: MIT
 
 using Content.Shared.Armor;
 using Content.Shared.Atmos;

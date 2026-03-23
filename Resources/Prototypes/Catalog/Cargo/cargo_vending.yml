@@ -35,7 +35,7 @@
 # SPDX-FileCopyrightText: 2025 SlamBamActionman
 # SPDX-FileCopyrightText: 2025 lzk
 #
-# SPDX-License-Identifier: MPL-2.0
+# SPDX-License-Identifier: MIT
 
 # If you've arrived here after a failed NoCargoOrderArbitrage test, it's likely
 # because the product in question contains a restock box which links to a

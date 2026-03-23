@@ -5,7 +5,7 @@
 // SPDX-FileCopyrightText: 2025 Kyle Tyo
 // SPDX-FileCopyrightText: 2026 LaCumbiaDelCoronavirus
 //
-// SPDX-License-Identifier: MPL-2.0
+// SPDX-License-Identifier: MIT
 
 using System.Linq;
 using Content.Client.Gameplay;

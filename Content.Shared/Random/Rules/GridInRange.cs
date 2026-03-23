@@ -3,7 +3,7 @@
 // SPDX-FileCopyrightText: 2025 Tayrtahn
 // SPDX-FileCopyrightText: 2026 LaCumbiaDelCoronavirus
 //
-// SPDX-License-Identifier: MPL-2.0
+// SPDX-License-Identifier: MIT
 
 using System.Numerics;
 using Robust.Shared.Map;

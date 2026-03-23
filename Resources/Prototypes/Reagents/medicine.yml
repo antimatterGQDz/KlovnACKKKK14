@@ -76,7 +76,7 @@
 # SPDX-FileCopyrightText: 2026 DeusMaldPr
 # SPDX-FileCopyrightText: 2026 Princess Cheeseballs
 #
-# SPDX-License-Identifier: MPL-2.0
+# SPDX-License-Identifier: MIT
 
 - type: reagent
   id: Cryptobiolin

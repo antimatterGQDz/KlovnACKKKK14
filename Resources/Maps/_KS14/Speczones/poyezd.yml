@@ -1400,8 +1400,6 @@ entities:
         clearLinksEvery: 2
         bluespaceEffectOnInit: False
       pickLinksFromSameMap: False
-      bluespaceLinks:
-      - invalid
     missingComponents:
     - Construction
     - Damageable

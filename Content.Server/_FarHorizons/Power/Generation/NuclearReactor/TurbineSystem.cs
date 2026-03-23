@@ -23,6 +23,7 @@ using Robust.Shared.Utility;
 using Content.Shared.Destructible;
 using Content.Shared.FixedPoint;
 using Content.Shared.Destructible.Thresholds.Triggers;
+using Content.Shared.Atmos.Components;
 
 namespace Content.Server._FarHorizons.Power.Generation.FissionGenerator;
 

@@ -35,7 +35,7 @@ public sealed class CanisterOverlay : Overlay
 
     public override OverlaySpace Space => OverlaySpace.WorldSpaceBelowFOV;
 
-    public SpriteSpecifier.Rsi WindowMaskSpriteSpecifier;
+    public SpriteSpecifier.Rsi WindowMaskSpriteSpecifier = new SpriteSpecifier.Rsi(new ResPath("/Textures/_KS14/Structures/Storage/canister.rsi"), "window-mask");
 
     // see: DoAfterOverlay.cs
     private const float Scale = 1f;
@@ -43,7 +43,7 @@ public sealed class CanisterOverlay : Overlay
 
     public static readonly Vector2 HalfNegativeVector2 = new(-0.5f, -0.5f);
 
-    private readonly GasTileOverlay _gasTileOverlay;
+    private readonly GasTileVisibleGasOverlay _gasTileOverlay;
     private readonly int _visibleGasCount;
     private readonly float[] _visibleGasMolesVisibleMin;
     private readonly float[] _visibleGasMolesVisibleMax;
@@ -55,9 +55,8 @@ public sealed class CanisterOverlay : Overlay
     /// </summary>
     private readonly List<(GasCanisterComponent, Matrix3x2)> _drawDataCache = new();
 
-    public CanisterOverlay(SpriteSpecifier.Rsi maskSpriteSpecifier, GasTileOverlay gasTileOverlay /* TODO LCDC: HOLY SHIT THIS IS DEMENTED */)
+    public CanisterOverlay(GasTileVisibleGasOverlay gasTileOverlay /* TODO LCDC: HOLY SHIT THIS IS DEMENTED */)
     {
-        WindowMaskSpriteSpecifier = maskSpriteSpecifier;
         _gasTileOverlay = gasTileOverlay;
 
         IoCManager.InjectDependencies(this);

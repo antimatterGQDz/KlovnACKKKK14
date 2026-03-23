@@ -34,6 +34,7 @@ using Content.Server.Administration.Logs;
 using Content.Server.Audio;
 using Content.Shared.Throwing;
 using Content.Shared._KS14.Deferral;
+using Content.Shared.Atmos.Components;
 
 namespace Content.Server._FarHorizons.Power.Generation.FissionGenerator;
 

@@ -218,11 +218,11 @@
     # - /Audio/Lobby/title2.ogg # KS14 - Commented
 
     # KS14 Start
-    - /Audio/_KS14/Space/Ambience/ambispace.ogg
-    - /Audio/_KS14/Space/Ambience/ambispace3.ogg
-    - /Audio/_KS14/Space/Ambience/ambispace4.ogg
-    - /Audio/_KS14/Space/Ambience/ambispace5.ogg
-    - /Audio/_KS14/Space/Ambience/ambispace6.ogg
+    - /Audio/_KS14/Ambience/Space/ambispace.ogg
+    - /Audio/_KS14/Ambience/Space/ambispace3.ogg
+    - /Audio/_KS14/Ambience/Space/ambispace4.ogg
+    - /Audio/_KS14/Ambience/Space/ambispace5.ogg
+    - /Audio/_KS14/Ambience/Space/ambispace6.ogg
     # KS14 End
 
 - type: soundCollection

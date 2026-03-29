@@ -1,10 +1,18 @@
 - type: entity
-  name: BaseWeaponRifle
-  parent: [BaseItem, BaseGunWieldable]
+  name: BaseWeaponRifle #KS14 HEAVILY MODIFIED PROTOTYPE
+  parent: BaseItem # KS14 modified, removed basegunwieldable
   id: BaseWeaponRifle
   description: A rooty tooty point and shooty.
   abstract: true
   components:
+  - type: HeldGrantComponent
+    component:
+      - type: MeleeForceUnwieldWeapon
+  - type: Wieldable
+    unwieldOnUse: false
+  - type: GunWieldBonus
+    minAngle: -180
+    maxAngle: -140
   - type: Sprite
   - type: Item
     size: Huge
@@ -18,10 +26,17 @@
     - suitStorage
   - type: AmmoCounter
   - type: Gun
-    fireRate: 5
+    minAngle: 180
+    maxAngle: 180
+    angleIncrease: 6
+    angleDecay: 25
+    fireRate: 6
     selectedMode: FullAuto
+    shotsPerBurst: 3
+    burstFireRate: 15
     availableModes:
       - FullAuto
+      - Burst
       - SemiAuto
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/batrifle.ogg
@@ -77,6 +92,7 @@
   - type: Gun
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/rifle2.ogg
+    angleIncrease: 7 # KS14 modified
   - type: ChamberMagazineAmmoProvider
     soundRack:
       path: /Audio/Weapons/Guns/Cock/ltrifle_cock.ogg
@@ -220,13 +236,13 @@
     pvsIncrease: 0.2
   - type: StaticPrice
     price: 1500 #3x lecter
-  - type: Gun
-    shotsPerBurst: 3
-    selectedMode: Burst
-    availableModes:
-    - Burst
-    - SemiAuto
-    - FullAuto
+  #- type: Gun KS14 - removes superfluous spec
+  #  shotsPerBurst: 3
+  #  selectedMode: Burst
+  #  availableModes:
+  #  - Burst
+  #  - SemiAuto
+  #  - FullAuto
 
 - type: entity
   name: Estoc DMR

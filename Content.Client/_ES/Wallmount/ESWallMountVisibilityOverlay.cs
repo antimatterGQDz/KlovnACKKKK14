@@ -81,14 +81,6 @@ public sealed class ESWallMountVisibilityOverlay : Overlay
             //Log.Info($"wallmount {Name(uid)} screenrot {wallmountScreenRotation.Degrees} distangle {distAngle.Degrees} anglebetween {angleBetween.Degrees}");
 
             // KS14 start
-            if (sprite.Visible != visible)
-            {
-                if (visible)
-                    entry.Component.OriginalAlpha = sprite.Color.A;
-                else
-                    _sprite.SetColor((uid, sprite), sprite.Color.WithAlpha(entry.Component.OriginalAlpha));
-            }
-
             var z = Math.Abs((float)angleBetween.Theta) / MathHelper.PiOver2;
             var d = z < Feather;
             var r = d ? 0f : z - Feather;
@@ -97,10 +89,10 @@ public sealed class ESWallMountVisibilityOverlay : Overlay
 
             if (visible)
             {
-                _sprite.SetColor((uid, sprite), sprite.Color.WithAlpha(alpha));
-
                 if (sprite.Visible != visible)
                     entry.Component.OriginalAlpha = sprite.Color.A;
+
+                _sprite.SetColor((uid, sprite), sprite.Color.WithAlpha(alpha));
             }
             else if (sprite.Visible != visible)
                 _sprite.SetColor((uid, sprite), sprite.Color.WithAlpha(entry.Component.OriginalAlpha));

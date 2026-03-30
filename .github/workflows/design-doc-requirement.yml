@@ -16,8 +16,7 @@ jobs:
       env:
         PR_BODY: ${{ github.event.pull_request.body }}
       run: |
-        echo "Checking PR body for license..."
-        if grep -qi "- \\[x\\] Design doc" <<< "$PR_BODY"; then
+        if grep -qi -- "- \[x\] Design doc" <<< "$PR_BODY"; then
           echo "Design doc found"
           echo "DESIGN_DOC=yes" >> $GITHUB_ENV
         else

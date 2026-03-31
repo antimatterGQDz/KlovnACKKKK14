@@ -16,7 +16,7 @@ RELEASE_DIR = "release"
 # Forks should change these to publish to their own infrastructure.
 #
 ROBUST_CDN_URL = "http://game.klovnstation.org:9090/cdn/"
-FORK_ID = "ks14"
+FORK_ID = "klovnstation"
 
 def main():
     parser = argparse.ArgumentParser()

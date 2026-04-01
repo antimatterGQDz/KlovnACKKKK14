@@ -851,3 +851,17 @@ Entries:
       message: Gun and armor rework.
   id: 107
   time: '2026-03-29T18:00:29.0000000+00:00'
+- author: LaCumbiaDelCoronavirus
+  changes:
+    - type: Add
+      message: Added a way to enter speczones without admin intervention.
+    - type: Add
+      message: Gmod 2d rope physics in ss14
+    - type: Remove
+      message: Displaced telescience can no longer spawn as a roundstart ruin.
+    - type: Tweak
+      message: Handgrenades are now bouncier.
+    - type: Fix
+      message: Fixed wallmounts looking weird when toggling FOV
+  id: 108
+  time: '2026-04-01T14:17:13.0000000+00:00'

@@ -871,3 +871,13 @@ Entries:
       message: Fixed spin/jump/flip emotes not working when used from emotewheel.
   id: 109
   time: '2026-04-03T09:13:49.0000000+00:00'
+- author: DeusMaldPr
+  changes:
+    - type: Tweak
+      message: Bicardine heals slightly more but heals it slower (3/u > 4dmg/u)
+    - type: Tweak
+      message: >-
+        T2 Brute meds now heal very small amounts of the brute damage type
+        they're not specialized for, and don't deal residual damage.
+  id: 110
+  time: '2026-04-03T09:15:08.0000000+00:00'

@@ -865,3 +865,9 @@ Entries:
       message: Fixed wallmounts looking weird when toggling FOV
   id: 108
   time: '2026-04-01T14:17:13.0000000+00:00'
+- author: LaCumbiaDelCoronavirus
+  changes:
+    - type: Fix
+      message: Fixed spin/jump/flip emotes not working when used from emotewheel.
+  id: 109
+  time: '2026-04-03T09:13:49.0000000+00:00'

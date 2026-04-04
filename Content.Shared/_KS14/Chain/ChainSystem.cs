@@ -129,6 +129,15 @@ public sealed class ChainSystem : EntitySystem
         BreakEdges(entity);
     }
 
+    private void TrySafeRemoveJoint(EntityUid uid, string jointId)
+    {
+        if (!TryComp<JointComponent>(uid, out var jointComponent) ||
+            !jointComponent.GetJoints.ContainsKey(jointId))
+            return;
+
+        _jointSystem.RemoveJoint(uid, jointId);
+    }
+
     /// <summary>
     ///     Updates this link for the FORWARDS adjacent link having been broken.
     ///         Assumes the forwards link exists.
@@ -136,8 +145,8 @@ public sealed class ChainSystem : EntitySystem
     private void BreakChainForwards(EntityUid uid, ref ChainSegmentedEvent segmentedEv, bool removeJoints = false)
     {
         var previousLinkComponent = _linkQuery.GetComponent(uid);
-        if (removeJoints)
-            _jointSystem.RemoveJoint(uid, previousLinkComponent.NextLinkJointId!);
+        if (removeJoints && previousLinkComponent.NextLinkJointId is { })
+            _jointSystem.RemoveJoint(uid, previousLinkComponent.NextLinkJointId);
 
         OnAdjacentLinkBroken(uid, ref segmentedEv);
 
@@ -154,8 +163,8 @@ public sealed class ChainSystem : EntitySystem
     private void BreakChainBackwards(EntityUid uid, ref ChainSegmentedEvent segmentedEv, bool removeJoints = false)
     {
         var nextLinkComponent = _linkQuery.GetComponent(uid);
-        if (removeJoints)
-            _jointSystem.RemoveJoint(uid, nextLinkComponent.PreviousLinkJointId!);
+        if (removeJoints && nextLinkComponent.PreviousLinkJointId is { })
+            _jointSystem.RemoveJoint(uid, nextLinkComponent.PreviousLinkJointId);
 
         OnAdjacentLinkBroken(uid, ref segmentedEv);
 

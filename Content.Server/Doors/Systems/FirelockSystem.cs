@@ -61,12 +61,14 @@ namespace Content.Server.Doors.Systems
             var query = EntityQueryEnumerator<FirelockComponent, DoorComponent>();
             while (query.MoveNext(out var uid, out var firelock, out var door))
             {
+                var didPressureStop = false; // KS14
                 if (_atmosAlarmQuery.TryComp(uid, out var alarmable)
                     && alarmable.LastAlarmState == AtmosAlarmType.Danger
                     && this.IsPowered(uid, EntityManager)
                     && door.State == DoorState.Open)
                 {
-                    EmergencyPressureStop(uid, firelock, door);
+                    didPressureStop = // KS14
+                        EmergencyPressureStop(uid, firelock, door);
                 }
 
                 // only bother to check pressure on doors that are some variation of closed.
@@ -74,6 +76,9 @@ namespace Content.Server.Doors.Systems
                     && door.State != DoorState.Welded
                     && door.State != DoorState.Denying)
                 {
+                    if (!didPressureStop) // KS14
+                        _appearance.SetData(uid, DoorVisuals.ClosedLights, false);
+
                     continue;
                 }
 
@@ -82,7 +87,7 @@ namespace Content.Server.Doors.Systems
                     && appearanceQuery.TryGetComponent(uid, out var appearance))
                 {
                     var (pressure, fire) = CheckPressureAndFire(uid, firelock, xform, airtight, airtightQuery);
-                    _appearance.SetData(uid, DoorVisuals.ClosedLights, fire || pressure, appearance);
+                    // KS14: Removed ClosedLights appearance data here
                     firelock.Temperature = fire;
                     firelock.Pressure = pressure;
                     _appearance.SetData(uid, FirelockVisuals.PressureWarning, pressure, appearance);
@@ -107,11 +112,15 @@ namespace Content.Server.Doors.Systems
 
             if (args.AlarmType == AtmosAlarmType.Normal)
             {
+                _appearance.SetData(uid, DoorVisuals.ClosedLights, false); // KS14
                 if (doorComponent.State == DoorState.Closed)
+                {
                     _doorSystem.TryOpen(uid);
+                }
             }
             else if (args.AlarmType == AtmosAlarmType.Danger)
             {
+                _appearance.SetData(uid, DoorVisuals.ClosedLights, true); // KS14
                 EmergencyPressureStop(uid, component, doorComponent);
             }
         }

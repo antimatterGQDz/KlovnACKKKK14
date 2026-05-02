@@ -35,12 +35,19 @@
     guides:
     - DeviceMonitoringAndControl
     - AtmosphericsSystems
+  # KS14: emissive start
+  - type: EmissiveLayers
+    glowRadius: 0.3
+    intensity: 1
+    layers:
+    - enum.PowerDeviceVisualLayers.Powered
+  # KS14: emissive end
 
 - type: entity
   id: AirSensor
   name: air sensor
   description: Air sensor. It senses air.
-  parent: AirSensorBase
+  parent: [ AirSensorBase, AirSensorBaseVisuals ] # KS14: Added AirSensorBaseVisuals
   placement:
     mode: SnapgridCenter
   components:
@@ -79,19 +86,7 @@
   - type: Construction
     graph: AirSensor
     node: sensor
-  - type: Appearance
-  - type: Sprite
-    drawdepth: FloorObjects
-    sprite: Structures/Specific/Atmospherics/sensor.rsi
-    layers:
-    - state: gsensor1
-      map: [ "enum.PowerDeviceVisualLayers.Powered" ]
-  - type: GenericVisualizer
-    visuals:
-      enum.PowerDeviceVisuals.Powered:
-        enum.PowerDeviceVisualLayers.Powered:
-          True: { state: gsensor1 }
-          False: { state: gsensor0 }
+  # KS14: Moved Sprite, Appearance and GenericVisualizer to AirSensorBaseVisuals
   - type: Tag
     tags:
     - AirSensor

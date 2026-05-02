@@ -3,7 +3,7 @@
   abstract: true
   parent: BaseStructure
   name: firelock
-  description: Apply crowbar.
+  description: Apply crowbar. Stand clear of firelock during operation.
   components:
     - type: Anchorable
       flags:
@@ -74,6 +74,16 @@
           enum.FirelockVisualLayersTemperature.Base:
             True: { visible: true }
             False: { visible: false }
+    # KS14: emissive start
+    - type: EmissiveLayers
+      glowRadius: 0.4
+      intensity: 1.2
+      useSpriteTransform: false
+      layers:
+      - enum.DoorVisualLayers.BaseUnlit
+      - enum.FirelockVisualLayersPressure.Base
+      - enum.FirelockVisualLayersTemperature.Base
+    # KS14: emissive end
     - type: AnimationPlayer
     - type: Fixtures
       fixtures:
@@ -87,6 +97,11 @@
           layer:
           - AirlockLayer
     - type: Door
+      # KS14 start
+      performCollisionCheck: false
+      forcedCollisionCheckOnClick: true
+      crushableBodyPartType: [ Arm, Leg ]
+      # KS14 end
       openDrawDepth: WallTops
       closeTimeOne: 0.1
       closeTimeTwo: 0.6
@@ -97,7 +112,7 @@
       clickOpen: true
       crushDamage:
         types:
-          Blunt: 15
+          Blunt: 45 # KS14: 15 -> 45
       openSound:
         path: /Audio/Machines/airlock_open.ogg
       closeSound:

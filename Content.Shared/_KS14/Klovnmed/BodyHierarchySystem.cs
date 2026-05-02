@@ -3,12 +3,15 @@ using Content.Shared._KS14.Hierarchy;
 using Content.Shared.Body;
 using Robust.Shared.Containers;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
 namespace Content.Shared._KS14.Klovnmed;
 
 public sealed class BodyHierarchySystem : BaseHierarchySystem<BodyComponent, OrganComponent>
 {
+    [Dependency] private readonly IGameTiming _gameTiming = default!;
+
     public const string ConstContainerId = "body_organs"; // for compatibility
     public override string ContainerId => ConstContainerId;
 
@@ -38,6 +41,9 @@ public sealed class BodyHierarchySystem : BaseHierarchySystem<BodyComponent, Org
         if (args.Container.ID != ConstContainerId)
             return;
 
+        if (_gameTiming.ApplyingState)
+            return;
+
         // i just want contents to be visible not removable. Still interactable and whatnot doe
         args.Cancel();
     }
@@ -63,7 +69,7 @@ public sealed class BodyHierarchySystem : BaseHierarchySystem<BodyComponent, Org
         var ev = new OrganGotInsertedEvent(hierarchyEntity, hierarchyEntity, addedEntity);
         RaiseLocalEvent(addedEntity, ref ev);
 
-        addedEntity.Comp.Container.ShowContents = true;
+        addedEntity.Comp.Container.ShowContents = false;
         Dirty(addedEntity.Owner, Comp<ContainerManagerComponent>(addedEntity.Owner));
     }
 
@@ -81,7 +87,7 @@ public sealed class BodyHierarchySystem : BaseHierarchySystem<BodyComponent, Org
         var ev = new OrganGotRemovedEvent(hierarchyEntity, hierarchyEntity, removedEntity);
         RaiseLocalEvent(removedEntity, ref ev);
 
-        removedEntity.Comp.Container.ShowContents = false;
+        removedEntity.Comp.Container.ShowContents = true;
         Dirty(removedEntity.Owner, Comp<ContainerManagerComponent>(removedEntity.Owner));
     }
 }

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
-using System.Numerics;
+using Content.Shared._KS14.Klovnmed; // KS14
 using Content.Shared.Body;
 using Content.Shared.Hands.Components;
 using Robust.Shared.Containers;
@@ -12,6 +12,7 @@ namespace Content.IntegrationTests.Tests.Body;
 [TestOf(typeof(HandOrganSystem))]
 public sealed class HandOrganTest
 {
+    // KS14: Modified prototype to match hierarchy
     [TestPrototypes]
     private const string Prototypes = @"
 - type: entity
@@ -23,13 +24,36 @@ public sealed class HandOrganTest
     containers:
       body_organs: !type:AllSelector
         children:
+        - id: LeftArm
+        - id: RightArm
+
+- type: entity
+  id: LeftArm
+  components:
+  - type: Organ
+    category: LeftArm
+  - type: EntityTableContainerFill
+    containers:
+      body_organs: !type:AllSelector
+        children:
         - id: LeftHand
+
+- type: entity
+  id: RightArm
+  components:
+  - type: Organ
+    category: RightArm
+  - type: EntityTableContainerFill
+    containers:
+      body_organs: !type:AllSelector
+        children:
         - id: RightHand
 
 - type: entity
   id: LeftHand
   components:
   - type: Organ
+    category: LeftHand
   - type: HandOrgan
     handID: left
     data:
@@ -39,6 +63,7 @@ public sealed class HandOrganTest
   id: RightHand
   components:
   - type: Organ
+    category: RightHand
   - type: HandOrgan
     handID: right
     data:
@@ -67,7 +92,7 @@ public sealed class HandOrganTest
             // KS14: Use hierarchy instead of container
 
             var expectedCount = 2;
-            var contained = bodyComponent.RecursiveChildUids; // KS14: Use hierarchy instead of container
+            EntityUid[] contained = [bodyComponent.PresentOrganCategories["LeftHand"], bodyComponent.PresentOrganCategories["RightHand"]]; // KS14: Use hierarchy instead of container
             foreach (var hand in contained)
             {
                 expectedCount--;
@@ -75,11 +100,11 @@ public sealed class HandOrganTest
                 Assert.That(hands.Count, Is.EqualTo(expectedCount));
             }
 
-            var protos = new List<string>() { "LeftHand", "RightHand" };
-            foreach (var proto in protos)
+            var protos = new List<(string, string)>() { ("LeftArm", "LeftHand"), ("RightArm", "RightHand") }; // KS14: Use hierarchy instead of container
+            foreach (var (parentCategory, proto) in protos) // KS14
             {
                 expectedCount++;
-                entityManager.SpawnAttachedTo(proto, new(body, Vector2.Zero)); // KS14: Use hierarchy instead of container
+                entityManager.SpawnInContainerOrDrop(proto, bodyComponent.PresentOrganCategories[parentCategory], BodyHierarchySystem.ConstContainerId); // KS14: Use hierarchy instead of container
                 Assert.That(hands.Count, Is.EqualTo(expectedCount));
             }
         });

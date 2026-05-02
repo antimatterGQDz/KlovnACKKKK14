@@ -30,8 +30,6 @@ public abstract class BaseHierarchySystem<THierarchyComp, TElementComp> : Entity
         HierarchyQuery = GetEntityQuery<THierarchyComp>();
         ElementQuery = GetEntityQuery<TElementComp>();
 
-        SubscribeLocalEvent<TElementComp, ComponentStartup>(OnElementStartup);
-
         SubscribeLocalEvent<THierarchyComp, ComponentAdd>(OnHierarchyAdd);
         SubscribeLocalEvent<TElementComp, ComponentAdd>(OnElementAdd);
 
@@ -45,7 +43,6 @@ public abstract class BaseHierarchySystem<THierarchyComp, TElementComp> : Entity
         SubscribeLocalEvent<THierarchyComp, EntRemovedFromContainerMessage>(OnElementRemovedFromHierarchy);
         SubscribeLocalEvent<TElementComp, EntRemovedFromContainerMessage>(OnElementRemovedFromElement);
         SubscribeLocalEvent<TElementComp, EntGotInsertedIntoContainerMessage>(OnElementGotInsertedIntoContainer);
-
 
         SubscribeLocalEvent<TElementComp, ComponentShutdown>(OnElementShutdown);
     }
@@ -61,14 +58,6 @@ public abstract class BaseHierarchySystem<THierarchyComp, TElementComp> : Entity
 
         hierarchyEntity = (hierarchyUid, HierarchyQuery.GetComponent(hierarchyUid));
         return true;
-    }
-
-    private void OnElementStartup(Entity<TElementComp> elementEntity, ref ComponentStartup args)
-    {
-        if (elementEntity.Comp.HierarchyUid != null)
-            return;
-
-        //UpdateNewParent(elementEntity, Transform(elementEntity).ParentUid, null);
     }
 
     private void UpdateElementChildrenNewHierarchy(Entity<TElementComp> elementEntity, EntityUid? newHierarchyUid)
@@ -111,6 +100,7 @@ public abstract class BaseHierarchySystem<THierarchyComp, TElementComp> : Entity
     {
         if (args.Container.ID != _containerId)
             return;
+
         elementEntity.Comp.Container = ContainerSystem.EnsureContainer<Container>(elementEntity.Owner, _containerId);
         var newParentUid = args.Container.Owner;
         if (HierarchyQuery.HasComponent(newParentUid)) // use new hierarchy parent as hierarchy
@@ -130,12 +120,6 @@ public abstract class BaseHierarchySystem<THierarchyComp, TElementComp> : Entity
         }
         else
             throw new InvalidOperationException("Hierarchy element got into some bullshit container with valid container id but neither a hierarchy nor element component and we are just bailing");
-    }
-
-    [MustCallBase(true)]
-    protected virtual void OnElementParentChanged(Entity<TElementComp> elementEntity, ref EntParentChangedMessage args)
-    {
-        //UpdateNewParent(elementEntity, args.Transform.ParentUid, args.OldParent);
     }
 
     private void OnHierarchyAdd(Entity<THierarchyComp> hierarchyEntity, ref ComponentAdd args)
@@ -214,16 +198,19 @@ public abstract class BaseHierarchySystem<THierarchyComp, TElementComp> : Entity
 
     /// <summary>
     ///     Called when the entitys <see cref="THierarchyComp.RecursiveChildUids"/> was updated.
+    ///         Not called when state is being applied.
     /// </summary>
     protected virtual void UpdateHierarchyEntityState(Entity<THierarchyComp> entity) { }
 
     /// <summary>
     ///     Called when the entitys <see cref="TElementComp.ChildUids"/> was updated.
+    ///         Not called when state is being applied.
     /// </summary>
     protected virtual void UpdateElementEntityChildren(Entity<TElementComp> entity) { }
 
     /// <summary>
     ///     Called when the entitys <see cref="TElementComp.HierarchyUid"/> was updated.
+    ///         Not called when state is being applied.
     /// </summary>
     protected virtual void UpdateElementEntityHierarchy(Entity<TElementComp> entity) { }
 
@@ -250,8 +237,8 @@ public abstract class BaseHierarchySystem<THierarchyComp, TElementComp> : Entity
     {
         hierarchyEntity.Comp.RecursiveChildUids.Remove(removedEntity);
 
-        var addedEv = new HierarchyElementRemovedEvent<TElementComp>(removedEntity);
-        RaiseLocalEvent(hierarchyEntity, ref addedEv);
+        var removedEv = new HierarchyElementRemovedEvent<TElementComp>(removedEntity);
+        RaiseLocalEvent(hierarchyEntity, ref removedEv);
 
         UpdateHierarchyEntityState(hierarchyEntity);
     }

@@ -950,3 +950,23 @@ Entries:
         limbs.
   id: 114
   time: '2026-05-02T21:19:37.0000000+00:00'
+- author: LCDC
+  changes:
+    - type: Fix
+      message: Finally fixed canister overlays
+    - type: Add
+      message: The small port on gas canisters now shows the gas inside.
+    - type: Tweak
+      message: Improved emissive effect
+    - type: Add
+      message: >-
+        Alot of more things will emit light in the world according to their
+        sprite.
+    - type: Add
+      message: >-
+        Firelocks can now tear or crush your limbs off if you stand under them
+        while they force-close.
+    - type: Add
+      message: DLSS and RTX have been tuned a bit.
+  id: 115
+  time: '2026-05-02T21:20:43.0000000+00:00'

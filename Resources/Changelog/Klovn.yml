@@ -938,3 +938,15 @@ Entries:
         you can shoot someones head off.
   id: 113
   time: '2026-05-02T17:11:00.0000000+00:00'
+- author: LaCumbiaDelCoronavirus
+  changes:
+    - type: Add
+      message: >-
+        You can now reattach arms/legs/hands/feet to people by clicking on them
+        with the organ.
+    - type: Add
+      message: >-
+        The biogenerator, usually found in botany, can now craft basic human
+        limbs.
+  id: 114
+  time: '2026-05-02T21:19:37.0000000+00:00'

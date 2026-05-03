@@ -970,3 +970,33 @@ Entries:
       message: DLSS and RTX have been tuned a bit.
   id: 115
   time: '2026-05-02T21:20:43.0000000+00:00'
+- author: LaCumbiaDelCoronavirus
+  changes:
+    - type: Add
+      message: Added guidebook for surgery.
+    - type: Add
+      message: You can now re-add organs.
+    - type: Add
+      message: >-
+        Hands/feet can be removed/re-attached from/to individual dismembered
+        arms/legs, but it requires some surgery.
+    - type: Fix
+      message: You can no longer pry firelocks closed when they are open.
+    - type: Fix
+      message: Directional firelocks no longer crush you.
+    - type: Add
+      message: New sound for some snowstorm weather.
+    - type: Tweak
+      message: >-
+        Weather audio has been reworked, you now need to be outside or close to
+        the outside of the station to hear it, instead of anywhere.
+    - type: Add
+      message: Added Nightshift; only available on Saltern.
+    - type: Add
+      message: Added more emissives.
+    - type: Add
+      message: Gas miners now make sounds depending on what theyre doing.
+    - type: Fix
+      message: Fixed some gas miner mispredicts.
+  id: 116
+  time: '2026-05-03T14:38:26.0000000+00:00'

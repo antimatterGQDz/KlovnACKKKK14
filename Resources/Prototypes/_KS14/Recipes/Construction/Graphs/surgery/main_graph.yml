@@ -1,0 +1,203 @@
+- type: constructionGraph
+  id: SurgeryGraph
+  start: start
+  graph:
+  - node: start # ConstructionComponent.DeconstructionNode
+    actions: # Reset attachables
+    - !type:RemoveAttachableOrganCategory
+      category: Eyes
+    - !type:RemoveAttachableOrganCategory
+      category: Ears
+    edges:
+    - to: OpenIncision # Start surgery -> Incision
+      steps:
+      - tool: Slicing
+        doAfter: 12 # use the proper tool smh
+    - to: OpenIncision # Start surgery -> Incision
+      steps:
+      - tool: Incision
+        doAfter: 3
+  - node: OpenIncision # Incision
+    actions:
+    - !type:AddAttachableOrganCategory
+      category: Eyes
+    - !type:AddAttachableOrganCategory
+      category: Ears
+    edges:
+    # Cauterise to stop surgery early
+    - to: start
+      steps:
+      - tool: Welding
+        doAfter: 6.5
+    - to: start
+      steps:
+      - tool: Cauterisation
+        doAfter: 2.5
+
+    # Open ribcage
+    - to: Saw open ribcage
+      steps:
+      - tool: Sawing
+        doAfter: 4
+
+    ## Subset: Open head
+    - to: Saw head to expose brain # Incision -> Cut head open
+      conditions:
+      - !type:HasOrgan
+        category: Head
+      - !type:HasTag
+        tag: KsSurgeryMainBrainExposed
+        inverted: true
+      steps:
+      - tool: Sawing
+        doAfter: 2
+
+    - to: Remove brain # Incision -> Close head
+      conditions:
+      - !type:HasOrgan
+        category: Brain
+      - !type:HasTag
+        tag: KsSurgeryMainBrainExposed
+      steps:
+      - tool: Slicing
+        doAfter: 2
+
+    - to: Cauterize head wound # Incision -> Close head
+      conditions:
+      - !type:HasOrgan
+        category: Head
+      - !type:HasTag
+        tag: KsSurgeryMainBrainExposed
+      steps:
+      - tool: Cauterisation
+        doAfter: 2
+
+    ## Limb removal edges
+    - to: Saw Head off # Incision -> Cut head
+      conditions:
+      - !type:HasOrgan
+        category: Head
+      steps:
+      - tool: Sawing
+        doAfter: 6.5
+    - to: Cut Ears off # Incision -> Cut ears
+      conditions:
+      - !type:HasOrgan
+        category: Ears
+      steps: &cutting_amputation_steps
+      - tool: Cutting
+        doAfter: 3
+    - to: Cut Eyes off # Incision -> Cut ears
+      conditions:
+      - !type:HasOrgan
+        category: Eyes
+      steps: *cutting_amputation_steps
+    ##
+  ## Limb removal nodes
+  - node: Saw Head off # Transient node for: OpenIncision
+    actions:
+    - !type:TakeOrgan
+      category: Head
+    - !type:SetNode
+      node: OpenIncision
+      performActions: false # Dont perform actions so as to not re-add the category
+  - node: Cut Ears off # Transient node for: OpenIncision
+    actions:
+    - !type:TakeOrgan
+      category: Ears
+    - !type:SetNode
+      node: OpenIncision
+      performActions: false # Dont perform actions so as to not re-add the category
+  - node: Cut Eyes off # Transient node for: OpenIncision
+    actions:
+    - !type:TakeOrgan
+      category: Eyes
+    - !type:SetNode
+      node: OpenIncision
+      performActions: false # Dont perform actions so as to not re-add the category
+  ##
+
+  # Exposed head
+  - node: Saw head to expose brain # Transient node for: OpenIncision
+    actions:
+    - !type:SetNode
+      node: OpenIncision
+      performActions: false # Dont perform actions so as to not re-add the category
+    - !type:AddAttachableOrganCategory
+      category: Brain
+    - !type:AddTag
+      tag: KsSurgeryMainBrainExposed
+
+  - node: Remove brain # Transient node for: OpenIncision
+    actions:
+    - !type:TakeOrgan
+      category: Brain
+
+  - node: Cauterize head wound # Transient node for: OpenIncision
+    actions:
+    - !type:SetNode
+      node: OpenIncision
+      performActions: false # Dont perform actions so as to not re-add the category
+    - !type:RemoveAttachableOrganCategory
+      category: Brain
+    - !type:RemoveTag
+      tag: KsSurgeryMainBrainExposed
+
+  # Ribcage
+  - node: Saw open ribcage
+    actions:
+    - !type:AddAttachableOrganCategory
+      category: Heart
+    - !type:AddAttachableOrganCategory
+      category: Lungs
+    edges:
+    - to: Close Ribcage
+      steps:
+      - tool: Cauterisation
+        doAfter: 1
+
+    ## Limb removal edges
+    - to: Cut Heart out # Transient node for: Saw open ribcage
+      conditions:
+      - !type:HasOrgan
+        category: Heart
+      steps:
+      - tool: Incision
+        doAfter: 4.5
+
+    - to: Cut Lungs out # Transient node for: Saw open ribcage
+      conditions:
+      - !type:HasOrgan
+        category: Lungs
+      steps:
+      - tool: Incision
+        doAfter: 3.5
+    ##
+
+  - node: Close Ribcage # Transient node for: OpenIncision
+    actions:
+    - !type:SetNode
+      node: OpenIncision
+      performActions: false # Dont perform actions so as to not re-add the category
+    - !type:RemoveAttachableOrganCategory
+      category: Heart
+    - !type:RemoveAttachableOrganCategory
+      category: Lungs
+
+  ## Limb removal nodes
+  - node: Cut Heart out # Transient node for: Saw open ribcage
+    actions:
+    - !type:TakeOrgan
+      category: Heart
+    - !type:SetNode
+      node: Saw open ribcage
+      performActions: false # Dont perform actions so as to not re-add the category
+
+  - node: Cut Lungs out # Transient node for: Saw open ribcage
+    actions:
+    - !type:TakeOrgan
+      category: Lungs
+    - !type:SetNode
+      node: Saw open ribcage
+      performActions: false # Dont perform actions so as to not re-add the category
+  ##

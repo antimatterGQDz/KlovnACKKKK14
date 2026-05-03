@@ -28,9 +28,19 @@ public sealed class OrganAttachmentOperationSystem : EntitySystem
 
         _organQuery = GetEntityQuery<OrganComponent>();
 
-        SubscribeLocalEvent<OrganAttachmentOperationComponent, InteractUsingEvent>(OnInteractUsing);
+        SubscribeLocalEvent<OrganAttachmentOperationComponent, InteractUsingEvent>(OnInteractUsing, before: [typeof(Nutrition.EntitySystems.IngestionSystem)]);
         SubscribeLocalEvent<OrganAttachmentOperationComponent, DoAfterAttemptEvent<OrganAttachmentDoAfterEvent>>(OnDoAfterAttempt);
         SubscribeLocalEvent<OrganAttachmentOperationComponent, OrganAttachmentDoAfterEvent>(OnDoAfter);
+    }
+
+    private bool RaiseCanAttachOrganCancelled(Entity<OrganAttachmentOperationComponent?> entity, ProtoId<OrganCategoryPrototype> category)
+    {
+        Resolve(entity.Owner, ref entity.Comp, logMissing: false);
+
+        var ev = new CanAttachOrganEvent(false, category, entity.Comp);
+        RaiseLocalEvent(entity, ref ev);
+
+        return ev.Cancelled;
     }
 
     private HashSet<ProtoId<OrganCategoryPrototype>> GetApplicableOrganCategories(Entity<OrganAttachmentOperationComponent> entity)
@@ -49,12 +59,16 @@ public sealed class OrganAttachmentOperationSystem : EntitySystem
 
     private void OnInteractUsing(Entity<OrganAttachmentOperationComponent> entity, ref InteractUsingEvent args)
     {
+        if (args.Handled)
+            return;
+
         if (!_organQuery.TryGetComponent(args.Used, out var organComponent) ||
             organComponent.Category is not { } category ||
             !GetApplicableOrganCategories(entity).Contains(category))
             return;
 
-        if (_bodyHierarchySystem.TryGetOrgan(entity.Owner, category, out _) ||
+        if (RaiseCanAttachOrganCancelled(entity!, category) ||
+            _bodyHierarchySystem.TryGetOrgan(entity.Owner, category, out _) ||
             !_containerSystem.TryGetContainer(entity.Owner, BodyHierarchySystem.ConstContainerId, out var bodyContainer) ||
             !_containerSystem.CanInsert(args.Used, bodyContainer))
         {
@@ -65,7 +79,8 @@ public sealed class OrganAttachmentOperationSystem : EntitySystem
         NetEntity? routeEntity = null;
         if (entity.Comp.OrganRoutes.TryGetValue(category, out var routeCategory))
         {
-            if (!_bodyHierarchySystem.TryGetOrgan(entity.Owner, routeCategory, out var routeOrganEntity))
+            if (!_bodyHierarchySystem.TryGetOrgan(entity.Owner, routeCategory, out var routeOrganEntity) ||
+                RaiseCanAttachOrganCancelled(routeOrganEntity.Value.Owner, category))
             {
                 _popupSystem.PopupClient(Loc.GetString("ks-organ-attachment-operation-wontfit"), entity.Owner, args.User);
                 return;
@@ -74,6 +89,7 @@ public sealed class OrganAttachmentOperationSystem : EntitySystem
             routeEntity = GetNetEntity(routeOrganEntity.Value.Owner);
         }
 
+        args.Handled = true;
         _doAfterSystem.TryStartDoAfter(new DoAfterArgs(EntityManager, args.User, ReattachmentDuration, new OrganAttachmentDoAfterEvent(category, routeEntity ?? GetNetEntity(entity.Owner)), entity.Owner, entity.Owner, used: args.Used)
         {
             BreakOnDamage = true,
@@ -88,6 +104,12 @@ public sealed class OrganAttachmentOperationSystem : EntitySystem
         if (args.Event is not { } innerEvent ||
             innerEvent.Used is not { } usedUid)
             return;
+
+        if (RaiseCanAttachOrganCancelled(entity!, args.Event.Category))
+        {
+            args.Cancel();
+            return;
+        }
 
         if (_bodyHierarchySystem.TryGetOrgan(entity.Owner, args.Event.Category, out _) ||
             !_containerSystem.TryGetContainer(GetEntity(args.Event.ContainerEntity), BodyHierarchySystem.ConstContainerId, out var bodyContainer) ||

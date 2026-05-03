@@ -6,8 +6,10 @@ using Robust.Shared.Serialization;
 
 namespace Content.Shared._KS14.Klovnmed.OrganAttachmentOperation;
 
+/// <summary>
+///     Allows organs to be attached to this entity, if its a body or another organ.
+/// </summary>
 [RegisterComponent, NetworkedComponent]
-[Access(typeof(OrganAttachmentOperationSystem))]
 public sealed partial class OrganAttachmentOperationComponent : Component
 {
     /// <summary>
@@ -28,7 +30,16 @@ public sealed partial class OrganAttachmentOperationComponent : Component
 }
 
 /// <summary>
-///     Raised on something <see cref="OrganAttachmentOperationComponent"/> to
+///     Raised on something with <see cref="OrganAttachmentOperationComponent"/> to
+///         attempt to cancel an organ attachment if necessary, with the category of the organ being attached.
+///
+///     This will be raised every tick during doafters.
+/// </summary>
+[ByRefEvent]
+public record struct CanAttachOrganEvent(bool Cancelled, ProtoId<OrganCategoryPrototype> Category, OrganAttachmentOperationComponent? Component);
+
+/// <summary>
+///     Raised on something with <see cref="OrganAttachmentOperationComponent"/> to
 ///         get the organ categories which may be inserted, and into where.
 /// </summary>
 /// <param name="Categories"></param>

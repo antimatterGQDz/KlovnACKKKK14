@@ -13,11 +13,11 @@ public sealed class BodyHierarchySystem : BaseHierarchySystem<BodyComponent, Org
     [Dependency] private readonly IGameTiming _gameTiming = default!;
 
     public const string ConstContainerId = "body_organs"; // for compatibility
-    public override string ContainerId => ConstContainerId;
 
     public override void Initialize()
     {
         base.Initialize();
+        ContainerId = ConstContainerId;
 
         SubscribeLocalEvent<OrganComponent, ContainerIsRemovingAttemptEvent>(OnOrganElementRemovingAttempt);
     }
@@ -25,7 +25,7 @@ public sealed class BodyHierarchySystem : BaseHierarchySystem<BodyComponent, Org
     /// <returns>True if the entity was found.</returns>
     public bool TryGetOrgan(Entity<BodyComponent?> entity, ProtoId<OrganCategoryPrototype> category, [NotNullWhen(true)] out Entity<OrganComponent>? organEntity)
     {
-        if (!HierarchyQuery.Resolve(entity, ref entity.Comp) ||
+        if (!HierarchyQuery.Resolve(entity, ref entity.Comp, logMissing: false) ||
             !entity.Comp.PresentOrganCategories.TryGetValue(category, out var foundOrganEntity))
         {
             organEntity = null;
@@ -33,6 +33,20 @@ public sealed class BodyHierarchySystem : BaseHierarchySystem<BodyComponent, Org
         }
 
         organEntity = foundOrganEntity;
+        return true;
+    }
+
+    /// <returns>True if the body was found.</returns>
+    public bool TryGetBody(Entity<OrganComponent?> entity, [NotNullWhen(true)] out Entity<BodyComponent>? bodyEntity)
+    {
+        if (!ElementQuery.Resolve(entity, ref entity.Comp, logMissing: false) ||
+            entity.Comp.HierarchyUid is not { } bodyUid)
+        {
+            bodyEntity = null;
+            return false;
+        }
+
+        bodyEntity = (bodyUid, HierarchyQuery.GetComponent(bodyUid));
         return true;
     }
 
@@ -68,9 +82,6 @@ public sealed class BodyHierarchySystem : BaseHierarchySystem<BodyComponent, Org
 
         var ev = new OrganGotInsertedEvent(hierarchyEntity, hierarchyEntity, addedEntity);
         RaiseLocalEvent(addedEntity, ref ev);
-
-        addedEntity.Comp.Container.ShowContents = false;
-        Dirty(addedEntity.Owner, Comp<ContainerManagerComponent>(addedEntity.Owner));
     }
 
     protected override void RemoveElementFromHierarchy(Entity<BodyComponent> hierarchyEntity, Entity<OrganComponent> removedEntity)
@@ -86,8 +97,5 @@ public sealed class BodyHierarchySystem : BaseHierarchySystem<BodyComponent, Org
 
         var ev = new OrganGotRemovedEvent(hierarchyEntity, hierarchyEntity, removedEntity);
         RaiseLocalEvent(removedEntity, ref ev);
-
-        removedEntity.Comp.Container.ShowContents = true;
-        Dirty(removedEntity.Owner, Comp<ContainerManagerComponent>(removedEntity.Owner));
     }
 }

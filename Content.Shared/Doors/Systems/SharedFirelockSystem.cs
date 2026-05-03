@@ -65,6 +65,11 @@ public abstract class SharedFirelockSystem : EntitySystem
 
     private void OnBeforePry(EntityUid uid, FirelockComponent component, ref BeforePryEvent args)
     {
+        // KS14 start: dont let people pry open firelocks closed (fun banned)
+        if (TryComp<DoorComponent>(uid, out var doorComponent))
+            args.Cancelled |= doorComponent.State == DoorState.Open;
+        // KS14 end
+
         if (args.Cancelled || !component.Powered || args.StrongPry || args.PryPowered)
             return;
 

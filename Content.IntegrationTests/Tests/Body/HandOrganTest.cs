@@ -92,7 +92,7 @@ public sealed class HandOrganTest
             // KS14: Use hierarchy instead of container
 
             var expectedCount = 2;
-            EntityUid[] contained = [bodyComponent.PresentOrganCategories["LeftHand"], bodyComponent.PresentOrganCategories["RightHand"]]; // KS14: Use hierarchy instead of container
+            EntityUid[] contained = [bodyComponent.PresentOrganCategories["HandLeft"], bodyComponent.PresentOrganCategories["HandRight"]]; // KS14: Use hierarchy instead of container
             foreach (var hand in contained)
             {
                 expectedCount--;
@@ -100,7 +100,7 @@ public sealed class HandOrganTest
                 Assert.That(hands.Count, Is.EqualTo(expectedCount));
             }
 
-            var protos = new List<(string, string)>() { ("LeftArm", "LeftHand"), ("RightArm", "RightHand") }; // KS14: Use hierarchy instead of container
+            var protos = new List<(string, string)>() { ("ArmLeft", "LeftHand"), ("ArmRight", "RightHand") }; // KS14: Use hierarchy instead of container
             foreach (var (parentCategory, proto) in protos) // KS14
             {
                 expectedCount++;

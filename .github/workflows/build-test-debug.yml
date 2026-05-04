@@ -21,7 +21,6 @@ jobs:
     - name: Checkout Master
       uses: actions/checkout@v4.2.2
       with: # KS14: params
-        submodules: recursive\
         fetch-depth: 1 # made shallow, so its faster
         persist-credentials: false # idk it allegedly makes checkout faster
 
@@ -45,6 +44,7 @@ jobs:
     - name: Install dependencies
       run: dotnet restore
 
+    # SURELY WONT HAUNT US IN THE FUTURE
     - name: Build Project
       run: > # KS14: changed params to make it faster or something by alot
         dotnet build

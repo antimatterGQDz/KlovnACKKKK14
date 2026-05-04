@@ -60,19 +60,26 @@ jobs:
         find nunit -type f | sort | sed -n '1,200p'
 
     # ---------------------------
-    # Locate runner ONCE and reuse everywhere
+    # Locate runner ONCE and reuse everywhere, prefer .exe over .dll
     # ---------------------------
     - name: Locate NUnit runner
       run: |
-        RUNNER=$(find nunit -type f -name "nunit3-console.dll" | head -n 1)
+        echo "Scanning for NUnit runner..."
+
+        RUNNER=$(find nunit -type f \( -name "nunit3-console" -o -name "nunit3-console.exe" -o -name "nunit3-console.dll" \) | head -n 1)
 
         if [ -z "$RUNNER" ]; then
-          echo "ERROR: Could not locate nunit3-console.dll"
+          echo "ERROR: Could not locate NUnit runner"
+          find nunit -type f
           exit 1
         fi
 
+        echo "Resolved runner: $RUNNER"
+
+        # Make executable if needed
+        chmod +x "$RUNNER" || true
+
         echo "RUNNER=$RUNNER" >> "$GITHUB_ENV"
-        echo "Using NUnit runner: $RUNNER"
 
     # ---------------------------
     # Submodules
@@ -115,11 +122,12 @@ jobs:
         TEST_DLL=$(find bin -type f -name "Content.Tests.dll" | head -n 1)
 
         echo "Running: $TEST_DLL"
-        dotnet "$RUNNER" \
-          "$TEST_DLL" \
-          --workers=1 \
-          --labels=Off \
-          --result=none
+
+        if [[ "$RUNNER" == *.dll ]]; then
+          dotnet "$RUNNER" "$TEST_DLL" --workers=1 --labels=Off --result=none
+        else
+          "$RUNNER" "$TEST_DLL" --workers=1 --labels=Off --result=none
+        fi
 
     - name: Run Content.IntegrationTests
       run: |
@@ -128,11 +136,12 @@ jobs:
         TEST_DLL=$(find bin -type f -name "Content.IntegrationTests.dll" | head -n 1)
 
         echo "Running: $TEST_DLL"
-        dotnet "$RUNNER" \
-          "$TEST_DLL" \
-          --workers=1 \
-          --labels=Off \
-          --result=none
+
+        if [[ "$RUNNER" == *.dll ]]; then
+          dotnet "$RUNNER" "$TEST_DLL" --workers=1 --labels=Off --result=none
+        else
+          "$RUNNER" "$TEST_DLL" --workers=1 --labels=Off --result=none
+        fi
 
   ci-success:
     needs: build

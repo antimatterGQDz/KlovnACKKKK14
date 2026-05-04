@@ -59,20 +59,19 @@ jobs:
         -p:CL_MPCount=3
 
     - name: Run Content.Tests
-      shell: pwsh # KS14: remove XML output
+      shell: pwsh # KS14: add NUnit.ConsoleOut=0, NUnit.InternalTraceLevel=Off; to minimise XML OOM disaster
       run: >
         dotnet test
         --no-build
         --configuration DebugOpt
         Content.Tests/Content.Tests.csproj
         -- NUnit.ConsoleOut=0
-        NUnit.WorkDirectory="$(pwd)/test_results"
 
     - name: Run Content.IntegrationTests
-      shell: pwsh # KS14: add NUnit.ConsoleOut=0, NUnit.InternalTraceLevel=Off; remove XML output; to minimise XML OOM disaster
+      shell: pwsh # KS14: add NUnit.ConsoleOut=0, NUnit.InternalTraceLevel=Off; to minimise XML OOM disaster
       run: |
         $env:DOTNET_gcServer=1
-        dotnet test --no-build --configuration DebugOpt Content.IntegrationTests/Content.IntegrationTests.csproj -- NUnit.ConsoleOut=0 NUnit.MapWarningTo=Failed NUnit.WorkDirectory="$(pwd)/test_results" `
+        dotnet test --no-build --configuration DebugOpt Content.IntegrationTests/Content.IntegrationTests.csproj -- NUnit.ConsoleOut=0 NUnit.MapWarningTo=Failed `
           NUnit.ConsoleOut=0 `
           NUnit.InternalTraceLevel=Off
 

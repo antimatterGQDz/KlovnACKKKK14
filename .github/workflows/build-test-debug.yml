@@ -1,7 +1,6 @@
 name: Build & Test Debug
 
 # KS14: Changed alot to stop relying on `dotnet test` command and instead directly use NUnit console
-# KS14: Also made checkouts/submodule updates be shallow
 
 on:
   push:
@@ -24,11 +23,10 @@ jobs:
     # ---------------------------
     # Checkout FIRST (needed for everything else)
     # ---------------------------
-    - name: Checkout repo (shallow)
+    - name: Checkout repo
       uses: actions/checkout@v4
       with:
         submodules: recursive
-        fetch-depth: 1
         persist-credentials: false
 
     # ---------------------------
@@ -84,9 +82,9 @@ jobs:
     # ---------------------------
     # Submodules
     # ---------------------------
-    - name: Init submodules (shallow-safe)
+    - name: Init submodules
       run: |
-        git submodule update --init --recursive --depth 1
+        git submodule update --init --recursive
 
     - name: Pull engine updates
       uses: space-wizards/submodule-dependency@v0.1.5

@@ -46,32 +46,31 @@ jobs:
     - name: Build Project
       run: dotnet build --configuration DebugOpt --no-restore /m
 
-    # KS14: Modified step to not do any logging ever as it OOMs
-    - name: Run Content.Tests
+    # KS14: Use NUnit instead of `dotnet test`
+    - name: Download NUnit Console Runner # KS14 addition
       run: |
-        export DOTNET_gcServer=1
-        dotnet test \
-          --no-build \
-          --configuration DebugOpt \
-          Content.Tests/Content.Tests.csproj \
-          --logger "console;verbosity=minimal" \
-          --verbosity minimal \
-          -- NUnit.ConsoleOut=0 \
-            NUnit.NumberOfTestWorkers=1
+        wget https://github.com/nunit/nunit-console/releases/latest/download/NUnit.Console-3.22.0.zip
+        unzip NUnit.ConsoleRunner.3.18.1.zip -d nunit
 
-    # KS14: Modified step to not do any logging ever as it OOMs
-    - name: Run Content.IntegrationTests
+    # KS14: Use NUnit instead of `dotnet test`
+    - name: Run Content.Tests (NUnit)
       run: |
         export DOTNET_gcServer=1
-        dotnet test \
-          --no-build \
-          --configuration DebugOpt \
-          Content.IntegrationTests/Content.IntegrationTests.csproj \
-          --logger "console;verbosity=minimal" \
-          --verbosity minimal \
-          -- NUnit.ConsoleOut=0 \
-            NUnit.MapWarningTo=Failed \
-            NUnit.NumberOfTestWorkers=1
+        ./nunit/NUnit.ConsoleRunner*/bin/net*/nunit3-console \
+          bin/Content.Tests/Content.Tests.dll \
+          --workers=1 \
+          --labels=Off \
+          --result=none
+
+    # KS14: Use NUnit instead of `dotnet test`
+    - name: Run Content.IntegrationTests (NUnit)
+      run: |
+        export DOTNET_gcServer=1
+        ./nunit/NUnit.ConsoleRunner*/bin/net*/nunit3-console \
+          bin/Content.IntegrationTests/Content.IntegrationTests.dll \
+          --workers=1 \
+          --labels=Off \
+          --result=none
 
     # KS14: Remove test result archiving
 

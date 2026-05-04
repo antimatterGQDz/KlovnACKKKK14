@@ -22,30 +22,64 @@ jobs:
 
     steps:
     # ---------------------------
-    # NUnit download (NO version in paths)
+    # NUnit download (download first so breakages show up immediately)
     # ---------------------------
+    - name: Resolve latest NUnit release
+      id: nunit_release
+      run: |
+        set -euo pipefail
+        TAG=$(curl -fsSL https://api.github.com/repos/nunit/nunit-console/releases/latest | grep -m1 '"tag_name"' | cut -d '"' -f 4)
+        echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+        echo "Latest NUnit: $TAG"
+
     - name: Download NUnit Console Runner
       run: |
-        TAG=$(curl -s https://api.github.com/repos/nunit/nunit-console/releases/latest | grep tag_name | cut -d '"' -f 4)
-        echo "Latest NUnit: $TAG"
+        set -euo pipefail
+        mkdir -p nunit
+
+        TAG='${{ steps.nunit_release.outputs.tag }}'
 
         curl -L -o nunit.zip \
           "https://github.com/nunit/nunit-console/releases/download/${TAG}/NUnit.Console-${TAG}.zip"
 
         unzip -q nunit.zip -d nunit
+        rm -f nunit.zip
 
-    # Find runner dynamically (IMPORTANT FIX)
+    # KS14: print what we downloaded for debugging
+    - name: Inspect NUnit folder
+      run: |
+        set -euo pipefail
+        echo "NUnit contents:"
+        find nunit -type f | sort | sed -n '1,200p'
+
+    # ---------------------------
+    # Locate runner ONCE and reuse everywhere
+    # ---------------------------
     - name: Locate NUnit runner
       run: |
-        echo "Searching for nunit3-console..."
-        find nunit -type f -name "nunit3-console*" -print
+        set -euo pipefail
 
+        RUNNER=$(find nunit -type f \( -name "nunit3-console" -o -name "nunit3-console.exe" \) | head -n 1)
+
+        if [ -z "$RUNNER" ]; then
+          echo "ERROR: Could not locate nunit3-console"
+          exit 1
+        fi
+
+        chmod +x "$RUNNER" || true
+
+        echo "RUNNER=$RUNNER" >> "$GITHUB_ENV"
+        echo "Using NUnit runner: $RUNNER"
+
+    # ---------------------------
+    # Checkout repo (shallow)
+    # ---------------------------
     - name: Checkout repo (shallow)
       uses: actions/checkout@v4
       with:
         submodules: recursive
-        fetch-depth: 1 # KS14: shallow
-        persist-credentials: false # KS14: idk tbh allegedly this makes test run faster
+        fetch-depth: 1
+        persist-credentials: false
 
     # KS14: shallow
     - name: Init submodules (shallow-safe)
@@ -77,31 +111,45 @@ jobs:
         -p:CL_MPCount=2
 
     # ---------------------------
-    # Tests (shared script)
+    # Tests (use stored RUNNER variable only)
     # ---------------------------
     - name: Run Content.Tests
       run: |
+        set -euo pipefail
         export DOTNET_gcServer=1
 
-        RUNNER=$(find nunit -type f -name nunit3-console | head -n 1)
+        TEST_DLL=$(find bin -type f -name "Content.Tests.dll" | head -n 1)
 
-        $RUNNER \
-          bin/Content.Tests/Content.Tests.dll \
+        if [ -z "$TEST_DLL" ]; then
+          echo "ERROR: Content.Tests.dll not found"
+          exit 1
+        fi
+
+        echo "Running: $TEST_DLL"
+        "$RUNNER" \
+          "$TEST_DLL" \
           --workers=1 \
           --labels=Off \
-          --result=none
+          --noresult
 
     - name: Run Content.IntegrationTests
       run: |
+        set -euo pipefail
         export DOTNET_gcServer=1
 
-        RUNNER=$(find nunit -type f -name nunit3-console | head -n 1)
+        TEST_DLL=$(find bin -type f -name "Content.IntegrationTests.dll" | head -n 1)
 
-        $RUNNER \
-          bin/Content.IntegrationTests/Content.IntegrationTests.dll \
+        if [ -z "$TEST_DLL" ]; then
+          echo "ERROR: Content.IntegrationTests.dll not found"
+          exit 1
+        fi
+
+        echo "Running: $TEST_DLL"
+        "$RUNNER" \
+          "$TEST_DLL" \
           --workers=1 \
           --labels=Off \
-          --result=none
+          --noresult
 
   ci-success:
     needs: build

@@ -46,24 +46,35 @@ jobs:
     - name: Build Project
       run: dotnet build --configuration DebugOpt --no-restore /m
 
+    # KS14: Modified step to not do any logging ever as it OOMs
     - name: Run Content.Tests
-      shell: pwsh
-      run: dotnet test --no-build --configuration DebugOpt Content.Tests/Content.Tests.csproj -- NUnit.ConsoleOut=0 NUnit.TestOutputXml="logs" NUnit.WorkDirectory="$(pwd)/test_results"
-
-    - name: Run Content.IntegrationTests
-      shell: pwsh
       run: |
-        $env:DOTNET_gcServer=1
-        dotnet test --no-build --configuration DebugOpt Content.IntegrationTests/Content.IntegrationTests.csproj -- NUnit.ConsoleOut=0 NUnit.MapWarningTo=Failed NUnit.TestOutputXml="logs" NUnit.WorkDirectory="$(pwd)/test_results"
+        export DOTNET_gcServer=1
+        dotnet test \
+          --no-build \
+          --configuration DebugOpt \
+          Content.Tests/Content.Tests.csproj \
+          --logger "console;verbosity=minimal" \
+          --verbosity minimal \
+          -- NUnit.ConsoleOut=0 \
+            NUnit.NumberOfTestWorkers=1
 
-    - name: Archive NUnit3 test results.
-      if: always()
-      uses: actions/upload-artifact@v4
-      with:
-        name: nunit3-results-${{ matrix.os }}
-        path: test_results/*
-        retention-days: 7
-        compression-level: 9
+    # KS14: Modified step to not do any logging ever as it OOMs
+    - name: Run Content.IntegrationTests
+      run: |
+        export DOTNET_gcServer=1
+        dotnet test \
+          --no-build \
+          --configuration DebugOpt \
+          Content.IntegrationTests/Content.IntegrationTests.csproj \
+          --logger "console;verbosity=minimal" \
+          --verbosity minimal \
+          -- NUnit.ConsoleOut=0 \
+            NUnit.MapWarningTo=Failed \
+            NUnit.NumberOfTestWorkers=1
+
+    # KS14: Remove test result archiving
+
   ci-success:
     name: Build & Test Debug
     needs:

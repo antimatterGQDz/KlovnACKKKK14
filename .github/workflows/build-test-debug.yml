@@ -1,6 +1,7 @@
 name: Build & Test Debug
 
 # KS14: Changed alot to stop relying on `dotnet test` command and instead directly use NUnit console
+# KS14: Also made checkouts/submodule updates be shallow
 
 on:
   push:
@@ -20,13 +21,36 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     steps:
-    - name: Checkout repo
+    # ---------------------------
+    # NUnit download (NO version in paths)
+    # ---------------------------
+    - name: Download NUnit Console Runner
+      run: |
+        TAG=$(curl -s https://api.github.com/repos/nunit/nunit-console/releases/latest | grep tag_name | cut -d '"' -f 4)
+        echo "Latest NUnit: $TAG"
+
+        curl -L -o nunit.zip \
+          "https://github.com/nunit/nunit-console/releases/download/${TAG}/NUnit.Console-${TAG}.zip"
+
+        unzip -q nunit.zip -d nunit
+
+    # Find runner dynamically (IMPORTANT FIX)
+    - name: Locate NUnit runner
+      run: |
+        echo "Searching for nunit3-console..."
+        find nunit -type f -name "nunit3-console*" -print
+
+    - name: Checkout repo (shallow)
       uses: actions/checkout@v4
       with:
         submodules: recursive
+        fetch-depth: 1 # KS14: shallow
+        persist-credentials: false # KS14: idk tbh allegedly this makes test run faster
 
-    - name: Setup submodules
-      run: git submodule update --init --recursive
+    # KS14: shallow
+    - name: Init submodules (shallow-safe)
+      run: |
+        git submodule update --init --recursive --depth 1
 
     - name: Pull engine updates
       uses: space-wizards/submodule-dependency@v0.1.5
@@ -51,23 +75,6 @@ jobs:
         -p:EnableNETAnalyzers=false
         -p:BuildInParallel=true
         -p:CL_MPCount=2
-
-    # ---------------------------
-    # NUnit download (NO version in paths)
-    # ---------------------------
-    - name: Download NUnit Console Runner
-      run: |
-        curl -L -o nunit.zip \
-          https://github.com/nunit/nunit-console/releases/latest/download/NUnit.Console.zip
-
-        unzip -q nunit.zip -d nunit
-        rm nunit.zip
-
-    # Find runner dynamically (IMPORTANT FIX)
-    - name: Locate NUnit runner
-      run: |
-        echo "Searching for nunit3-console..."
-        find nunit -type f -name "nunit3-console*" -print
 
     # ---------------------------
     # Tests (shared script)

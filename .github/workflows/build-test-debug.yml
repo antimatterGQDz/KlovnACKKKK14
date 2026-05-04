@@ -1,7 +1,5 @@
 name: Build & Test Debug
 
-# KS14: Changed alot to stop relying on `dotnet test` command and instead directly use NUnit console
-
 on:
   push:
     branches: [ master, staging, stable ]
@@ -20,85 +18,35 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     steps:
-    # ---------------------------
-    # Checkout FIRST (needed for everything else)
-    # ---------------------------
-    - name: Checkout repo
-      uses: actions/checkout@v4
-      with:
-        submodules: recursive
-        persist-credentials: false
+    - name: Checkout Master
+      uses: actions/checkout@v4.2.2
+      with: # KS14: params
+        submodules: recursive\
+        fetch-depth: 1 # made shallow, so its faster
+        persist-credentials: false # idk it allegedly makes checkout faster
 
-    # ---------------------------
-    # NUnit download (download first so breakages show up immediately)
-    # ---------------------------
-    - name: Resolve latest NUnit release
-      id: nunit_release
-      run: |
-        TAG=$(curl -fsSL https://api.github.com/repos/nunit/nunit-console/releases/latest | grep -m1 '"tag_name"' | cut -d '"' -f 4)
-        echo "tag=$TAG" >> "$GITHUB_OUTPUT"
-        echo "Latest NUnit: $TAG"
-
-    - name: Download NUnit Console Runner
-      run: |
-        mkdir -p nunit
-
-        TAG='${{ steps.nunit_release.outputs.tag }}'
-
-        curl -L -o nunit.zip \
-          "https://github.com/nunit/nunit-console/releases/download/${TAG}/NUnit.Console-${TAG}.zip"
-
-        unzip -q nunit.zip -d nunit
-        rm -f nunit.zip
-
-    # KS14: print what we downloaded for debugging
-    - name: Inspect NUnit folder
-      run: |
-        echo "NUnit contents:"
-        find nunit -type f | sort | sed -n '1,200p'
-
-    # ---------------------------
-    # Locate runner ONCE and reuse everywhere, prefer .exe over .dll
-    # ---------------------------
-    - name: Locate NUnit runner
-      run: |
-        echo "Scanning for NUnit runner..."
-
-        RUNNER=$(find nunit -type f \( -name "nunit3-console" -o -name "nunit3-console.exe" -o -name "nunit3-console.dll" \) | head -n 1)
-
-        if [ -z "$RUNNER" ]; then
-          echo "ERROR: Could not locate NUnit runner"
-          find nunit -type f
-          exit 1
-        fi
-
-        echo "Resolved runner: $RUNNER"
-
-        # Make executable if needed
-        chmod +x "$RUNNER" || true
-
-        echo "RUNNER=$RUNNER" >> "$GITHUB_ENV"
-
-    # ---------------------------
-    # Submodules
-    # ---------------------------
-    - name: Init submodules
+    - name: Setup Submodule
       run: |
         git submodule update --init --recursive
 
     - name: Pull engine updates
       uses: space-wizards/submodule-dependency@v0.1.5
 
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v4
+    - name: Update Engine Submodules
+      run: |
+        cd RobustToolbox/
+        git submodule update --init --recursive
+
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v4.1.0
       with:
         dotnet-version: 10.0.x
 
-    - name: Restore
+    - name: Install dependencies
       run: dotnet restore
 
-    - name: Build (fast CI config)
-      run: >
+    - name: Build Project
+      run: > # KS14: changed params to make it faster or something by alot
         dotnet build
         --configuration DebugOpt
         --no-restore
@@ -110,39 +58,22 @@ jobs:
         -p:BuildInParallel=true
         -p:CL_MPCount=2
 
-    # ---------------------------
-    # Tests
-    # ---------------------------
     - name: Run Content.Tests
-      run: |
-        export DOTNET_gcServer=1
-
-        TEST_DLL=$(find bin -type f -name "Content.Tests.dll" | head -n 1)
-
-        echo "Running: $TEST_DLL"
-
-        if [[ "$RUNNER" == *.dll ]]; then
-          dotnet "$RUNNER" "$TEST_DLL" --workers=1 --labels=Off --result=none
-        else
-          "$RUNNER" "$TEST_DLL" --workers=1 --labels=Off --result=none
-        fi
+      shell: pwsh
+      run: dotnet test --no-build --configuration DebugOpt Content.Tests/Content.Tests.csproj -- NUnit.ConsoleOut=0 NUnit.TestOutputXml="logs" NUnit.WorkDirectory="$(pwd)/test_results"
 
     - name: Run Content.IntegrationTests
+      shell: pwsh
       run: |
-        export DOTNET_gcServer=1
+        $env:DOTNET_gcServer=1
+        dotnet test --no-build --configuration DebugOpt Content.IntegrationTests/Content.IntegrationTests.csproj -- NUnit.ConsoleOut=0 NUnit.MapWarningTo=Failed NUnit.TestOutputXml="logs" NUnit.WorkDirectory="$(pwd)/test_results"
 
-        TEST_DLL=$(find bin -type f -name "Content.IntegrationTests.dll" | head -n 1)
-
-        echo "Running: $TEST_DLL"
-
-        if [[ "$RUNNER" == *.dll ]]; then
-          dotnet "$RUNNER" "$TEST_DLL" --workers=1 --labels=Off --result=none
-        else
-          "$RUNNER" "$TEST_DLL" --workers=1 --labels=Off --result=none
-        fi
-
+    # KS14: Removed test result archival
   ci-success:
-    needs: build
+    name: Build & Test Debug
+    needs:
+      - build
     runs-on: ubuntu-latest
     steps:
-      - run: exit 0
+      - name: CI succeeded
+        run: exit 0

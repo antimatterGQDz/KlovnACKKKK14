@@ -22,6 +22,16 @@ jobs:
 
     steps:
     # ---------------------------
+    # Checkout FIRST (needed for everything else)
+    # ---------------------------
+    - name: Checkout repo (shallow)
+      uses: actions/checkout@v4
+      with:
+        submodules: recursive
+        fetch-depth: 1
+        persist-credentials: false
+
+    # ---------------------------
     # NUnit download (download first so breakages show up immediately)
     # ---------------------------
     - name: Resolve latest NUnit release
@@ -54,29 +64,19 @@ jobs:
     # ---------------------------
     - name: Locate NUnit runner
       run: |
-        RUNNER=$(find nunit -name "nunit3-console.dll" | head -n 1)
+        RUNNER=$(find nunit -type f -name "nunit3-console.dll" | head -n 1)
 
         if [ -z "$RUNNER" ]; then
-          echo "ERROR: Could not locate nunit3-console"
+          echo "ERROR: Could not locate nunit3-console.dll"
           exit 1
         fi
-
-        chmod +x "$RUNNER" || true
 
         echo "RUNNER=$RUNNER" >> "$GITHUB_ENV"
         echo "Using NUnit runner: $RUNNER"
 
     # ---------------------------
-    # Checkout repo (shallow)
+    # Submodules
     # ---------------------------
-    - name: Checkout repo (shallow)
-      uses: actions/checkout@v4
-      with:
-        submodules: recursive
-        fetch-depth: 1
-        persist-credentials: false
-
-    # KS14: shallow
     - name: Init submodules (shallow-safe)
       run: |
         git submodule update --init --recursive --depth 1
@@ -106,7 +106,7 @@ jobs:
         -p:CL_MPCount=2
 
     # ---------------------------
-    # Tests (use stored RUNNER variable only)
+    # Tests
     # ---------------------------
     - name: Run Content.Tests
       run: |
@@ -114,17 +114,12 @@ jobs:
 
         TEST_DLL=$(find bin -type f -name "Content.Tests.dll" | head -n 1)
 
-        if [ -z "$TEST_DLL" ]; then
-          echo "ERROR: Content.Tests.dll not found"
-          exit 1
-        fi
-
         echo "Running: $TEST_DLL"
-        "$RUNNER" \
+        dotnet "$RUNNER" \
           "$TEST_DLL" \
           --workers=1 \
           --labels=Off \
-          --noresult
+          --result=none
 
     - name: Run Content.IntegrationTests
       run: |
@@ -132,17 +127,12 @@ jobs:
 
         TEST_DLL=$(find bin -type f -name "Content.IntegrationTests.dll" | head -n 1)
 
-        if [ -z "$TEST_DLL" ]; then
-          echo "ERROR: Content.IntegrationTests.dll not found"
-          exit 1
-        fi
-
         echo "Running: $TEST_DLL"
-        "$RUNNER" \
+        dotnet "$RUNNER" \
           "$TEST_DLL" \
           --workers=1 \
           --labels=Off \
-          --noresult
+          --result=none
 
   ci-success:
     needs: build

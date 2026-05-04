@@ -68,12 +68,13 @@ jobs:
         -- NUnit.ConsoleOut=0
 
     - name: Run Content.IntegrationTests
-      shell: pwsh # KS14: add NUnit.ConsoleOut=0, NUnit.InternalTraceLevel=Off; to minimise XML OOM disaster
+      shell: pwsh # KS14: add NUnit.ConsoleOut=0, NUnit.InternalTraceLevel=Off; to minimise XML OOM disaster, also added logger settings
       run: |
         $env:DOTNET_gcServer=1
         dotnet test --no-build --configuration DebugOpt Content.IntegrationTests/Content.IntegrationTests.csproj -- NUnit.ConsoleOut=0 NUnit.MapWarningTo=Failed `
           NUnit.ConsoleOut=0 `
-          NUnit.InternalTraceLevel=Off
+          NUnit.InternalTraceLevel=Off `
+          --logger "console;verbosity=normal"
 
     # KS14: Removed test result archival
   ci-success:

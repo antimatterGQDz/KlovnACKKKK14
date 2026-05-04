@@ -56,7 +56,7 @@ jobs:
         -p:RunAnalyzers=false
         -p:EnableNETAnalyzers=false
         -p:BuildInParallel=true
-        -p:CL_MPCount=2
+        -p:CL_MPCount=3
 
     - name: Run Content.Tests
       shell: pwsh # KS14: do something here idk

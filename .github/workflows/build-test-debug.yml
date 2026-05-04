@@ -54,7 +54,7 @@ jobs:
     # ---------------------------
     - name: Locate NUnit runner
       run: |
-        RUNNER=$(find nunit -type f \( -name "nunit3-console" -o -name "nunit3-console.exe" \) | head -n 1)
+        RUNNER=$(find nunit -name "nunit3-console.dll" | head -n 1)
 
         if [ -z "$RUNNER" ]; then
           echo "ERROR: Could not locate nunit3-console"

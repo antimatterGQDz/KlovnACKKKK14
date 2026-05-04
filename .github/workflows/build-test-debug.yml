@@ -18,6 +18,12 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     steps:
+    # KS14: Use NUnit instead of `dotnet test`
+    - name: Download NUnit Console Runner # KS14 addition
+      run: |
+        wget https://github.com/nunit/nunit-console/releases/download/3.22.0/NUnit.Console-3.22.0.zip
+        unzip NUnit.Console-3.22.0.zip -d nunit
+
     - name: Checkout Master with Submodule
       uses: actions/checkout@v4.2.2
       with:
@@ -45,12 +51,6 @@ jobs:
 
     - name: Build Project
       run: dotnet build --configuration DebugOpt --no-restore /m
-
-    # KS14: Use NUnit instead of `dotnet test`
-    - name: Download NUnit Console Runner # KS14 addition
-      run: |
-        wget https://github.com/nunit/nunit-console/releases/latest/download/NUnit.Console-3.22.0.zip
-        unzip NUnit.ConsoleRunner.3.18.1.zip -d nunit
 
     # KS14: Use NUnit instead of `dotnet test`
     - name: Run Content.Tests (NUnit)

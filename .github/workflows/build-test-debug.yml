@@ -1,5 +1,7 @@
 name: Build & Test Debug
 
+# KS14: Changed alot to stop relying on `dotnet test` command and instead directly use NUnit console
+
 on:
   push:
     branches: [ master, staging, stable ]
@@ -18,71 +20,84 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     steps:
-    # KS14: Use NUnit runner directly instead of `dotnet test`
-    - name: Download NUnit Console Runner # KS14 addition
-      run: |
-        wget https://github.com/nunit/nunit-console/releases/download/3.22.0/NUnit.Console-3.22.0.zip
-        unzip NUnit.Console-3.22.0.zip -d nunit
-
-    # KS14: Use NUnit runner directly instead of `dotnet test`
-    - name: Inspect NUnit folder
-      run: ls -R nunit
-
-    - name: Checkout Master with Submodule
-      uses: actions/checkout@v4.2.2
+    - name: Checkout repo
+      uses: actions/checkout@v4
       with:
         submodules: recursive
 
-    - name: Setup Submodule
-      run: |
-        git submodule update --init --recursive
+    - name: Setup submodules
+      run: git submodule update --init --recursive
 
     - name: Pull engine updates
       uses: space-wizards/submodule-dependency@v0.1.5
 
-    - name: Update Engine Submodules
-      run: |
-        cd RobustToolbox/
-        git submodule update --init --recursive
-
-    - name: Setup .NET Core
-      uses: actions/setup-dotnet@v4.1.0
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
       with:
         dotnet-version: 10.0.x
 
-    - name: Install dependencies
+    - name: Restore
       run: dotnet restore
 
-    - name: Build Project # KS14: Add parallelism, remove debugging and analyzers (saves like 17.2% of time compared to previously)
-      run: dotnet build --configuration DebugOpt --no-restore -p:DebugType=None -p:DebugSymbols=false -p:BuildInParallel=true -p:CL_MPCount=2 -p:RunAnalyzers=false -p:EnableNETAnalyzers=false -m
+    - name: Build (fast CI config)
+      run: >
+        dotnet build
+        --configuration DebugOpt
+        --no-restore
+        -m
+        -p:DebugType=None
+        -p:DebugSymbols=false
+        -p:RunAnalyzers=false
+        -p:EnableNETAnalyzers=false
+        -p:BuildInParallel=true
+        -p:CL_MPCount=2
 
-    # KS14: Use NUnit runner directly instead of `dotnet test`
-    - name: Run Content.Tests (NUnit)
+    # ---------------------------
+    # NUnit download (NO version in paths)
+    # ---------------------------
+    - name: Download NUnit Console Runner
+      run: |
+        curl -L -o nunit.zip \
+          https://github.com/nunit/nunit-console/releases/latest/download/NUnit.Console.zip
+
+        unzip -q nunit.zip -d nunit
+        rm nunit.zip
+
+    # Find runner dynamically (IMPORTANT FIX)
+    - name: Locate NUnit runner
+      run: |
+        echo "Searching for nunit3-console..."
+        find nunit -type f -name "nunit3-console*" -print
+
+    # ---------------------------
+    # Tests (shared script)
+    # ---------------------------
+    - name: Run Content.Tests
       run: |
         export DOTNET_gcServer=1
-        ./nunit/NUnit.Console-3.22.0/bin/net6.0/nunit3-console \
-          bin/Content.IntegrationTests/Content.IntegrationTests.dll \
+
+        RUNNER=$(find nunit -type f -name nunit3-console | head -n 1)
+
+        $RUNNER \
+          bin/Content.Tests/Content.Tests.dll \
           --workers=1 \
           --labels=Off \
           --result=none
 
-    # KS14: Use NUnit runner directly instead of `dotnet test`
-    - name: Run Content.IntegrationTests (NUnit)
+    - name: Run Content.IntegrationTests
       run: |
         export DOTNET_gcServer=1
-        ./nunit/NUnit.Console-3.22.0/bin/net6.0/nunit3-console \
+
+        RUNNER=$(find nunit -type f -name nunit3-console | head -n 1)
+
+        $RUNNER \
           bin/Content.IntegrationTests/Content.IntegrationTests.dll \
           --workers=1 \
           --labels=Off \
           --result=none
-
-    # KS14: Remove test result archiving
 
   ci-success:
-    name: Build & Test Debug
-    needs:
-      - build
+    needs: build
     runs-on: ubuntu-latest
     steps:
-      - name: CI succeeded
-        run: exit 0
+      - run: exit 0

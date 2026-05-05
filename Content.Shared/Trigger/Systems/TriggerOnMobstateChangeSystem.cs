@@ -4,10 +4,6 @@ using Content.Shared.Inventory; // KS14: MOBSTATERELAY
 using Content.Shared.Mobs;
 using Content.Shared.Popups;
 using Content.Shared.Trigger.Components.Triggers;
-//KS14 START
-using Content.Shared._KS14.Clothing.EntitySystems;
-using Content.Shared._KS14.Clothing.Components;
-//KS14 END
 
 namespace Content.Shared.Trigger.Systems;
 

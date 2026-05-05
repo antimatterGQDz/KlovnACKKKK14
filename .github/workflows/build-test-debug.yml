@@ -78,7 +78,7 @@ jobs:
           --no-build `
           --configuration DebugOpt `
           Content.IntegrationTests/Content.IntegrationTests.csproj `
-          --logger "console;verbosity=detailed" `
+          --logger "console;verbosity=minimal" `
           -- `
           NUnit.ConsoleOut=0 `
           NUnit.InternalTraceLevel=Off `

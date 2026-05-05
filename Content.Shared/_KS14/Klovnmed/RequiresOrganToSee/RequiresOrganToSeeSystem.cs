@@ -36,7 +36,8 @@ public sealed class RequiresOrganToSeeSystem : EntitySystem
 
     private void OnSeeAttempt(Entity<RequiresOrganToSeeComponent> entity, ref CanSeeAttemptEvent args)
     {
-        if (_bodyHierarchySystem.TryGetOrgan(entity.Owner, entity.Comp.Category, out _))
+        if (args.Cancelled ||
+            _bodyHierarchySystem.TryGetOrgan(entity.Owner, entity.Comp.Category, out _))
             return;
 
         args.Cancel();

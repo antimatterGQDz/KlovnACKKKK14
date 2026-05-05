@@ -33,6 +33,9 @@ public sealed class WormWithoutOrgansSystem : EntitySystem
 
     private void OnOrganInserted(Entity<WormWithoutOrgansComponent> entity, ref OrganInsertedIntoEvent args)
     {
+        if (_gameTiming.ApplyingState)
+            return;
+
         if (!HasAllRequiredOrgans(entity, args.BodyComponent))
             return;
 

@@ -2,6 +2,7 @@ using Content.Shared.Body;
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Timing;
 
 namespace Content.Shared._KS14.InventoryRequiresOrgan;
 
@@ -9,6 +10,7 @@ namespace Content.Shared._KS14.InventoryRequiresOrgan;
 
 public sealed class InventoryRequiresOrganSystem : EntitySystem
 {
+    [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly InventorySystem _inventorySystem = default!;
 
     public override void Initialize()
@@ -56,6 +58,9 @@ public sealed class InventoryRequiresOrganSystem : EntitySystem
 
     private void OnOrganRemoved(Entity<InventoryRequiresOrganComponent> entity, ref OrganRemovedFromEvent args)
     {
+        if (_gameTiming.ApplyingState)
+            return;
+
         if (TerminatingOrDeleted(entity) ||
             !Transform(entity.Owner).ParentUid.IsValid())
             return;
@@ -65,7 +70,7 @@ public sealed class InventoryRequiresOrganSystem : EntitySystem
             if (!ShouldDisableSlot(requiredCategories, args.BodyComponent.PresentOrganCategories))
                 continue;
 
-            _inventorySystem.TryUnequip(entity.Owner, slotId, force: true, predicted: true);
+            _inventorySystem.TryUnequip(entity.Owner, slotId, silent: true, force: true, predicted: true);
         }
     }
 }

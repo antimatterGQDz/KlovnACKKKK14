@@ -72,7 +72,6 @@ jobs:
       # KS14: Added heap hardlimit
       run: |
         $env:DOTNET_gcServer=1
-        $env:DOTNET_GCHeapHardLimit=3000000000
 
         dotnet test `
           --no-build `

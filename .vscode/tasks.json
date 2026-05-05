@@ -62,6 +62,31 @@
             "problemMatcher": "$msCompile"
         },
         {
+            "label": "build - DebugOpt, Quick, Buggy",
+            "command": "dotnet",
+            "type": "shell",
+            "args": [
+                "build",
+                "--configuration",
+                "DebugOpt",
+                "-m",
+                "-p:DebugType=None",
+                "-p:DebugSymbols=false",
+                "-p:RunAnalyzers=false",
+                "-p:EnableNETAnalyzers=false",
+                "-p:BuildInParallel=true",
+                "-p:CL_MPCount=3"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "presentation": {
+                "reveal": "silent"
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
             "label": "build-yaml-linter",
             "command": "dotnet",
             "type": "process",

@@ -112,6 +112,22 @@
             "console": "integratedTerminal",
             "stopAtEntry": false
         },
+        {
+            "name": "Client - DebugOpt, Quick, Buggy",
+            "type": "coreclr",
+            "request": "launch",
+
+            "preLaunchTask": "build - DebugOpt, Quick, Buggy",
+
+            // REQUIRED but never used since we won't run anything
+            "program": "${workspaceFolder}/bin/Content.Client/Content.Client.dll",
+
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+
+            // IMPORTANT: prevents actual debugging behavior from being meaningful
+            "justMyCode": true
+        },
     ],
     "compounds": [
         {

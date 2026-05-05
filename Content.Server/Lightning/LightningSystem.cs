@@ -71,6 +71,12 @@ public sealed class LightningSystem : SharedLightningSystem
     /// <param name="triggerLightningEvents">if the lightnings being fired should trigger lightning events.</param>
     public void ShootRandomLightnings(EntityUid user, float range, int boltCount, string lightningPrototype = "Lightning", int arcDepth = 0, bool triggerLightningEvents = true)
     {
+        // KS14 Start
+        // possibly test fail fix o algo, maybe oom fix too
+        if (boltCount <= 0 || range <= 0f)
+            return;
+        // KS14 End
+
         //TODO: add support to different priority target tablem for different lightning types
         //TODO: Remove Hardcode LightningTargetComponent (this should be a parameter of the SharedLightningComponent)
         //TODO: This is still pretty bad for perf but better than before and at least it doesn't re-allocate
@@ -82,7 +88,7 @@ public sealed class LightningSystem : SharedLightningSystem
 
         int shootedCount = 0;
         int count = -1;
-        while(shootedCount < boltCount)
+        while (shootedCount < boltCount)
         {
             count++;
 

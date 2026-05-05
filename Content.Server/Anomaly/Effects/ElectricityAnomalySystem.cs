@@ -32,12 +32,6 @@ public sealed class ElectricityAnomalySystem : EntitySystem
 
         int boltCount = (int)MathF.Floor(MathHelper.Lerp((float)anomaly.Comp.MinBoltCount, (float)anomaly.Comp.MaxBoltCount, args.Severity));
 
-        // KS14 Start
-        // shitty tests fix
-        if (range <= 0)
-            return;
-        // KS14 End
-
         _lightning.ShootRandomLightnings(anomaly, range, boltCount);
     }
 

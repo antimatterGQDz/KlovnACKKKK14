@@ -32,6 +32,12 @@ public sealed class ElectricityAnomalySystem : EntitySystem
 
         int boltCount = (int)MathF.Floor(MathHelper.Lerp((float)anomaly.Comp.MinBoltCount, (float)anomaly.Comp.MaxBoltCount, args.Severity));
 
+        // KS14 Start
+        // shitty tests fix
+        if (range <= 0)
+            return;
+        // KS14 End
+
         _lightning.ShootRandomLightnings(anomaly, range, boltCount);
     }
 
@@ -58,7 +64,7 @@ public sealed class ElectricityAnomalySystem : EntitySystem
                 continue;
 
             var range = elec.MaxElectrocuteRange * anom.Stability;
-            var damage = (int) (elec.MaxElectrocuteDamage * anom.Severity);
+            var damage = (int)(elec.MaxElectrocuteDamage * anom.Severity);
             var duration = elec.MaxElectrocuteDuration * anom.Severity;
 
             foreach (var (ent, comp) in _lookup.GetEntitiesInRange<StatusEffectsComponent>(_transform.GetMapCoordinates(uid, xform), range))

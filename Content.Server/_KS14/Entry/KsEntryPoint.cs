@@ -15,7 +15,8 @@ internal sealed class KsEntryPoint : GameServer
     [Dependency] private readonly IComponentFactory _componentFactory = default!;
     [Dependency] private readonly LastRolledAntagManager _lastRolledAntagManager = default!;
     [Dependency] private readonly AnnouncementWebhookManager _announcementWebhookManager = default!;
-    [Dependency] private readonly SystemCollectionHookManager _systemCollectionHookManager = default!; // inited on postinit on server, and after player joined on client
+
+    [Dependency] private readonly SystemCollectionHookManager _systemCollectionHookManager = default!;
 
     public override void PreInit()
     {

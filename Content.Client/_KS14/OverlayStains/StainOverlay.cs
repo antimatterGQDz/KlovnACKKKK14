@@ -57,15 +57,23 @@ public sealed class StainOverlay : Overlay
         ZIndex = (int)Shared.DrawDepth.DrawDepth.WallTops;
     }
 
-    protected override void Draw(in OverlayDrawArgs args)
+    protected override bool BeforeDraw(in OverlayDrawArgs args)
     {
+        if (!base.BeforeDraw(args))
+            return false;
+
         if (StainSpriteSpecifier == null)
-            return;
+            return false;
 
         var stainedQuery = _entityManager.EntityQuery<StainedComponent>();
         if (!stainedQuery.Any())
-            return;
+            return false;
 
+        return false;
+    }
+
+    protected override void Draw(in OverlayDrawArgs args)
+    {
         var viewport = args.Viewport;
         var mapId = args.MapId;
         var worldBounds = args.WorldBounds;
@@ -139,7 +147,7 @@ public sealed class StainOverlay : Overlay
         worldHandle.UseShader(_prototypeManager.Index(StencilMaskShader).Instance());
         worldHandle.DrawTextureRect(res.StainTarget.Texture, worldBounds);
 
-        var texture = _spriteSystem.GetFrame(StainSpriteSpecifier, realTime);
+        var texture = _spriteSystem.GetFrame(StainSpriteSpecifier!, realTime);
         var convertedTextureWidth = texture.Width / DblPixelsPerMeter;
         var convertedTextureHeight = texture.Height / DblPixelsPerMeter;
 

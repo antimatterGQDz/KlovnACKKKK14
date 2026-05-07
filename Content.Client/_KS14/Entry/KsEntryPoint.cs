@@ -1,14 +1,13 @@
 using Content.Client._KS14.IoC;
 using Content.Shared._KS14.IoC;
-using Robust.Client;
 using Robust.Shared.ContentPack;
+using Robust.Shared.Timing;
 
 namespace Content.Client._KS14.Entry;
 
 internal sealed class KsEntryPoint : GameClient
 {
-    [Dependency] private readonly IBaseClient _baseClient = default!;
-    [Dependency] private readonly SystemCollectionHookManager _systemCollectionHookManager = default!; // inited on postinit on server, and after player joined on client
+    [Dependency] private readonly SystemCollectionHookManager _systemCollectionHookManager = default!;
 
     public override void PreInit()
     {
@@ -23,10 +22,13 @@ internal sealed class KsEntryPoint : GameClient
         Dependencies.InjectDependencies(this);
     }
 
-    public override void PostInit()
+    public override void Update(ModUpdateLevel level, FrameEventArgs frameEventArgs)
     {
-        base.PostInit();
+        base.Update(level, frameEventArgs);
 
-        _baseClient.PlayerJoinedServer += (_, _) => _systemCollectionHookManager.TryInit();
+        if (level != ModUpdateLevel.PreEngine)
+            return;
+
+        _systemCollectionHookManager.TryInit();
     }
 }

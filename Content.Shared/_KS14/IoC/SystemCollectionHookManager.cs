@@ -16,7 +16,6 @@ public sealed class SystemCollectionHookManager
         if (_initalisedCollection)
             return;
 
-        _entitySystemManager.Initialize(); // Justin Case
         _initalisedCollection = true;
         _onSystemCollectionAvailable?.Invoke(DependencyCollection);
     }

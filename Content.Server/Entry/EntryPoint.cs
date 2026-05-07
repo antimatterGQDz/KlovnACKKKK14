@@ -1,4 +1,3 @@
-using Content.Server._KS14.IoC; // KS14
 using System.Threading.Tasks;
 using Content.Server.Acz;
 using Content.Server.Administration;
@@ -82,12 +81,10 @@ namespace Content.Server.Entry
         [Dependency] private readonly ServerInfoManager _serverInfo = default!;
         [Dependency] private readonly ServerUpdateManager _updateManager = default!;
         [Dependency] private readonly ServerFeedbackManager _feedbackManager = null!;
-        [Dependency] private readonly KsServerContentIoC _ksServerContentIoC = null!; // KS14
 
         public override void PreInit()
         {
             ServerContentIoC.Register(Dependencies);
-            _ksServerContentIoC.Register(Dependencies); // KS14
 
             foreach (var callback in TestingCallbacks)
             {
@@ -176,14 +173,12 @@ namespace Content.Server.Entry
             _connection.PostInit();
             _multiServerKick.Initialize();
             _cvarCtrl.Initialize();
-            _ksServerContentIoC.PostInit(); // KS14
             _feedbackManager.Initialize();
         }
 
         public override void Update(ModUpdateLevel level, FrameEventArgs frameEventArgs)
         {
             base.Update(level, frameEventArgs);
-            _ksServerContentIoC.Update(level, frameEventArgs); // KS14
 
             switch (level)
             {
@@ -206,7 +201,6 @@ namespace Content.Server.Entry
         protected override void Dispose(bool disposing)
         {
             var dest = _cfg.GetCVar(CCVars.DestinationFile);
-            _ksServerContentIoC.Dispose(disposing, dest); // KS14
             if (!string.IsNullOrEmpty(dest))
             {
                 _playTimeTracking.Shutdown();

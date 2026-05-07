@@ -32,7 +32,7 @@ using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Temperature.Components;
-using Content.Server._KS14.IoC; // KS14: ANK
+using Content.Shared._KS14.IoC; // KS14: ANK
 using Content.Shared.Containers.ItemSlots; // KS14: ANK
 using Content.Shared.Weapons.Ranged.Systems;
 using Content.Shared.Stealth.Components;
@@ -62,7 +62,7 @@ public sealed class NPCUtilitySystem : EntitySystem
     [Dependency] private readonly MobThresholdSystem _thresholdSystem = default!;
     [Dependency] private readonly TurretTargetSettingsSystem _turretTargetSettings = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly SystemCollectionHookSystem _collectionHook = default!; // KS14: ANK
+    [Dependency] private readonly SystemCollectionHookManager _collectionHook = default!; // KS14: ANK
     [Dependency] private readonly ItemSlotsSystem _itemSlotsSystem = default!; // KS14: ANK
     [Dependency] private readonly SharedStealthSystem _stealth = default!;
 

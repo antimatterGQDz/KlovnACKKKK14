@@ -1,4 +1,3 @@
-using Content.Client._KS14.IoC;
 using Content.Client.Administration.Managers;
 using Content.Client.Changelog;
 using Content.Client.Chat.Managers;
@@ -80,12 +79,10 @@ namespace Content.Client.Entry
         [Dependency] private readonly IEntitySystemManager _entitySystemManager = default!;
         [Dependency] private readonly ClientsidePlaytimeTrackingManager _clientsidePlaytimeManager = default!;
         [Dependency] private readonly ClientFeedbackManager _feedbackManager = null!;
-        [Dependency] private readonly KsClientContentIoC _ksClientContentIoC = null!; // KS14
 
         public override void PreInit()
         {
             ClientContentIoC.Register(Dependencies);
-            _ksClientContentIoC.Register(Dependencies); // KS14
 
             foreach (var callback in TestingCallbacks)
             {
@@ -178,7 +175,6 @@ namespace Content.Client.Entry
             _userInterfaceManager.SetActiveTheme(_configManager.GetCVar(CVars.InterfaceTheme));
             _documentParsingManager.Initialize();
             _titleWindowManager.Initialize();
-            _ksClientContentIoC.PostInit(); // KS14
             _feedbackManager.Initialize();
 
             _baseClient.RunLevelChanged += (_, args) =>
@@ -232,8 +228,6 @@ namespace Content.Client.Entry
 
         public override void Update(ModUpdateLevel level, FrameEventArgs frameEventArgs)
         {
-            _ksClientContentIoC.Update(level, frameEventArgs); // KS14
-
             if (level == ModUpdateLevel.FramePreEngine)
             {
                 _debugMonitorManager.FrameUpdate();

@@ -1,10 +1,10 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Diagnostics.Contracts;
 using System.Linq;
-using Content.Server._KS14.IoC;
 using Content.Server.GameTicking;
 using Content.Server.GameTicking.Events;
 using Content.Shared._KS14.CCVar;
+using Content.Shared._KS14.IoC;
 using Content.Shared._KS14.Speczones;
 using Content.Shared.GameTicking;
 using Content.Shared.Random.Helpers;
@@ -61,7 +61,7 @@ public sealed partial class SpeczoneSystem : SharedSpeczoneSystem
         SubscribeLocalEvent<SpeczoneComponent, ComponentShutdown>(OnSpeczoneShutdown);
         SubscribeLocalEvent<SpeczoneEntryComponent, ComponentShutdown>(OnSpeczoneEntryShutdown);
 
-        SubscribeLocalEvent<RoundStartingEvent>(OnRoundStarting, after: [typeof(SystemCollectionHookSystem)]);
+        SubscribeLocalEvent<RoundStartingEvent>(OnRoundStarting, after: [typeof(SystemCollectionHookManager)]);
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundCleanup);
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
 

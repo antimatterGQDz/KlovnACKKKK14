@@ -29,15 +29,8 @@ public sealed class DismembermentSystem : EntitySystem
     [Dependency] private readonly MobStateSystem _mobStateSystem = default!;
     [Dependency] private readonly SharedChatSystem _chatSystem = default!;
 
-    private EntityQuery<BodyComponent> _bodyQuery;
+    [Dependency] private readonly EntityQuery<BodyComponent> _bodyQuery = default!;
     private static readonly ProtoId<EmotePrototype> DismemberEmote = "Scream";
-
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        _bodyQuery = GetEntityQuery<BodyComponent>();
-    }
 
     /// <returns>True if, with the given damage, something can be dismembered from the given entity.</returns>
     public bool CanDismemberByDamage(Entity<BodyComponent?> bodyEntity, DamageSpecifier damageSpecifier, [NotNullWhen(true)] out float? totalDamage)

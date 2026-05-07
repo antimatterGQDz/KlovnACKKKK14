@@ -34,8 +34,8 @@ public sealed class StainOverlay : Overlay
     /// </summary>
     public bool ComplexDrawing = false;
 
-    private EntityQuery<TransformComponent> _transformQuery;
-    private EntityQuery<SpriteComponent> _spriteQuery;
+    [Dependency] private readonly EntityQuery<TransformComponent> _transformQuery = default!;
+    [Dependency] private readonly EntityQuery<SpriteComponent> _spriteQuery = default!;
 
     public override OverlaySpace Space => OverlaySpace.WorldSpaceBelowFOV;
 
@@ -59,9 +59,6 @@ public sealed class StainOverlay : Overlay
         _transformSystem = _entityManager.System<TransformSystem>();
         _spriteSystem = _entityManager.System<SpriteSystem>();
         _entityLookupSystem = _entityManager.System<EntityLookupSystem>();
-
-        _transformQuery = _entityManager.GetEntityQuery<TransformComponent>();
-        _spriteQuery = _entityManager.GetEntityQuery<SpriteComponent>();
 
         ZIndex = AfterLightTargetOverlay.ContentZIndex + 1;
     }

@@ -15,18 +15,13 @@ public sealed class NightshiftRule : StationEventSystem<NightshiftRuleComponent>
     [Dependency] private readonly PoweredLightSystem _poweredLightSystem = default!;
     [Dependency] private readonly LightBulbSystem _bulbSystem = default!;
 
-    private EntityQuery<StationMemberComponent> _stationMemberQuery;
-    private EntityQuery<NightshiftBulbComponent> _nightshiftBulbQuery;
-    private EntityQuery<NightshiftLightComponent> _nightshiftLightQuery;
+    [Dependency] private readonly EntityQuery<StationMemberComponent> _stationMemberQuery = default!;
+    [Dependency] private readonly EntityQuery<NightshiftBulbComponent> _nightshiftBulbQuery = default!;
+    [Dependency] private readonly EntityQuery<NightshiftLightComponent> _nightshiftLightQuery = default!;
 
     public override void Initialize()
     {
         base.Initialize();
-
-        _stationMemberQuery = GetEntityQuery<StationMemberComponent>();
-
-        _nightshiftBulbQuery = GetEntityQuery<NightshiftBulbComponent>();
-        _nightshiftLightQuery = GetEntityQuery<NightshiftLightComponent>();
 
         SubscribeLocalEvent<NightshiftLightComponent, EntRemovedFromContainerMessage>(OnRemoved, before: [typeof(SharedPoweredLightSystem)]);
         SubscribeLocalEvent<NightshiftLightComponent, EntInsertedIntoContainerMessage>(OnInserted, before: [typeof(SharedPoweredLightSystem)]);

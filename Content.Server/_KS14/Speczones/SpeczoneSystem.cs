@@ -33,7 +33,7 @@ public sealed partial class SpeczoneSystem : SharedSpeczoneSystem
     [Dependency] private readonly TransformSystem _transformSystem = default!;
     [Dependency] private readonly GameTicker _gameTicker = default!;
 
-    private EntityQuery<SpeczoneComponent> _speczoneQuery;
+    [Dependency] private readonly EntityQuery<SpeczoneComponent> _speczoneQuery = default!;
 
     /// <summary>
     ///     Dictionary of loaded speczones cached by their prototype ID.
@@ -55,8 +55,6 @@ public sealed partial class SpeczoneSystem : SharedSpeczoneSystem
     public override void Initialize()
     {
         base.Initialize();
-
-        _speczoneQuery = GetEntityQuery<SpeczoneComponent>();
 
         _configurationManager.OnValueChanged(KsCCVars.SpeczonesEnabled, x => _loadSpeczones = x, invokeImmediately: true);
 

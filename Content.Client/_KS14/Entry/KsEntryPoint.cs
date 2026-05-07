@@ -7,7 +7,7 @@ namespace Content.Client._KS14.Entry;
 
 internal sealed class KsEntryPoint : GameClient
 {
-    [Dependency] private readonly BaseClient _baseClient = default!;
+    [Dependency] private readonly IBaseClient _baseClient = default!;
     [Dependency] private readonly SystemCollectionHookManager _systemCollectionHookManager = default!; // inited on postinit on server, and after player joined on client
 
     public override void PreInit()

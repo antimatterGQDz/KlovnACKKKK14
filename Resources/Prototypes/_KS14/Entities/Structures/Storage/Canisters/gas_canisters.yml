@@ -16,9 +16,10 @@
     - state: paper
       visible: false
       map: [ "enum.PaperLabelVisuals.Layer" ]
+      sprite: Structures/Storage/canister.rsi # KS14: use upstream sprite
     # KS14: Removed MaxPressureVisualLayers
   - type: GasCanister
-    gasMixture:
+    air:
       volume: 1500
       moles:
         Zipion: 2769.36
@@ -50,25 +51,6 @@
     locked: true
 
 - type: entity
-  parent: GasCanisterBrokenBase
-  id: ZipionCanisterBroken
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Sprite
-    layers:
-    - state: window-base_broken
-    - state: multi_shader_broken
-      color: "#0f0f0f"
-    - state: double_stripe_broken
-      color: "#9e0664"
-    - state: outline_broken
-      color: "#0f0f0f"
-    - state: paper
-      visible: false
-      map: [ "enum.PaperLabelVisuals.Layer" ]
-    # KS14: Removed MaxPressureVisualLayers
-
-- type: entity
   parent: GasCanister
   id: ArgonCanister
   name: argon canister
@@ -86,9 +68,10 @@
     - state: paper
       visible: false
       map: [ "enum.PaperLabelVisuals.Layer" ]
+      sprite: Structures/Storage/canister.rsi # KS14: use upstream sprite
     # KS14: Removed MaxPressureVisualLayers
   - type: GasCanister
-    gasMixture:
+    air:
       volume: 1500
       moles:
         Argon: 2769.36 # Argon
@@ -118,6 +101,27 @@
       - !type:DumpCanisterBehavior
   - type: Lock
     locked: true
+
+## Broken
+
+- type: entity
+  parent: GasCanisterBrokenBase
+  id: ZipionCanisterBroken
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    layers:
+    - state: window-base_broken
+    - state: multi_shader_broken
+      color: "#0f0f0f"
+    - state: double_stripe_broken
+      color: "#9e0664"
+    - state: outline_broken
+      color: "#0f0f0f"
+    - state: paper
+      visible: false
+      map: [ "enum.PaperLabelVisuals.Layer" ]
+    # KS14: Removed MaxPressureVisualLayers
 
 - type: entity
   parent: GasCanisterBrokenBase

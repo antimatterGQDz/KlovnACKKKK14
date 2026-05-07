@@ -23,15 +23,12 @@ public abstract class SharedJetpackSystem : EntitySystem
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly ActionContainerSystem _actionContainer = default!;
 
-    private EntityQuery<JetpackUserComponent> _jetpackUserQuery;
-    private EntityQuery<ActiveJetpackComponent> _activeJetpackQuery;
+    [Dependency] private readonly EntityQuery<JetpackUserComponent> _jetpackUserQuery = default!;
+    [Dependency] private readonly EntityQuery<ActiveJetpackComponent> _activeJetpackQuery = default!;
 
     public override void Initialize()
     {
         base.Initialize();
-
-        _jetpackUserQuery = GetEntityQuery<JetpackUserComponent>();
-        _activeJetpackQuery = GetEntityQuery<ActiveJetpackComponent>();
 
         SubscribeLocalEvent<JetpackComponent, MapInitEvent>(OnMapInit);
 

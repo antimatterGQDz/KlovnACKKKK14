@@ -13,6 +13,10 @@
     - state: outline
       color: "#0f0f0f"
     - state: window-base
+    - state: paper
+      visible: false
+      map: [ "enum.PaperLabelVisuals.Layer" ]
+    # KS14: Removed MaxPressureVisualLayers
   - type: GasCanister
     gasMixture:
       volume: 1500
@@ -59,6 +63,10 @@
       color: "#9e0664"
     - state: outline_broken
       color: "#0f0f0f"
+    - state: paper
+      visible: false
+      map: [ "enum.PaperLabelVisuals.Layer" ]
+    # KS14: Removed MaxPressureVisualLayers
 
 - type: entity
   parent: GasCanister
@@ -75,6 +83,10 @@
     - state: outline
       color: "#00d5ff"
     - state: window-base
+    - state: paper
+      visible: false
+      map: [ "enum.PaperLabelVisuals.Layer" ]
+    # KS14: Removed MaxPressureVisualLayers
   - type: GasCanister
     gasMixture:
       volume: 1500

@@ -1,7 +1,6 @@
 using System.Linq;
 using System.Numerics;
 using Content.Client.Graphics;
-using Content.Client.Light;
 using Content.Shared._KS14.OverlayStains;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
@@ -26,9 +25,9 @@ public sealed class StainOverlay : Overlay
     [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly IMapManager _mapManager = default!;
 
-    private readonly TransformSystem _transformSystem = default!;
-    private readonly SpriteSystem _spriteSystem = default!;
-    private readonly EntityLookupSystem _entityLookupSystem = default!;
+    [Dependency] private readonly TransformSystem _transformSystem = default!;
+    [Dependency] private readonly SpriteSystem _spriteSystem = default!;
+    [Dependency] private readonly EntityLookupSystem _entityLookupSystem = default!;
 
     /// <summary>
     ///     Based on <see cref="Shared._KS14.CCVar.KsCCVars.ComplexStainDrawing"/>
@@ -55,12 +54,6 @@ public sealed class StainOverlay : Overlay
 
     public StainOverlay()
     {
-        IoCManager.InjectDependencies(this);
-
-        _transformSystem = _entityManager.System<TransformSystem>();
-        _spriteSystem = _entityManager.System<SpriteSystem>();
-        _entityLookupSystem = _entityManager.System<EntityLookupSystem>();
-
         ZIndex = (int)Shared.DrawDepth.DrawDepth.WallTops;
     }
 

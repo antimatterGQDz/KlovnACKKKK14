@@ -18,12 +18,12 @@ public sealed class StainOverlayVisualizerSystem : EntitySystem
     {
         base.Initialize();
 
-        _stainOverlay = new() { StainSpriteSpecifier = new SpriteSpecifier.Rsi(new ResPath("/Textures/Effects/crayondecals.rsi"), "splatter") };
         _systemCollectionHookManager.OnSystemCollectionAvailable += OnDependenciesReady;
     }
 
     private void OnDependenciesReady(IDependencyCollection dependencyCollection)
     {
+        _stainOverlay = new() { StainSpriteSpecifier = new SpriteSpecifier.Rsi(new ResPath("/Textures/Effects/crayondecals.rsi"), "splatter") };
         dependencyCollection.InjectDependencies(_stainOverlay, oneOff: true);
 
         _overlayManager.AddOverlay(_stainOverlay);

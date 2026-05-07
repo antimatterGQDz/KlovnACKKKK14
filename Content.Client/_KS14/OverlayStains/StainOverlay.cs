@@ -11,7 +11,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
-namespace Content.Client.Light;
+namespace Content.Client._KS14.OverlayStains;
 
 public sealed class StainOverlay : Overlay
 {
@@ -34,8 +34,10 @@ public sealed class StainOverlay : Overlay
     /// </summary>
     public bool ComplexDrawing = false;
 
-    [Dependency] private readonly EntityQuery<TransformComponent> _transformQuery = default!;
-    [Dependency] private readonly EntityQuery<SpriteComponent> _spriteQuery = default!;
+    // overlays dont get ioc injected after entitysystems are inited, lol lmao even
+    // so these cant have [Dependency] yet
+    private readonly EntityQuery<TransformComponent> _transformQuery = default!;
+    private readonly EntityQuery<SpriteComponent> _spriteQuery = default!;
 
     public override OverlaySpace Space => OverlaySpace.WorldSpaceBelowFOV;
 
@@ -55,6 +57,9 @@ public sealed class StainOverlay : Overlay
     public StainOverlay()
     {
         IoCManager.InjectDependencies(this);
+
+        _transformQuery = _entityManager.GetEntityQuery<TransformComponent>();
+        _spriteQuery = _entityManager.GetEntityQuery<SpriteComponent>();
 
         _transformSystem = _entityManager.System<TransformSystem>();
         _spriteSystem = _entityManager.System<SpriteSystem>();

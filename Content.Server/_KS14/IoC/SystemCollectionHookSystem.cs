@@ -2,6 +2,8 @@ using Content.Server.GameTicking.Events;
 
 namespace Content.Server._KS14.IoC;
 
+// This could use harmony or something and be injected when registering IoC or something but idgaf
+
 public sealed class SystemCollectionHookSystem : EntitySystem
 {
     [Dependency] private readonly IEntitySystemManager _entitySystemManager = default!;

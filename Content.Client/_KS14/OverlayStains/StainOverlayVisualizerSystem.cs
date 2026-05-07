@@ -1,4 +1,3 @@
-using Content.Client.Light;
 using Content.Shared._KS14.CCVar;
 using Robust.Client.Graphics;
 using Robust.Shared.Configuration;

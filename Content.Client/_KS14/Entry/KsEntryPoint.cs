@@ -6,8 +6,6 @@ namespace Content.Client._KS14.Entry;
 
 internal sealed class KsEntryPoint : GameClient
 {
-    [Dependency] private readonly SystemCollectionHookManager _systemCollectionHookManager = default!;
-
     public override void PreInit()
     {
         base.PreInit();

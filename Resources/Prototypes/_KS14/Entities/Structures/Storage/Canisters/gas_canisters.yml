@@ -16,7 +16,7 @@
     - state: paper
       visible: false
       map: [ "enum.PaperLabelVisuals.Layer" ]
-      sprite: Structures/Storage/canister.rsi # KS14: use upstream sprite
+      sprite: Structures/Storage/canister.rsi # use upstream sprite
     # KS14: Removed MaxPressureVisualLayers
   - type: GasCanister
     air:
@@ -68,7 +68,7 @@
     - state: paper
       visible: false
       map: [ "enum.PaperLabelVisuals.Layer" ]
-      sprite: Structures/Storage/canister.rsi # KS14: use upstream sprite
+      sprite: Structures/Storage/canister.rsi # use upstream sprite
     # KS14: Removed MaxPressureVisualLayers
   - type: GasCanister
     air:

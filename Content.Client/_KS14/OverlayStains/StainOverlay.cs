@@ -1,6 +1,7 @@
 using System.Linq;
 using System.Numerics;
 using Content.Client.Graphics;
+using Content.Client.Light;
 using Content.Shared._KS14.OverlayStains;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
@@ -65,7 +66,7 @@ public sealed class StainOverlay : Overlay
         _spriteSystem = _entityManager.System<SpriteSystem>();
         _entityLookupSystem = _entityManager.System<EntityLookupSystem>();
 
-        ZIndex = AfterLightTargetOverlay.ContentZIndex + 1;
+        ZIndex = (int)Shared.DrawDepth.DrawDepth.WallTops;
     }
 
     protected override void Draw(in OverlayDrawArgs args)

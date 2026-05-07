@@ -1,5 +1,4 @@
 using Content.Client._KS14.IoC;
-using Content.Shared._KS14.IoC;
 using Robust.Shared.ContentPack;
 
 namespace Content.Client._KS14.Entry;

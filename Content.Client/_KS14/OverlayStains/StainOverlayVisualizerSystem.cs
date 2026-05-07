@@ -22,8 +22,10 @@ public sealed class StainOverlayVisualizerSystem : EntitySystem
         _systemCollectionHookManager.OnSystemCollectionAvailable += OnDependenciesReady;
     }
 
-    private void OnDependenciesReady(IDependencyCollection _)
+    private void OnDependenciesReady(IDependencyCollection dependencyCollection)
     {
+        dependencyCollection.InjectDependencies(_stainOverlay, oneOff: true);
+
         _overlayManager.AddOverlay(_stainOverlay);
         _configurationManager.OnValueChanged(KsCCVars.ComplexStainDrawing, (complexDrawing) => _stainOverlay.ComplexDrawing = complexDrawing, invokeImmediately: true);
     }

@@ -7,12 +7,44 @@ public sealed class SystemCollectionHookManager
     /// <inheritdoc cref="EntitySystemManager.DependencyCollection"/>
     [Access(Other = AccessPermissions.ReadExecute)]
     public IDependencyCollection DependencyCollection => _entitySystemManager.DependencyCollection;
-    public Action<IDependencyCollection>? OnSystemCollectionAvailable = null;
+    private Action<IDependencyCollection>? _onSystemCollectionAvailable = null;
 
-    public void PostInit()
+    private bool _initalisedCollection = false;
+
+    public void TryInit()
     {
-        OnSystemCollectionAvailable?.Invoke(DependencyCollection);
+        if (_initalisedCollection)
+            return;
+
+        _initalisedCollection = true;
+        _onSystemCollectionAvailable?.Invoke(DependencyCollection);
     }
 
-    public void HookAction(Action act) => OnSystemCollectionAvailable += (_) => act();
+    /// <summary>
+    ///     Hooks an action to be called when the full <see cref="IDependencyCollection"/>
+    ///         is available, calling it immediately if the collection
+    ///         is already available.
+    /// </summary>
+    public void HookAction(Action act)
+    {
+        if (_initalisedCollection)
+        {
+            act();
+            return;
+        }
+
+        _onSystemCollectionAvailable += (_) => act();
+    }
+
+    /// <inheritdoc cref="HookAction(Action)"/>
+    public void HookAction(Action<IDependencyCollection> act)
+    {
+        if (_initalisedCollection)
+        {
+            act(DependencyCollection);
+            return;
+        }
+
+        _onSystemCollectionAvailable += act;
+    }
 }

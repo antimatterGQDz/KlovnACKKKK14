@@ -1,6 +1,7 @@
 using Content.Server._KS14.AnnouncementWebhook;
 using Content.Server._KS14.Antag;
 using Content.Server._KS14.IoC;
+using Content.Shared._KS14.IoC;
 using Content.Shared.CCVar;
 using Robust.Shared.Configuration;
 using Robust.Shared.ContentPack;
@@ -14,6 +15,7 @@ internal sealed class KsEntryPoint : GameServer
     [Dependency] private readonly IComponentFactory _componentFactory = default!;
     [Dependency] private readonly LastRolledAntagManager _lastRolledAntagManager = default!;
     [Dependency] private readonly AnnouncementWebhookManager _announcementWebhookManager = default!;
+    [Dependency] private readonly SystemCollectionHookManager _systemCollectionHookManager = default!; // inited on postinit on server, and after player joined on client
 
     public override void PreInit()
     {
@@ -37,6 +39,8 @@ internal sealed class KsEntryPoint : GameServer
 
         _lastRolledAntagManager.Initialize();
         _announcementWebhookManager.Initialize();
+
+        _systemCollectionHookManager.TryInit();
     }
 
     public override void Update(ModUpdateLevel level, FrameEventArgs frameEventArgs)

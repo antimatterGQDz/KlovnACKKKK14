@@ -84,7 +84,7 @@ public sealed class NPCUtilitySystem : EntitySystem
         _xformQuery = GetEntityQuery<TransformComponent>();
 
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded); // KS14: ANK
-        _collectionHook.OnSystemCollectionAvailable += InitializeConsiderations;
+        _collectionHook.HookAction(InitializeConsiderations);
     }
 
     // KS14: ANK

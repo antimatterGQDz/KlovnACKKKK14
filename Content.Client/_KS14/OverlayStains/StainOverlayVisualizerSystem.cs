@@ -17,8 +17,7 @@ public sealed class StainOverlayVisualizerSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
-
-        _systemCollectionHookManager.OnSystemCollectionAvailable += OnDependenciesReady;
+        _systemCollectionHookManager.HookAction(OnDependenciesReady);
     }
 
     private void OnDependenciesReady(IDependencyCollection dependencyCollection)

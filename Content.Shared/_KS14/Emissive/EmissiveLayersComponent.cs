@@ -24,14 +24,6 @@ public sealed partial class EmissiveLayersComponent : Component
     [ViewVariables(VVAccess.ReadWrite)]
     public float GlowRadius = 0.25f;
 
-
-    /// <summary>
-    ///     Enlargement to glow.
-    /// </summary>
-    [DataField, AutoNetworkedField]
-    [ViewVariables(VVAccess.ReadWrite)]
-    public float ROTOF = 0f;
-
     /// <summary>
     ///     Actual intensity of the shader.
     /// </summary>

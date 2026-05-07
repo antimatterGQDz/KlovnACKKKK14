@@ -98,11 +98,13 @@ public sealed class StainOverlay : Overlay
                 worldHandle.UseShader(_prototypeManager.Index(UnshadedShader).Instance());
                 foreach (var grid in _grids)
                 {
-                    var localMatrix = Matrix3x2.Multiply(_transformSystem.GetWorldMatrix(grid, _transformQuery), invMatrix);
-                    worldHandle.SetTransform(localMatrix);
-
                     _intersectingEntities.Clear();
                     _entityLookupSystem.GetEntitiesIntersecting(mapId, worldBoundBox, _intersectingEntities, LookupFlags.Static);
+                    if (_intersectingEntities.Count == 0)
+                        continue;
+
+                    var localMatrix = Matrix3x2.Multiply(_transformSystem.GetWorldMatrix(grid, _transformQuery), invMatrix);
+                    worldHandle.SetTransform(localMatrix);
 
                     // TODO: Draw actual sprite texture to stencil?
                     foreach (var uid in _intersectingEntities)

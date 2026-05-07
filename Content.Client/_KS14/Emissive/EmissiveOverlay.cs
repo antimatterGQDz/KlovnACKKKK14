@@ -108,7 +108,8 @@ public sealed class EmissiveOverlay : Overlay
                 if (_entities.Count == 0)
                     continue;
 
-                var gridMatrix = _transformSystem.GetWorldMatrix(grid.Owner);
+                var gridMatrix = Matrix3x2.Multiply(_transformSystem.GetWorldMatrix(grid.Owner), invMatrix);
+                worldHandle.SetTransform(gridMatrix);
 
                 foreach (var ent in _entities)
                 {
@@ -127,10 +128,6 @@ public sealed class EmissiveOverlay : Overlay
                     worldHandle.UseShader(shader);
 
                     var transformComponent = transformQuery.GetComponent(ent);
-
-                    var matty = Matrix3x2.Multiply(gridMatrix, invMatrix);
-
-                    worldHandle.SetTransform(matty);
 
                     var renderPosition = transformComponent.Coordinates.Position;
                     var spriteRotation = transformComponent.LocalRotation;
@@ -159,10 +156,13 @@ public sealed class EmissiveOverlay : Overlay
                         if (!layer.Visible)
                             continue;
 
-                        var textureRotation = spriteRotation + Angle.FromDegrees(ent.Comp.ROTOF);
+                        var textureRotation = spriteRotation;
                         var origin = renderPosition;
                         if (ent.Comp.UseSpriteTransform)
                         {
+                            if (!spriteComponent.NoRotation)
+                                textureRotation += eyeRotation;
+
                             textureRotation += layer.Rotation;
                             origin += layer.Offset;
                         }

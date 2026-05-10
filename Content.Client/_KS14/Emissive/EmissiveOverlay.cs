@@ -160,7 +160,7 @@ public sealed class EmissiveOverlay : Overlay
                         var origin = renderPosition;
                         if (ent.Comp.UseSpriteTransform)
                         {
-                            if (!spriteComponent.NoRotation)
+                            if (spriteComponent.NoRotation)
                                 textureRotation += eyeRotation;
 
                             textureRotation += layer.Rotation;

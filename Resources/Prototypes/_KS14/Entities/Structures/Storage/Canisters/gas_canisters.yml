@@ -118,10 +118,6 @@
       color: "#9e0664"
     - state: outline_broken
       color: "#0f0f0f"
-    - state: paper
-      visible: false
-      map: [ "enum.PaperLabelVisuals.Layer" ]
-    # KS14: Removed MaxPressureVisualLayers
 
 - type: entity
   parent: GasCanisterBrokenBase

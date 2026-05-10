@@ -5,6 +5,8 @@ namespace Content.Shared._KS14.Entry;
 
 public sealed class KsEntryPoint : GameShared
 {
+    [Dependency] private readonly SystemCollectionHookManager _systemCollectionHookManager = default!;
+
     public override void PreInit()
     {
         base.PreInit();
@@ -18,8 +20,9 @@ public sealed class KsEntryPoint : GameShared
         Dependencies.InjectDependencies(this);
     }
 
-    public override void PostInit()
+    public override void Shutdown()
     {
-        base.PostInit();
+        _systemCollectionHookManager.Reset();
+        base.Shutdown();
     }
 }

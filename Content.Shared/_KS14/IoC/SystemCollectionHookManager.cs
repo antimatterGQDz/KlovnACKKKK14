@@ -1,8 +1,19 @@
+using Robust.Shared.Network;
+
 namespace Content.Shared._KS14.IoC;
+
+// TODO LCDC: somehow make engine PR to make this engine-based or otherwise publicly accessible
 
 public sealed class SystemCollectionHookManager
 {
+    [Dependency] private readonly INetManager _netManager = default!;
     [Dependency] private readonly IEntitySystemManager _entitySystemManager = default!;
+    private readonly ISawmill _sawmill = default!;
+
+    public SystemCollectionHookManager()
+    {
+        _sawmill = Logger.GetSawmill("sys.collectionhook.man");
+    }
 
     /// <inheritdoc cref="EntitySystemManager.DependencyCollection"/>
     [Access(Other = AccessPermissions.ReadExecute)]
@@ -11,13 +22,36 @@ public sealed class SystemCollectionHookManager
 
     private bool _initalisedCollection = false;
 
+    // Fuuckk
+    private bool IsProperlyInitialised()
+    {
+        try
+        {
+            var get = DependencyCollection;
+        }
+        catch (InvalidOperationException)
+        {
+            return false;
+        }
+
+        return true;
+    }
+
     public void TryInit()
     {
         if (_initalisedCollection)
             return;
 
+        _sawmill.Info($"Collectionsysman initialised on {(_netManager.IsServer ? "server" : "client")}");
         _initalisedCollection = true;
         _onSystemCollectionAvailable?.Invoke(DependencyCollection);
+    }
+
+    public void Reset()
+    {
+        _sawmill.Info($"Collectionsysman reset on {(_netManager.IsServer ? "server" : "client")}");
+        _initalisedCollection = false;
+        _onSystemCollectionAvailable = null;
     }
 
     /// <summary>
@@ -27,7 +61,7 @@ public sealed class SystemCollectionHookManager
     /// </summary>
     public void HookAction(Action act)
     {
-        if (_initalisedCollection)
+        if (IsProperlyInitialised())
         {
             act();
             return;
@@ -39,7 +73,7 @@ public sealed class SystemCollectionHookManager
     /// <inheritdoc cref="HookAction(Action)"/>
     public void HookAction(Action<IDependencyCollection> act)
     {
-        if (_initalisedCollection)
+        if (IsProperlyInitialised())
         {
             act(DependencyCollection);
             return;

@@ -1044,3 +1044,11 @@ Entries:
       message: Dermaline and Bic now both od at 20u
   id: 118
   time: '2026-05-13T20:57:37.0000000+00:00'
+- author: DecemberEpsilon
+  changes:
+    - type: Tweak
+      message: No more firelock delimb
+    - type: Tweak
+      message: Movement buffs when crawling
+  id: 119
+  time: '2026-05-13T21:28:03.0000000+00:00'

@@ -1000,3 +1000,25 @@ Entries:
       message: Fixed some gas miner mispredicts.
   id: 116
   time: '2026-05-03T14:38:26.0000000+00:00'
+- author: LaCumbiaDelCoronavirus
+  changes:
+    - type: Tweak
+      message: >-
+        Explosions now need to do more damage to delimb you. They will also no
+        longer delimb feet.
+    - type: Tweak
+      message: >-
+        You must have atleast 90 total damage for firelocks to delimb you. They
+        will also no longer delimb feet.
+    - type: Fix
+      message: >-
+        Fixed limbs thrown from explosion dismemberment being thrown in exact
+        same direction. 
+    - type: Tweak
+      message: >-
+        Diving now fullstuns you if you dont hit anything, but doesnt if you hit
+        something.
+    - type: Tweak
+      message: Diving is now stronger against people getting hit.
+  id: 117
+  time: '2026-05-13T18:10:17.0000000+00:00'

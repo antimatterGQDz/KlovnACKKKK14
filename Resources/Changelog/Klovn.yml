@@ -1022,3 +1022,25 @@ Entries:
       message: Diving is now stronger against people getting hit.
   id: 117
   time: '2026-05-13T18:10:17.0000000+00:00'
+- author: DeusMaldPr
+  changes:
+    - type: Add
+      message: Epinephrine bottles to nanomed plus
+    - type: Tweak
+      message: Iron pills to first aid kids, another bruise pack to brute kits
+    - type: Tweak
+      message: Moved filled medical belts to loadout (You spawn in with it)
+    - type: Tweak
+      message: Paramed belt fill now useful
+    - type: Tweak
+      message: >-
+        Paramed gets a handheld crew monitor, which is no longer a steal
+        objective
+    - type: Tweak
+      message: Tweaked medical doctor locker fill
+    - type: Tweak
+      message: Medbelts can store beakers
+    - type: Tweak
+      message: Dermaline and Bic now both od at 20u
+  id: 118
+  time: '2026-05-13T20:57:37.0000000+00:00'

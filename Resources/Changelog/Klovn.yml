@@ -1052,3 +1052,31 @@ Entries:
       message: Movement buffs when crawling
   id: 119
   time: '2026-05-13T21:28:03.0000000+00:00'
+- author: nabegator220
+  changes:
+    - type: Tweak
+      message: Ore bag and trash bag magnets are now toggleable.
+    - type: Tweak
+      message: NPC pathfinding rewrite.
+    - type: Tweak
+      message: Vents are now smarter.
+    - type: Tweak
+      message: Light colors and intensities have been changed.
+    - type: Tweak
+      message: The RPD can now make molar mixers.
+    - type: Fix
+      message: 'Fixed logo size '
+    - type: Fix
+      message: You can now place tiles on planetmaps.
+    - type: Fix
+      message: Flatpack logic is better.
+    - type: Fix
+      message: Cables placed in the admin menu no longer stack.
+    - type: Fix
+      message: Bots slaved by the AI can now correctly open doors
+    - type: Add
+      message: Added 4 new bots - fillbot, weldbot, plantbot, minebot
+    - type: Add
+      message: Limbs can now be removed via surgery.
+  id: 120
+  time: '2026-05-14T19:58:40.0000000+00:00'

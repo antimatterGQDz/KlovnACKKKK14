@@ -1080,3 +1080,11 @@ Entries:
       message: Limbs can now be removed via surgery.
   id: 120
   time: '2026-05-14T19:58:40.0000000+00:00'
+- author: DeusMaldPr
+  changes:
+    - type: Add
+      message: >-
+        You can now put mass scanners, and meson goggles in toolbelts (both have
+        sprites), weldmask in toolbelt has a sprite
+  id: 121
+  time: '2026-05-14T19:59:19.0000000+00:00'

@@ -23,9 +23,9 @@
   - type: Pullable
   - type: Tag
     tags:
-    - DoorBumpOpener
     - SiliconEmotes
     - Unimplantable
+    - SiliconMob
   - type: MobState
     allowedStates:
       - Alive
@@ -69,6 +69,7 @@
   - type: ActiveRadio
     channels:
     - Common
+  - type: ComplexInteraction #KS14
   - type: HealthExaminable
     examinableTypes:
     - Blunt
@@ -102,7 +103,6 @@
     - Robotics
   - type: Tag
     tags:
-    - DoorBumpOpener
     - SiliconEmotes
     - Bot
     - Unimplantable
@@ -128,6 +128,14 @@
     blackboard:
       NavInteract: !type:Bool
         true
+      NavPry: !type:Bool
+        true
+  - type: Prying #this is gonna be a lot of fun - KS14
+    pryPowered: true
+    force: true
+    speedModifier: 1.5
+    useSound:
+      path: /Audio/Items/crowbar.ogg
   - type: SolutionContainerManager
     solutions:
       spray:
@@ -184,6 +192,14 @@
     blackboard:
       NavInteract: !type:Bool
         true
+      NavPry: !type:Bool
+        true
+  - type: Prying #this is gonna be a lot of fun - KS14
+    pryPowered: true
+    force: true
+    speedModifier: 1.5
+    useSound:
+      path: /Audio/Items/crowbar.ogg
   - type: Slippery
     slipData:
       launchForwardsMultiplier: 2
@@ -310,6 +326,14 @@
     blackboard:
       NavInteract: !type:Bool
         true
+      NavPry: !type:Bool
+        true
+  - type: Prying #this is gonna be a lot of fun - KS14
+    pryPowered: true
+    force: true
+    speedModifier: 1.5
+    useSound:
+      path: /Audio/Items/crowbar.ogg
   - type: DrainableSolution
     solution: drainBuffer
   - type: InteractionPopup
@@ -356,6 +380,14 @@
     blackboard:
       NavInteract: !type:Bool
         true
+      NavPry: !type:Bool
+        true
+  - type: Prying #this is gonna be a lot of fun - KS14
+    pryPowered: true
+    force: true
+    speedModifier: 1.5
+    useSound:
+      path: /Audio/Items/crowbar.ogg
   - type: Construction
     graph: MediBot
     node: bot
@@ -409,6 +441,14 @@
     blackboard:
       NavInteract: !type:Bool
         true
+      NavPry: !type:Bool
+        true
+  - type: Prying #this is gonna be a lot of fun - KS14
+    pryPowered: true
+    force: true
+    speedModifier: 1.5
+    useSound:
+      path: /Audio/Items/crowbar.ogg
   - type: ControllableBot #KS14
 
 - type: entity
@@ -470,7 +510,6 @@
       collection: FootstepBorg
   - type: Tag
     tags:
-    - DoorBumpOpener
     - FootstepSound
     - SiliconEmotes
     - Bot
@@ -487,6 +526,14 @@
     blackboard:
       NavInteract: !type:Bool
         true
+      NavPry: !type:Bool
+        true
+  - type: Prying #this is gonna be a lot of fun - KS14
+    pryPowered: true
+    force: true
+    speedModifier: 1.5
+    useSound:
+      path: /Audio/Items/crowbar.ogg
   - type: ControllableBot #KS14
 
 - type: entity
@@ -514,7 +561,7 @@
         Blunt: 2
   - type: Anchorable
   - type: Hands # This probably REALLY needs hand whitelisting, but we NEED hands for hugs, so...
-  - type: ComplexInteraction # Hugging is a complex interaction, apparently.
+  #- type: ComplexInteraction # Hugging is a complex interaction, apparently. KS14 - redundant
   - type: HugBot
   - type: HTN
     rootTask:
@@ -522,6 +569,14 @@
     blackboard:
       NavInteract: !type:Bool
         true
+      NavPry: !type:Bool
+        true
+  - type: Prying #this is gonna be a lot of fun - KS14
+    pryPowered: true
+    force: true
+    speedModifier: 1.5
+    useSound:
+      path: /Audio/Items/crowbar.ogg
   - type: InteractionPopup
     interactSuccessString: hugging-success-generic
     interactSuccessSound: /Audio/Effects/thudswoosh.ogg

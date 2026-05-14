@@ -1,0 +1,28 @@
+- type: constructionGraph
+  id: MineBot
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: bot
+      steps:
+      - tag: ProximitySensor
+        icon:
+          sprite: Objects/Misc/proximity_sensor.rsi
+          state: icon
+        doAfter: 2
+        name: construction-graph-tag-proximity-sensor
+      - tag: ItemPickaxe
+        icon:
+          sprite: Objects/Weapons/Melee/pickaxe.rsi
+          state: pickaxe
+        doAfter: 2
+        name: construction-graph-tag-item-pickaxe
+      - tag: HardHat
+        icon:
+          sprite: Clothing/Head/Hardhats/yellow.rsi
+          state: icon
+        doAfter: 2
+        name: construction-graph-tag-hard-hat
+  - node: bot
+    entity: MobMineBot

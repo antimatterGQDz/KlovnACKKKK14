@@ -111,6 +111,8 @@ public sealed class EmissiveOverlay : Overlay
                 var gridMatrix = Matrix3x2.Multiply(_transformSystem.GetWorldMatrix(grid.Owner), invMatrix);
                 worldHandle.SetTransform(gridMatrix);
 
+                var localEyeRotation = eyeRotation - gridInvMatrix.Rotation();
+
                 foreach (var ent in _entities)
                 {
                     var spriteComponent = _spriteQuery.GetComponent(ent);
@@ -130,16 +132,16 @@ public sealed class EmissiveOverlay : Overlay
                     var transformComponent = transformQuery.GetComponent(ent);
 
                     var renderPosition = transformComponent.Coordinates.Position;
-                    var spriteRotation = transformComponent.LocalRotation;
+                    var spriteRotation = Angle.Zero;
                     if (ent.Comp.UseSpriteTransform)
                     {
                         renderPosition += spriteComponent.Offset;
                         spriteRotation += spriteComponent.Rotation;
                     }
+                    else
+                        spriteRotation += transformComponent.LocalRotation;
 
                     var spriteColor = spriteComponent.Color;
-
-
                     foreach (var layerId in ent.Comp.Layers)
                     {
                         // insanity
@@ -160,19 +162,38 @@ public sealed class EmissiveOverlay : Overlay
                         var origin = renderPosition;
                         if (ent.Comp.UseSpriteTransform)
                         {
-                            if (spriteComponent.NoRotation)
-                                textureRotation += eyeRotation;
+                            var noRot = spriteComponent.NoRotation;
+                            var snapCardinals = spriteComponent.SnapCardinals;
+                            if (spriteComponent.GranularLayersRendering)
+                            {
+                                noRot = layer.RenderingStrategy == LayerRenderingStrategy.NoRotation || (layer.RenderingStrategy == LayerRenderingStrategy.UseSpriteStrategy && noRot);
+                                snapCardinals = layer.RenderingStrategy == LayerRenderingStrategy.SnapToCardinals || (layer.RenderingStrategy == LayerRenderingStrategy.UseSpriteStrategy && snapCardinals);
+                            }
+
+                            if (noRot)
+                                textureRotation = -eyeRotation;
+                            else
+                            {
+                                var cardinal = Angle.Zero;
+                                if (snapCardinals)
+                                    cardinal = (spriteRotation + localEyeRotation)
+                                        .Reduced()
+                                        .FlipPositive() // angle on-screen. Used to decide the direction of 4/8 directional RSIs
+                                        .RoundToCardinalAngle();
+
+                                textureRotation = spriteRotation - cardinal;
+                            }
 
                             textureRotation += layer.Rotation;
-                            origin += layer.Offset;
+                            origin += textureRotation.RotateVec(layer.Offset); // This might need to be rotated by the texture rotation but idk
                         }
 
                         var texture = GetLayerTexture(spriteComponent, layer, textureRotation);
-                        var box = Box2.CenteredAround(origin + ent.Comp.Offset, texture.Size / (float)EyeManager.PixelsPerMeter).Enlarged(ent.Comp.GlowRadius);
+                        var box = Box2.CenteredAround(origin + textureRotation.RotateVec(ent.Comp.Offset), texture.Size / (float)EyeManager.PixelsPerMeter).Enlarged(ent.Comp.GlowRadius);
 
                         var textureBox = new Box2Rotated(
                             box,
-                            textureRotation,
+                            ent.Comp.OnlyRotateTexture ? Angle.Zero : textureRotation,
                             origin // The pivot-point should be at the origin of the box, not origin of the world (0,0)
                         );
 

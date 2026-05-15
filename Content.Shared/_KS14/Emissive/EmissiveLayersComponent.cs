@@ -47,4 +47,13 @@ public sealed partial class EmissiveLayersComponent : Component
     [DataField, AutoNetworkedField]
     [ViewVariables(VVAccess.ReadWrite)]
     public bool UseSpriteTransform = true;
+
+    /// <summary>
+    ///     Whether the texture lookup should use rotation only and the actual rendering doesnt.
+    ///
+    ///     Good for things that have sprites rotated for each direction, like light tubes etc..
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    [ViewVariables(VVAccess.ReadWrite)]
+    public bool OnlyRotateTexture = false;
 }

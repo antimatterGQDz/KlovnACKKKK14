@@ -69,7 +69,6 @@
   - type: ActiveRadio
     channels:
     - Common
-  - type: ComplexInteraction #KS14
   - type: HealthExaminable
     examinableTypes:
     - Blunt
@@ -131,8 +130,6 @@
       NavPry: !type:Bool
         true
   - type: Prying #this is gonna be a lot of fun - KS14
-    pryPowered: true
-    force: true
     speedModifier: 1.5
     useSound:
       path: /Audio/Items/crowbar.ogg
@@ -195,8 +192,6 @@
       NavPry: !type:Bool
         true
   - type: Prying #this is gonna be a lot of fun - KS14
-    pryPowered: true
-    force: true
     speedModifier: 1.5
     useSound:
       path: /Audio/Items/crowbar.ogg
@@ -329,8 +324,6 @@
       NavPry: !type:Bool
         true
   - type: Prying #this is gonna be a lot of fun - KS14
-    pryPowered: true
-    force: true
     speedModifier: 1.5
     useSound:
       path: /Audio/Items/crowbar.ogg
@@ -383,8 +376,6 @@
       NavPry: !type:Bool
         true
   - type: Prying #this is gonna be a lot of fun - KS14
-    pryPowered: true
-    force: true
     speedModifier: 1.5
     useSound:
       path: /Audio/Items/crowbar.ogg
@@ -444,8 +435,6 @@
       NavPry: !type:Bool
         true
   - type: Prying #this is gonna be a lot of fun - KS14
-    pryPowered: true
-    force: true
     speedModifier: 1.5
     useSound:
       path: /Audio/Items/crowbar.ogg
@@ -529,8 +518,6 @@
       NavPry: !type:Bool
         true
   - type: Prying #this is gonna be a lot of fun - KS14
-    pryPowered: true
-    force: true
     speedModifier: 1.5
     useSound:
       path: /Audio/Items/crowbar.ogg
@@ -561,7 +548,7 @@
         Blunt: 2
   - type: Anchorable
   - type: Hands # This probably REALLY needs hand whitelisting, but we NEED hands for hugs, so...
-  #- type: ComplexInteraction # Hugging is a complex interaction, apparently. KS14 - redundant
+  - type: ComplexInteraction # Hugging is a complex interaction, apparently.
   - type: HugBot
   - type: HTN
     rootTask:
@@ -572,8 +559,6 @@
       NavPry: !type:Bool
         true
   - type: Prying #this is gonna be a lot of fun - KS14
-    pryPowered: true
-    force: true
     speedModifier: 1.5
     useSound:
       path: /Audio/Items/crowbar.ogg

@@ -34,6 +34,9 @@ delta_pressure_damage = false
 # Virtually nonexistent somethingburger
 cooldown_seconds = 0.05
 
+[shuttle]
+emergency_early_launch_allowed = true
+
 [hub]
 advertise = true
 tags = "lang:en,region:eu_w,rp:low"

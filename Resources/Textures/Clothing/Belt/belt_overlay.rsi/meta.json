@@ -170,6 +170,15 @@
       "name": "wrench_medical"
     },
     {
+      "name": "meson"
+    },
+    {
+      "name": "weldmask"
+    },
+	{
+      "name": "mass_scanner"
+    },
+    {
       "name": "analyzer-equipped-BELT",
       "directions": 4
     },

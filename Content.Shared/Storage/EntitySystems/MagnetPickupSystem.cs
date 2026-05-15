@@ -4,6 +4,12 @@ using Content.Shared.Whitelist;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Timing;
 using Robust.Shared.Network;
+//WD toggle shit start - ks14
+using Content.Shared.Item;
+using Content.Shared.Item.ItemToggle;
+using Content.Shared.Item.ItemToggle.Components;
+using Content.Shared.Examine;
+//wd toggle shit end
 
 namespace Content.Shared.Storage.EntitySystems;
 
@@ -17,6 +23,8 @@ public sealed class MagnetPickupSystem : EntitySystem
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly SharedItemSystem _item = default!; //WD ks14 port
+    [Dependency] private readonly ItemToggleSystem _itemToggle = default!; //WD ks14 port
     [Dependency] private readonly SharedStorageSystem _storage = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
 
@@ -36,11 +44,26 @@ public sealed class MagnetPickupSystem : EntitySystem
         component.NextScan = _timing.CurTime;
     }
 
+    //WD EDIT start - KS14 port
+    private void OnExamined(Entity<MagnetPickupComponent> entity, ref ExaminedEvent args)
+    {
+        var onMsg = _itemToggle.IsActivated(entity.Owner)
+            ? Loc.GetString("comp-magnet-pickup-examined-on")
+            : Loc.GetString("comp-magnet-pickup-examined-off");
+        args.PushMarkup(onMsg);
+    }
+
+    private void OnItemToggled(Entity<MagnetPickupComponent> entity, ref ItemToggledEvent args)
+    {
+        _item.SetHeldPrefix(entity.Owner, args.Activated ? "on" : "off");
+    }
+    //WD EDIT end
+
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
 
-        //evil KS14 hack
+        //evil KS14 deprediction hack
         if (!_net.IsServer)
             return;
         //evil KS14 hack end
@@ -50,6 +73,14 @@ public sealed class MagnetPickupSystem : EntitySystem
 
         while (query.MoveNext(out var uid, out var comp, out var storage, out var xform, out var meta))
         {
+            // WD EDIT START - KS14 port
+            if (!TryComp<ItemToggleComponent>(uid, out var toggle))
+                continue;
+
+            if (!toggle.Activated)
+                continue;
+            // WD EDIT END
+
             if (comp.NextScan > currentTime)
                 continue;
 

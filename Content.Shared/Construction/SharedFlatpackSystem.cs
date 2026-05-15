@@ -19,7 +19,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Construction;
 
-public abstract class SharedFlatpackSystem : EntitySystem
+public abstract partial class SharedFlatpackSystem : EntitySystem // Trauma - made partial
 {
     [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
     [Dependency] private readonly INetManager _net = default!;
@@ -95,14 +95,14 @@ public abstract class SharedFlatpackSystem : EntitySystem
             return;
         }
 
-        if (_net.IsServer)
-        {
-            var spawn = Spawn(comp.Entity, _map.GridTileToLocal(grid, gridComp, buildPos));
-            _adminLogger.Add(LogType.Construction,
-                LogImpact.Low,
-                $"{ToPrettyString(args.User):player} unpacked {ToPrettyString(spawn):entity} at {xform.Coordinates} from {ToPrettyString(uid):entity}");
-            QueueDel(uid);
-        }
+        // <Trauma> - predict this and remove local rotatio
+        var spawn = PredictedSpawnAtPosition(comp.Entity, _map.GridTileToLocal(grid, gridComp, buildPos));
+        _transform.SetLocalRotation(spawn, 0);
+        _adminLogger.Add(LogType.Construction,
+            LogImpact.Low,
+            $"{ToPrettyString(args.User):player} unpacked {ToPrettyString(spawn):entity} at {xform.Coordinates} from {ToPrettyString(uid):entity}");
+        PredictedQueueDel(uid);
+        // </Trauma>
 
         _audio.PlayPredicted(comp.UnpackSound, args.Used, args.User);
     }

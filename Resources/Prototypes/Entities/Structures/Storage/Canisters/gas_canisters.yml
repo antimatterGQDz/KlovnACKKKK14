@@ -767,7 +767,6 @@
   - type: Lock
     locked: true
 
-
 - type: entity
   parent: GasCanister
   id: MaxCapCanister # As of writing canisters currently have about 9000 explosive intensity. 95% the total damage of a syndicate bomb but spread across a larger area.

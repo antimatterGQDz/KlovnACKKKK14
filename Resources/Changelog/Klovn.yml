@@ -1088,3 +1088,28 @@ Entries:
         sprites), weldmask in toolbelt has a sprite
   id: 121
   time: '2026-05-14T19:59:19.0000000+00:00'
+- author: LaCumbiaDelCoronavirus
+  changes:
+    - type: Add
+      message: >-
+        Added atmos shield generators; they can be constructed using their
+        circuit boards, researched round-start.
+  id: 122
+  time: '2026-05-15T18:51:07.0000000+00:00'
+- author: LaCumbiaDelCoronavirus
+  changes:
+    - type: Add
+      message: >-
+        Added geysers, which can currently be found outside Saltern. They can be
+        connected with plumbing. Try using a mineral scanner on them.
+    - type: Add
+      message: >-
+        Added plumbing chemical beacons, which can be made in the RPLD and
+        linked into a chemical recipients device list.
+    - type: Add
+      message: >-
+        Added plumbing chemical recipients, which must be researched, and have
+        beacons linked to it. They will allow you to transfer reagents from
+        beacons to recipients over any distance.
+  id: 123
+  time: '2026-05-15T19:26:59.0000000+00:00'

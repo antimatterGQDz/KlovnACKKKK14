@@ -1088,3 +1088,11 @@ Entries:
         sprites), weldmask in toolbelt has a sprite
   id: 121
   time: '2026-05-14T19:59:19.0000000+00:00'
+- author: LaCumbiaDelCoronavirus
+  changes:
+    - type: Add
+      message: >-
+        Added atmos shield generators; they can be constructed using their
+        circuit boards, researched round-start.
+  id: 122
+  time: '2026-05-15T18:51:07.0000000+00:00'

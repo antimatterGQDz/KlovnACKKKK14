@@ -267,6 +267,7 @@
     - EngineeringBoards
     - CargoBoards
     - MedicalBoards
+    - KlovnMedicalBoards # KS14
     - ServiceBoards
     - ScienceBoards
     - CameraBoards

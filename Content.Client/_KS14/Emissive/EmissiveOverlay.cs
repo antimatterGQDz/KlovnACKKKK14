@@ -135,7 +135,7 @@ public sealed class EmissiveOverlay : Overlay
                     var spriteRotation = Angle.Zero;
                     if (ent.Comp.UseSpriteTransform)
                     {
-                        renderPosition += spriteComponent.Offset * spriteComponent.Scale;
+                        renderPosition += spriteComponent.Offset;
                         spriteRotation += spriteComponent.Rotation;
                     }
                     else
@@ -158,37 +158,43 @@ public sealed class EmissiveOverlay : Overlay
                         if (!layer.Visible)
                             continue;
 
-                        var trueOrigin = renderPosition;
-                        var angle = (spriteRotation + localEyeRotation).Reduced().FlipPositive();
-
-                        var noRot = spriteComponent.NoRotation;
-                        var snapCardinals = spriteComponent.SnapCardinals;
-                        if (spriteComponent.GranularLayersRendering)
-                        {
-                            noRot = layer.RenderingStrategy == LayerRenderingStrategy.NoRotation;
-                            snapCardinals = layer.RenderingStrategy == LayerRenderingStrategy.SnapToCardinals;
-                        }
-
-                        var rotation = Angle.Zero;
-                        if (noRot)
-                            rotation = localEyeRotation;
-                        else if (snapCardinals)
-                            rotation = spriteRotation - angle.RoundToCardinalAngle();
-
-                        var totalOffset = ent.Comp.Offset;
+                        var textureRotation = spriteRotation;
+                        var origin = renderPosition;
                         if (ent.Comp.UseSpriteTransform)
                         {
-                            totalOffset += layer.Offset * layer.Scale;
-                            rotation += Matrix3Helpers.Rotation(spriteComponent.LocalMatrix);
+                            var noRot = spriteComponent.NoRotation;
+                            var snapCardinals = spriteComponent.SnapCardinals;
+                            if (spriteComponent.GranularLayersRendering)
+                            {
+                                noRot = layer.RenderingStrategy == LayerRenderingStrategy.NoRotation || layer.RenderingStrategy == LayerRenderingStrategy.UseSpriteStrategy && noRot;
+                                snapCardinals = layer.RenderingStrategy == LayerRenderingStrategy.SnapToCardinals || layer.RenderingStrategy == LayerRenderingStrategy.UseSpriteStrategy && snapCardinals;
+                            }
+
+                            if (noRot)
+                                textureRotation = localEyeRotation;
+                            else
+                            {
+                                var cardinal = Angle.Zero;
+                                if (snapCardinals)
+                                    cardinal = (spriteRotation + localEyeRotation)
+                                        .Reduced()
+                                        .FlipPositive() // angle on-screen. Used to decide the direction of 4/8 directional RSIs
+                                        .RoundToCardinalAngle();
+
+                                textureRotation = spriteRotation - cardinal;
+                            }
+
+                            textureRotation += layer.Rotation;
+                            origin += textureRotation.RotateVec(layer.Offset); // This might need to be rotated by the texture rotation but idk
                         }
 
-                        var texture = GetLayerTexture(spriteComponent, layer, angle);
-                        var box = Box2.CenteredAround(trueOrigin + totalOffset, texture.Size / (float)EyeManager.PixelsPerMeter * spriteComponent.Scale * layer.Scale).Enlarged(ent.Comp.GlowRadius);
+                        var texture = GetLayerTexture(spriteComponent, layer, textureRotation);
+                        var box = Box2.CenteredAround(origin + ent.Comp.Offset /* this is the centroid of the box */, texture.Size / (float)EyeManager.PixelsPerMeter).Enlarged(ent.Comp.GlowRadius);
 
                         var textureBox = new Box2Rotated(
                             box,
-                            rotation,
-                            trueOrigin // The pivot-point should be at the origin of the box, not origin of the world (0,0)
+                            ent.Comp.OnlyRotateTexture ? Angle.Zero : textureRotation,
+                            origin // /* this is the pivot-point of the box */ The pivot-point should be at the origin of the box, not origin of the world (0,0)
                         );
 
                         worldHandle.DrawTextureRect(

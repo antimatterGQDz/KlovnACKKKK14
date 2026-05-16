@@ -1113,3 +1113,17 @@ Entries:
         beacons to recipients over any distance.
   id: 123
   time: '2026-05-15T19:26:59.0000000+00:00'
+- author: LaCumbiaDelCoronavirus
+  changes:
+    - type: Fix
+      message: >-
+        Fixed bugs with nightshift throwing errors and not fixing everything
+        fully
+    - type: Fix
+      message: Fixed jetpacks totally dying, they now work properly
+    - type: Fix
+      message: >-
+        Probably totally fixed emissives, if there are any inconsistencies
+        between the actual sprite and the emissive please report them
+  id: 124
+  time: '2026-05-16T12:48:08.0000000+00:00'

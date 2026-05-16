@@ -48,9 +48,9 @@
     - state: wantpower
       shader: unshaded
       map: ["emissive"]
-  - type: EmissiveLayers # TODO LCDC EMISSIVES: this behaves fine on south sprite, not otherwise doe
-    glowRadius: 0.1
-    intensity: 1
+  - type: EmissiveLayers
+    glowRadius: 0
+    intensity: 2
     offset: 0,-0.25
     layers:
     - emissive
@@ -111,6 +111,13 @@
     - state: icon
       color: '#ffffff4d'
       shader: unshaded
+      map: ["truth"]
+
+  - type: EmissiveLayers
+    glowRadius: 0.3
+    intensity: 0
+    layers:
+    - truth
 
   - type: Airtight
     noAirWhenFullyAirBlocked: false

@@ -1,0 +1,25 @@
+
+#### BASE KS14
+
+# This is a base; gameplay-only changes that will be present on all KS14 builds (debug, release, etc.)
+
+[game]
+# Removes role timers - we keep this until we have proper game time for everyone
+role_timers = false
+role_loadout_timers = false
+
+[ooc]
+enable_during_round = true
+
+[atmos]
+# Bigger maxcap explo. range
+max_explosion_range = 60
+#disable deltap
+delta_pressure_damage = false
+
+[pointing]
+# Virtually nonexistent somethingburger
+cooldown_seconds = 0.05
+
+[shuttle]
+emergency_early_launch_allowed = true

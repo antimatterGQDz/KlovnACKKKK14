@@ -238,6 +238,8 @@ namespace Content.Server.Entry
 
         private static void LoadBuildConfigPresets(IConfigurationManager cfg, IResourceManager res, ISawmill sawmill)
         {
+            BaseLoad("ks14_base"); // KS14
+
 #if TOOLS
             Load(CCVars.ConfigPresetDevelopment, "development");
 #endif
@@ -248,8 +250,18 @@ namespace Content.Server.Entry
 #pragma warning disable CS8321
             void Load(CVarDef<bool> cVar, string name)
             {
+                if (cfg.GetCVar(cVar))
+                {
+                    // KS14: Separated into own method
+                    BaseLoad(name);
+                }
+            }
+
+            void BaseLoad(string name)
+            {
                 var path = $"{ConfigPresetsDirBuild}{name}.toml";
-                if (cfg.GetCVar(cVar) && res.TryContentFileRead(path, out var file))
+
+                if (res.TryContentFileRead(path, out var file))
                 {
                     cfg.LoadDefaultsFromTomlStream(file);
                     sawmill.Info("Loaded config preset: {Preset}", path);

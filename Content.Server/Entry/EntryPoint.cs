@@ -219,7 +219,7 @@ namespace Content.Server.Entry
             LoadBuildConfigPresets(cfg, res, sawmill);
 
             var presets = cfg.GetCVar(CCVars.ConfigPresets);
-            presets += ",_KS14/k14_base"; // KS14
+            presets += ",_KS14/ks14_base"; // KS14
             if (presets == "")
                 return;
 

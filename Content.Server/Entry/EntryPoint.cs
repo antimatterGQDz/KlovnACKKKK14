@@ -1,6 +1,3 @@
-using Content.Server._KS14.AnnouncementWebhook; // KS14
-using Content.Server._KS14.Antag; // KS14
-using Content.Server._KS14.IoC; // KS14
 using System.Threading.Tasks;
 using Content.Server.Acz;
 using Content.Server.Administration;
@@ -83,14 +80,11 @@ namespace Content.Server.Entry
         [Dependency] private readonly ServerApi _serverApi = default!;
         [Dependency] private readonly ServerInfoManager _serverInfo = default!;
         [Dependency] private readonly ServerUpdateManager _updateManager = default!;
-        [Dependency] private readonly LastRolledAntagManager _lastRolledAntagManager = default!; // KS14
-        [Dependency] private readonly AnnouncementWebhookManager _announcementWebhookManager = default!; // KS14
         [Dependency] private readonly ServerFeedbackManager _feedbackManager = null!;
 
         public override void PreInit()
         {
             ServerContentIoC.Register(Dependencies);
-            KsServerContentIoC.Register(Dependencies); // KS14
 
             foreach (var callback in TestingCallbacks)
             {
@@ -179,8 +173,6 @@ namespace Content.Server.Entry
             _connection.PostInit();
             _multiServerKick.Initialize();
             _cvarCtrl.Initialize();
-            _lastRolledAntagManager.Initialize(); // KS14
-            _announcementWebhookManager.Initialize(); // KS14
             _feedbackManager.Initialize();
         }
 
@@ -202,19 +194,15 @@ namespace Content.Server.Entry
                     _playTimeTracking.Update();
                     _watchlistWebhookManager.Update();
                     _connection.Update();
-                    _announcementWebhookManager.Update(); // KS14
                     break;
             }
         }
 
         protected override void Dispose(bool disposing)
         {
-            _announcementWebhookManager.Shutdown(); // KS14
-
             var dest = _cfg.GetCVar(CCVars.DestinationFile);
             if (!string.IsNullOrEmpty(dest))
             {
-                _lastRolledAntagManager.Shutdown(); // KS14
                 _playTimeTracking.Shutdown();
                 _dbManager.Shutdown();
             }

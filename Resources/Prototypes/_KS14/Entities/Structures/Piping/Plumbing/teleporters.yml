@@ -42,7 +42,7 @@
       - !type:DoActsBehavior
         acts: ["Destruction"]
   - type: StaticPrice
-    price: 45
+    price: 150
 
 - type: entity
   parent: [PlumbingMachineBase, ConstructibleMachine]

@@ -6,6 +6,23 @@
   placement:
     mode: SnapgridCenter
   components:
+  # Physics
+  - type: Transform
+    anchored: true
+    noRot: false
+  - type: Physics
+    bodyType: Static
+    canCollide: true
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: -0.35,-0.35,0.35,0.35
+        density: 1500
+        layer:
+        - HalfWallLayer
+
   # Sprites
   - type: Sprite
     sprite: _KS14/Objects/Misc/geyser.rsi
@@ -68,13 +85,6 @@
   - type: DrainableSolution
     solution: buffer
 
-  # Physics
-  - type: Transform
-    anchored: true
-    noRot: false
-  - type: Physics
-    bodyType: Static
-
   # Geyser
   - type: KsScanDiscoverable
     discoveryPopupLoc: ks-specific-geyser-discovered
@@ -100,6 +110,7 @@
       reagents:
       - ReagentId: Plasma
         Quantity: 100
+      temperature: 550
   - type: KsScanDiscoverable
     trueName: plasma geyser
 
@@ -114,6 +125,7 @@
       reagents:
       - ReagentId: CarbonDioxide
         Quantity: 100
+      temperature: 220
   - type: KsScanDiscoverable
     trueName: liquid carbon dioxide geyser
 
@@ -128,6 +140,7 @@
       reagents:
       - ReagentId: Nitrogen
         Quantity: 100
+      temperature: 75
   - type: KsScanDiscoverable
     trueName: liquid nitrogen geyser
 
@@ -142,6 +155,7 @@
       reagents:
       - ReagentId: Fresium
         Quantity: 100
+      temperature: 42
   - type: KsScanDiscoverable
     trueName: fresium geyser
 

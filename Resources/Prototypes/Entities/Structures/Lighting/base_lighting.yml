@@ -34,8 +34,8 @@
     state: base
   # KS14: emissive start
   - type: EmissiveLayers
-    onlyRotateTexture: true
-    useSpriteTransform: false
+    #onlyRotateTexture: true
+    #useSpriteTransform: false
     offset: 0,-0.3
     glowRadius: 0.25
     intensity: 1.3

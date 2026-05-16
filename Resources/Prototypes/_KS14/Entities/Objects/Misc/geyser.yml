@@ -6,6 +6,23 @@
   placement:
     mode: SnapgridCenter
   components:
+  # Physics
+  - type: Transform
+    anchored: true
+    noRot: false
+  - type: Physics
+    bodyType: Static
+    canCollide: true
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: -0.35,-0.35,0.35,0.35
+        density: 1500
+        layer:
+        - HalfWallLayer
+
   # Sprites
   - type: Sprite
     sprite: _KS14/Objects/Misc/geyser.rsi
@@ -67,13 +84,6 @@
         canReact: false
   - type: DrainableSolution
     solution: buffer
-
-  # Physics
-  - type: Transform
-    anchored: true
-    noRot: false
-  - type: Physics
-    bodyType: Static
 
   # Geyser
   - type: KsScanDiscoverable

@@ -225,6 +225,11 @@ namespace Content.Server.Entry
 
             foreach (var preset in presets)
             {
+                // KS14 Start
+                if (preset.IsWhiteSpace())
+                    continue;
+                // KS14 End
+
                 var path = $"{ConfigPresetsDir}{preset}.toml";
                 if (!res.TryContentFileRead(path, out var file))
                 {

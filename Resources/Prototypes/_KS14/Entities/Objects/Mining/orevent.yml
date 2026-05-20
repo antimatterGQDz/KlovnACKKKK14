@@ -74,8 +74,9 @@
 
 - type: entity
   parent: KsOreVentBase
-  id: KsOreVentLava
+  id: KsOreVentLavaBase
   suffix: Lava, Undiscoverable
+  abstract: true
   components:
   - type: OreVent
     tappingProcessEntityProto: KsOreVentMobSpawnerLava
@@ -99,8 +100,9 @@
 
 - type: entity
   parent: KsOreVentBase
-  id: KsOreVentIce
+  id: KsOreVentIceBase
   suffix: Ice, Undiscoverable
+  abstract: true
   components:
   - type: OreVent
     tappingProcessEntityProto: KsOreVentMobSpawnerIce
@@ -147,19 +149,19 @@
 ### Variants: discoverable
 
 - type: entity
-  parent: [ KsOreVentBaseDiscoverable, KsOreVentLava ]
-  id: KsOreVentLavaDiscoverable
+  parent: [ KsOreVentBaseDiscoverable, KsOreVentLavaBase ]
+  id: KsOreVentLava
   suffix: Lava, Discoverable
 
 - type: entity
-  parent: [ KsOreVentBaseDiscoverable, KsOreVentIce ]
-  id: KsOreVentIceDiscoverable
+  parent: [ KsOreVentBaseDiscoverable, KsOreVentIceBase ]
+  id: KsOreVentIce
   suffix: Ice, Discoverable
 
 ### Variants: debug
 
 - type: entity
-  parent: [ KsOreVentBaseDiscoverable, KsOreVentLava ]
+  parent: [ KsOreVentBaseDiscoverable, KsOreVentLavaBase ]
   id: KsOreVentDebug
   suffix: Debug, Discoverable
   categories: [ Debug ]

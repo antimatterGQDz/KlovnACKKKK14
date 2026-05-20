@@ -58,17 +58,17 @@
   id: KsOreVentBaseDiscoverable
   abstract: true
   components:
+  - type: KsScanTriggerOnDiscovered
+    keyOut: discovered
   - type: KsScanDiscoverable
     discoveryPopupLoc: ks-specific-orevent-discovered
     trueName: discovered ore vent
-  - type: KsScanTriggerOnDiscovered
-    keyOut: discovered
   - type: AddComponentsOnTrigger
     keysIn: [discovered]
     components: # copied from PenEmbeddable
     - type: KsRadarInterest
       data:
-        text: ore vent
+        text: discovered ore vent
 
 ### Variants: undiscoverable
 
@@ -127,7 +127,7 @@
 ### Variants: undiscoverable, tapped
 
 - type: entity
-  parent: KsOreVentLava
+  parent: KsOreVentLavaBase
   id: KsOreVentLavaTappedRoundstart
   description: "An ore vent, brimming with underground ore. It's already tapped, for your convenience."
   suffix: Lava, Tapped, Roundstart, Undiscoverable
@@ -137,7 +137,7 @@
     oreWellSettingId: Roundstart
 
 - type: entity
-  parent: KsOreVentIce
+  parent: KsOreVentIceBase
   id: KsOreVentIceTappedRoundstart
   description: "An ore vent, brimming with underground ore. It's already tapped, for your convenience."
   suffix: Ice, Tapped, Roundstart, Undiscoverable
@@ -149,14 +149,57 @@
 ### Variants: discoverable
 
 - type: entity
-  parent: [ KsOreVentBaseDiscoverable, KsOreVentLavaBase ]
-  id: KsOreVentLava
-  suffix: Lava, Discoverable
+  parent: KsOreVentBaseDiscoverable
+  id: KsOreVentBaseDiscoverableBasic
+  abstract: true
+  components:
+  - type: KsScanDiscoverable
+    trueName: common ore vent
+  - type: AddComponentsOnTrigger
+    keysIn: [discovered]
+    components: # copied from PenEmbeddable
+    - type: KsRadarInterest
+      data:
+        text: common ore vent
+  - type: OreVent
+    oreWellSettingId: Basic
 
 - type: entity
-  parent: [ KsOreVentBaseDiscoverable, KsOreVentIceBase ]
-  id: KsOreVentIce
-  suffix: Ice, Discoverable
+  parent: [ KsOreVentBaseDiscoverableBasic, KsOreVentLavaBase ]
+  id: KsOreVentLavaBasic
+  suffix: Lava, Discoverable, Basic
+
+- type: entity
+  parent: [ KsOreVentBaseDiscoverableBasic, KsOreVentIceBase ]
+  id: KsOreVentIceBasic
+  suffix: Ice, Discoverable, Basic
+
+- type: entity
+  parent: KsOreVentBaseDiscoverable
+  id: KsOreVentBaseDiscoverableRare
+  abstract: true
+  components:
+  - type: KsScanDiscoverable
+    trueName: rare ore vent
+  - type: AddComponentsOnTrigger
+    keysIn: [discovered]
+    components: # copied from PenEmbeddable
+    - type: KsRadarInterest
+      data:
+        text: rare ore vent
+  - type: OreVent
+    oreWellSettingId: Rare
+
+- type: entity
+  parent: [ KsOreVentBaseDiscoverableRare, KsOreVentLavaBase ]
+  id: KsOreVentLavaRare
+  suffix: Lava, Discoverable, Rare
+
+- type: entity
+  parent: [ KsOreVentBaseDiscoverableRare, KsOreVentIceBase ]
+  id: KsOreVentIceRare
+  suffix: Ice, Discoverable, Rare
+
 
 ### Variants: debug
 
@@ -183,12 +226,21 @@
   - type: OreVent
     tapped: true
 
+- type: entity
+  parent: KsOreVentDebugTapped
+  id: KsOreVentDebugTappedRare
+  suffix: Debug, Discoverable, Tapped, Rare
+  categories: [ Debug ]
+  components:
+  - type: OreVent
+    oreWellSettingId: Rare
+
 ## Settings
 
 - type: oreWellSetting
   id: Roundstart
-  totalResourceRateRange: 0.75,0.75
-  resourceCountRange: 0.25,0.25
+  totalResourceRateRange: 0.25,0.25
+  resourceCountRange: 2,2
   possibleResourceTypes:
   - SteelOre
   - SpaceQuartz
@@ -202,3 +254,12 @@
   - Coal
   - PlasmaOre
   - GoldOre
+
+- type: oreWellSetting
+  id: Rare
+  totalResourceRateRange: 0.2,0.3
+  resourceCountRange: 1,2
+  possibleResourceTypes:
+  - GoldOre
+  - DiamondOre
+  - UraniumOre

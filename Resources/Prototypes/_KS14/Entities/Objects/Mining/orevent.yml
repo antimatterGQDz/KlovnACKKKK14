@@ -30,7 +30,7 @@
     clearingIterations: 6
     tappingProcessEntityProto: KsOreVentMobSpawnerLava
     droneEntityProto: KsOreVentDrone
-    extractionDuration: 45s
+    extractionDuration: 75s
     oreWellSettingId: Basic
   - type: Explosive
     explosionType: OreVentClearing

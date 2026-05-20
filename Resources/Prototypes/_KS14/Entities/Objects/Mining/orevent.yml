@@ -186,7 +186,7 @@
 - type: oreWellSetting
   id: Roundstart
   totalResourceRateRange: 0.75,0.75
-  resourceCountRange: 2,2
+  resourceCountRange: 0.25,0.25
   possibleResourceTypes:
   - SteelOre
   - SpaceQuartz

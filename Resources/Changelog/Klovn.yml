@@ -1160,3 +1160,11 @@ Entries:
       message: This is how my voice sounds like.
   id: 126
   time: '2026-05-20T13:16:22.0000000+00:00'
+- author: LaCumbiaDelCoronavirus
+  changes:
+    - type: Add
+      message: >-
+        Added doafter for starting extraction on ore-vents, which will warn
+        nearby players.
+  id: 127
+  time: '2026-05-23T12:05:48.0000000+00:00'

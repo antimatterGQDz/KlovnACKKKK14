@@ -2,7 +2,7 @@
 - type: htnCompound
   id: KsOperativeGunCombatCompound
   branches:
-  # Pick target, then move into range and shoot them.
+  # Move into range and shoot the target.
   - tasks:
     - !type:HTNPrimitiveTask
       operator: !type:UtilityOperator
@@ -16,8 +16,12 @@
     - !type:HTNPrimitiveTask # VOICELINE
       operator: !type:SpeakOperator
         cooldown: 5
-        speech: !type:SingleSpeakOperatorSpeech
-          line: "CONTACT!!!"
+        speech: !type:LocalizedSetSpeakOperatorSpeech
+          lineSet: KsOperativeContact
+
+    - !type:HTNPrimitiveTask # Set combat time
+      operator: !type:SetTimeOperator
+        key: TimeOfLastCombat
 
     - !type:HTNPrimitiveTask
       operator: !type:MoveToOperator
@@ -27,6 +31,8 @@
         targetKey: TargetCoordinates
         pathfindKey: TargetPathfind
         rangeKey: RangedRange
+        stopOnLineOfSight: true
+        requireLosForRangeCheck: true
 
     - !type:HTNPrimitiveTask
       preconditions:
@@ -132,8 +138,8 @@
 
     - !type:HTNPrimitiveTask # VOICELINE
       operator: !type:SpeakOperator
-        speech: !type:SingleSpeakOperatorSpeech
-          line: "I'm out of ammo!"
+        speech: !type:LocalizedSetSpeakOperatorSpeech
+          lineSet: KsOperativeOutOfAmmo
 
 - type: htnCompound
   id: KsOperativeReloadActiveGun
@@ -141,8 +147,8 @@
   - tasks:
     - !type:HTNPrimitiveTask # VOICELINE
       operator: !type:SpeakOperator
-        speech: !type:SingleSpeakOperatorSpeech
-          line: "Changing mags!"
+        speech: !type:LocalizedSetSpeakOperatorSpeech
+          lineSet: KsOperativeReloading
 
     # Look for ammo
     - !type:HTNPrimitiveTask

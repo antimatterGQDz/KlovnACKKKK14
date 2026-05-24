@@ -1174,3 +1174,17 @@ Entries:
       message: You actually spawn with the medbelts now.
   id: 128
   time: '2026-05-23T13:54:19.0000000+00:00'
+- author: LaCumbiaDelCoronavirus
+  changes:
+    - type: Fix
+      message: Fixed ore vents destroying saltern's planetgen.
+    - type: Fix
+      message: >-
+        Fixed bloodsprays appearing for all damage types instead of just
+        bloodloss.
+    - type: Tweak
+      message: Made saltern's planetgen more aggressive.
+    - type: Tweak
+      message: Lava/liquid plasma is much more dangerous now.
+  id: 129
+  time: '2026-05-24T06:38:58.0000000+00:00'

@@ -1232,3 +1232,13 @@ Entries:
       message: Resprited most tiles.
   id: 134
   time: '2026-05-31T17:16:16.0000000+00:00'
+- author: LaCumbiaDelCoronavirus
+  changes:
+    - type: Fix
+      message: Fixed basilisks shooting beams of ice.
+    - type: Fix
+      message: Fixed some errors regarding organs.
+    - type: Add
+      message: Made trees move around.
+  id: 135
+  time: '2026-05-31T17:19:51.0000000+00:00'

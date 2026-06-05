@@ -1260,3 +1260,11 @@ Entries:
       message: Reverts shit prs from apstrimi merges
   id: 137
   time: '2026-06-03T16:08:39.0000000+00:00'
+- author: LaCumbiaDelCoronavirus
+  changes:
+    - type: Add
+      message: >-
+        Added the plumbing IV drip, constructable via an RPLD. Drag-drop it onto
+        patients to start the process.
+  id: 138
+  time: '2026-06-05T12:25:25.0000000+00:00'

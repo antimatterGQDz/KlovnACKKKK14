@@ -1268,3 +1268,11 @@ Entries:
         patients to start the process.
   id: 138
   time: '2026-06-05T12:25:25.0000000+00:00'
+- author: FrauZj
+  changes:
+    - type: Tweak
+      message: Tweaked rifle recoil
+    - type: Tweak
+      message: Changed speed to be generally faster but with a little bit of inertia.
+  id: 139
+  time: '2026-06-06T09:54:49.0000000+00:00'

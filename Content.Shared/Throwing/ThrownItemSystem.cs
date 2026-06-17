@@ -173,6 +173,8 @@ namespace Content.Shared.Throwing
         {
             base.Update(frameTime);
 
+            // KS14: TODO LCDC: TODO ZLEVELS: Collection was modified error sometimes when falling thru zlevel
+
             var query = EntityQueryEnumerator<ThrownItemComponent, PhysicsComponent>();
             while (query.MoveNext(out var uid, out var thrown, out var physics))
             {

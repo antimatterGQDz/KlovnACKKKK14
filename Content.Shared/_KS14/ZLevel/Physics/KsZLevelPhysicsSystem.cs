@@ -101,6 +101,10 @@ public sealed class KsZLevelPhysicsSystem : EntitySystem
         return true;
     }
 
+    /// <summary>
+    ///     Tries to make the fall if it is above a z-level and can fall.
+    /// </summary>
+    /// <returns>If the entity actually fell down.</returns>
     public bool TryFall(Entity<TransformComponent?> entity)
     {
         entity.Comp ??= Transform(entity.Owner);

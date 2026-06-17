@@ -1334,3 +1334,20 @@ Entries:
         visible in the Machine Contents list).
   id: 143
   time: '2026-06-17T15:00:57.0000000+00:00'
+- author: Gerkada
+  changes:
+    - type: Add
+      message: >-
+        Anomalies now dynamically react to and consume atmospheric gases,
+        altering their point generation, stability, and pulse behavior based on
+        the surrounding mix.
+    - type: Add
+      message: >-
+        The Anomaly Scanner can now detect atmospheric influences, displaying
+        the Primary and Secondary gas catalysts affecting the anomaly.
+    - type: Tweak
+      message: >-
+        Admin anomaly scanners now display the exact Health percentage of an
+        anomaly.
+  id: 144
+  time: '2026-06-17T15:30:01.0000000+00:00'

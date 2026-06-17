@@ -28,26 +28,20 @@ public sealed class KsZLevelPhysicsSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<GravityChangedEvent>(OnGravityChanged);
+        SubscribeLocalEvent<KsSuspendedZLevelFallComponent, WeightlessnessChangedEvent>(OnWeightlessnessChanged);
 
         SubscribeLocalEvent<PhysicsComponent, EntParentChangedMessage>(OnPhysicsParentChanged,
             after: [typeof(Shared.Movement.Systems.SharedJetpackSystem)]); // So that you dont fall when using a jetpack
         SubscribeLocalEvent<PhysicsComponent, LandEvent>(OnPhysicsLand);
     }
 
-    private void OnGravityChanged(ref GravityChangedEvent args)
+    private void OnWeightlessnessChanged(Entity<KsSuspendedZLevelFallComponent> entity, ref WeightlessnessChangedEvent args)
     {
-        if (args.HasGravity)
+        if (!args.Weightless)
             return;
 
-        var eqe = EntityQueryEnumerator<KsSuspendedZLevelFallComponent, TransformComponent>();
-        while (eqe.MoveNext(out var uid, out _, out var transformComponent))
-        {
-            if (transformComponent.GridUid != args.ChangedGridIndex)
-                continue;
-
-            Fall((uid, transformComponent), zLevelEntity: _zLevelSystem.GetZLevel((uid, transformComponent)));
-        }
+        var transformComponent = Transform(entity);
+        Fall((entity.Owner, transformComponent), zLevelEntity: _zLevelSystem.GetZLevel((entity.Owner, transformComponent)));
     }
 
     private void OnPhysicsParentChanged(Entity<PhysicsComponent> entity, ref EntParentChangedMessage args)

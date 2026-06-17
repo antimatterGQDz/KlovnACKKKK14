@@ -1293,3 +1293,9 @@ Entries:
       message: You can now inspect the contents of air grenades with a gas analyzer.
   id: 141
   time: '2026-06-17T14:05:38.0000000+00:00'
+- author: Gerkada
+  changes:
+    - type: Tweak
+      message: Orebag magnetic pickup is now predicted!
+  id: 142
+  time: '2026-06-17T14:09:13.0000000+00:00'

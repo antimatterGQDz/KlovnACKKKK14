@@ -25,15 +25,21 @@
     sprite: _KS14/Structures/Machines/PTL/pt_laser.rsi
     layers:
     - state: base
-      map: ["enum.Content.Shared._KS14.Power.PTL.PtlVisualLayers.Base"]
+      map: ["enum.PtlVisualLayers.Base"]
     - state: unpowered
       shader: unshaded
       visible: false
-      map: ["enum.Content.Shared._KS14.Power.PTL.PtlVisualLayers.Unpowered"]
+      map: ["enum.PtlVisualLayers.Unpowered"]
     - state: charge-1
       shader: unshaded
       visible: false
-      map: ["enum.Content.Shared._KS14.Power.PTL.PtlVisualLayers.Charge"]
+      map: ["enum.PtlVisualLayers.Charge"]
+  - type: EmissiveLayers
+    glowRadius: 0.65
+    intensity: 4.2
+    layers:
+    - enum.PtlVisualLayers.Unpowered
+    - enum.PtlVisualLayers.Charge
   - type: Transform
     anchored: true
     noRot: false
@@ -65,7 +71,7 @@
     fireRate: 10
     selectedMode: SemiAuto
     availableModes:
-      - SemiAuto
+    - SemiAuto
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
   - type: BatteryAmmoProvider

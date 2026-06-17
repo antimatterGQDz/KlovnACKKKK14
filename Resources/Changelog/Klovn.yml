@@ -1299,3 +1299,38 @@ Entries:
       message: Orebag magnetic pickup is now predicted!
   id: 142
   time: '2026-06-17T14:09:13.0000000+00:00'
+- author: Gerkada
+  changes:
+    - type: Add
+      message: >-
+        Added Stirring, Shaking, Centrifuging, and Electrolysis modes to the
+        Plumbing Reactor.
+    - type: Add
+      message: >-
+        Added a "Purge All" button to the Plumbing Reactor to clear stuck
+        chemicals.
+    - type: Add
+      message: >-
+        Added a detailed content UI and volume bar to all chemical storage tanks
+        and barrels.
+    - type: Add
+      message: >-
+        Added Nitrogen, Welding Fuel, and multiple base elements to the Chemical
+        Synthesizer.
+    - type: Tweak
+      message: Increased Plumbing Tank capacity to 800u.
+    - type: Tweak
+      message: All Chemical Synthesizer reagents now cost a flat 5W/u.
+    - type: Tweak
+      message: >-
+        The plumbing network now automatically strips DNA and metadata from
+        biological reagents (blood/vomit) to make them usable in automated
+        recipes.
+    - type: Fix
+      message: Fixed the chemical storage progress bar not filling correctly.
+    - type: Fix
+      message: >-
+        Fixed an issue where reactor products appeared to "vanish" (they are now
+        visible in the Machine Contents list).
+  id: 143
+  time: '2026-06-17T15:00:57.0000000+00:00'

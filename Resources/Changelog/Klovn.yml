@@ -1365,3 +1365,19 @@ Entries:
       message: Fixed a bug where gas flow rods were destroying neutrons.
   id: 146
   time: '2026-06-17T15:46:47.0000000+00:00'
+- author: LaCumbiaDelCoronavirus
+  changes:
+    - type: Add
+      message: Added wittel reagent, found in geysers and does nothing by itself.
+    - type: Add
+      message: >-
+        Added sorium reagent. Above a certain temperature, it detonates and
+        violently pushes away everything nearby.
+    - type: Add
+      message: >-
+        Added gravitum reagent, crafted from wittel and sorium. Gravitum, in the
+        bloodstream, makes you weightless.
+    - type: Tweak
+      message: Jetpacks can now fly on grids if there is no gravity.
+  id: 147
+  time: '2026-06-17T21:08:00.0000000+00:00'

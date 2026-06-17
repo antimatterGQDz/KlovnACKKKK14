@@ -10,11 +10,10 @@
   - BaseStationRecords
   - BaseStationGateway
   - BaseStationCentcomm
-  - BaseStationEvacuation
   - BaseStationAlertLevels
   - BaseStationSalvageJobs
   - BaseStationSiliconLawAsimov
   - BaseStationAllEventsEligible
   - BaseStationNanotrasen
-  id: KsBasicStationScenario
+  id: KsStationBasicScenario
   categories: [ HideSpawnMenu ]

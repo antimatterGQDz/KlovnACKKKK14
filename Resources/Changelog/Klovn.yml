@@ -1431,3 +1431,11 @@ Entries:
         no longer sufficient pressure in the machine. Sprites by IRS (GIGA)
   id: 150
   time: '2026-06-19T14:11:46.0000000+00:00'
+- author: LaCumbiaDelCoronavirus
+  changes:
+    - type: Tweak
+      message: Canisters now rupture more epically, you will know how when you see it.
+    - type: Remove
+      message: Removed safety valve mechanic on canisters
+  id: 151
+  time: '2026-06-19T16:40:26.0000000+00:00'

@@ -2,7 +2,7 @@
   parent: [ BaseMachine, ConstructibleMachine ]
   id: PneumaticHammer
   name: pneumatic hammer
-  description: Expensive equipment used to automagically teleports ores from ore wells; tapped ore vents. Well, if you press the power button first that is.
+  description: A machine of dubious usefulness that extends a piston when sufficient pressure is present inside it, and retracts it in the opposite case. Standing in the path of the piston is not advised.
   components:
   # Phys
   - type: Transform

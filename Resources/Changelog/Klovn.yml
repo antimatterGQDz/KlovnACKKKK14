@@ -1397,3 +1397,27 @@ Entries:
         errors) by ensuring proper map teardown in a `try...finally` block.
   id: 148
   time: '2026-06-18T21:44:55.0000000+00:00'
+- author: Gerkada
+  changes:
+    - type: Add
+      message: Added Evaporin gas and liquid reagent.
+    - type: Add
+      message: Added Evaporin synthesis reaction (2 CO2 + 1 Tritium at 500K).
+    - type: Add
+      message: Added Evaporin gas canister and paintable style.
+    - type: Tweak
+      message: Puddles now evaporate significantly faster when exposed to Evaporin gas.
+    - type: Tweak
+      message: >-
+        Inhaling or ingesting Evaporin causes severe dehydration and poison
+        damage when thirsty.
+    - type: Tweak
+      message: >-
+        Air alarms and scrubbers now support filtering Evaporin, Zipion, and
+        Argon by default.
+    - type: Fix
+      message: >-
+        Fixed an issue where mixed puddles (e.g., water and blood) would only
+        partially evaporate.
+  id: 149
+  time: '2026-06-19T14:07:52.0000000+00:00'

@@ -54,6 +54,7 @@ public abstract partial class SharedGunSystem : EntitySystem
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly UseDelaySystem _useDelay = default!;
     [Dependency] private readonly _KS14.NPC.Systems.SharedNpcSensorSystem _npcSensorSystem = default!; // KS14: ANK
+    [Dependency] private readonly _KS14.Farsound.FarSoundSystem _farsoundSystem = default!;// KS14
     [Dependency] protected readonly DamageableSystem Damageable = default!;
     [Dependency] protected readonly ExamineSystemShared Examine = default!;
     [Dependency] protected readonly IPrototypeManager ProtoManager = default!;
@@ -611,6 +612,7 @@ public abstract partial class SharedGunSystem : EntitySystem
                     PredictedDel(ent);
 
                     Audio.PlayPredicted(gun.Comp.SoundGunshotModified, gun, user);
+                    _farsoundSystem.TryPlayFarSound(gun, gun.Comp.FarSoundGunshot, userUid: user); // KS14
                     _npcSensorSystem.DoDisturbance(fromCoordinates, gun.Comp.SoundGunshotModified?.Params.MaxDistance ?? 0f, source: user); // KS14: ANK: AI sensors
                     break;
                 default:
@@ -656,6 +658,7 @@ public abstract partial class SharedGunSystem : EntitySystem
 
             MuzzleFlash(gun, ammoComp, mapDirection.ToAngle(), user);
             Audio.PlayPredicted(gun.Comp.SoundGunshotModified, gun, user);
+            _farsoundSystem.TryPlayFarSound(gun, gun.Comp.FarSoundGunshot, userUid: user); // KS14
         }
     }
 

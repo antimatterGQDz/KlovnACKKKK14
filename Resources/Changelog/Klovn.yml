@@ -1421,3 +1421,13 @@ Entries:
         partially evaporate.
   id: 149
   time: '2026-06-19T14:07:52.0000000+00:00'
+- author: LaCumbiaDelCoronavirus
+  changes:
+    - type: Add
+      message: >-
+        Added the pneumatic hammer: an atmos machine that upon receiving gas
+        above a certain pressure, extends a piston to a neighboring tile that
+        deals damage and forms a barrier. The piston is retracted when there is
+        no longer sufficient pressure in the machine. Sprites by IRS (GIGA)
+  id: 150
+  time: '2026-06-19T14:11:46.0000000+00:00'

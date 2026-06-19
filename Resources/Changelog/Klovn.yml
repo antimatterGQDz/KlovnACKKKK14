@@ -470,7 +470,7 @@ Entries:
     - type: Add
       message: >-
         You can now punch anomalies inside of disposal units. Requires a
-        G.O.R.I.L.L.A. gauntlet. 
+        G.O.R.I.L.L.A. gauntlet.
   id: 60
   time: '2025-12-31T01:08:31.0000000+00:00'
 - author: Gerkada
@@ -728,7 +728,7 @@ Entries:
     - type: Tweak
       message: >-
         Potassium iodine will heal SLIGHT amounts of rad damage aswell as
-        metabolize 50% slower than before. 
+        metabolize 50% slower than before.
   id: 93
   time: '2026-02-14T15:38:49.0000000+00:00'
 - author: LaCumbiaDelCoronavirus
@@ -1013,7 +1013,7 @@ Entries:
     - type: Fix
       message: >-
         Fixed limbs thrown from explosion dismemberment being thrown in exact
-        same direction. 
+        same direction.
     - type: Tweak
       message: >-
         Diving now fullstuns you if you dont hit anything, but doesnt if you hit
@@ -1438,4 +1438,10 @@ Entries:
     - type: Remove
       message: Removed safety valve mechanic on canisters
   id: 151
+  time: '2026-06-19T16:40:26.0000000+00:00'
+- author: LaCumbiaDelCoronavirus
+  changes:
+    - type: Fix
+      message: You no longer get forced to stand after you stop being weightless if you are not able to stand.
+  id: 152
   time: '2026-06-19T16:40:26.0000000+00:00'

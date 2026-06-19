@@ -34,7 +34,7 @@
   - type: GasPiston
     inletName: pipe
     fixtureId: piston
-    pressureRange: 10,96000
+    pressureRange: 10,32000
     removedGasRatio: 1 # remove all gas
     maxThrowForce: 300
     capped: false # ERM

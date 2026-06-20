@@ -27,7 +27,7 @@ emergency_early_launch_allowed = true
 [hub]
 advertise = true
 tags = "lang:en,region:eu_w,rp:low"
-hub_urls = "https://hub.singularity14.co.uk/" # SimpleStation hub likes to not work and crash the game
+hub_urls = "https://hub.simplestation.org/, https://hub.singularity14.co.uk/"
 server_url = "ss14://game.klovnstation.org"
 
 

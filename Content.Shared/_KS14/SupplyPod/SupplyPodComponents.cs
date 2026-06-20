@@ -1,6 +1,7 @@
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Map;
+using Robust.Shared.Serialization;
 
 namespace Content.Shared._KS14.SupplyPod;
 
@@ -24,6 +25,12 @@ public sealed partial class SupplyPodComponent : Component
     /// </summary>
     [DataField, ViewVariables(VVAccess.ReadWrite)]
     public float Height = 5f;
+
+    /// <summary>
+    ///     Maximum random angle to fall at.
+    /// </summary>
+    [DataField, ViewVariables(VVAccess.ReadWrite)]
+    public Angle AngularDeviation;
 
     #region Fall data
     /// <summary>
@@ -88,7 +95,7 @@ public sealed partial class ActiveSupplyPodComponent : Component
     /// </summary>
     [DataField, ViewVariables(VVAccess.ReadOnly)]
     [AutoNetworkedField]
-    public Angle Angle = Angle.FromDegrees(15d);
+    public Angle Angle;
 }
 
 [Access(typeof(SharedSupplyPodSystem))]
@@ -110,4 +117,13 @@ public sealed partial class SupplyPodDoorDrawerComponent : Component
     /// </summary>
     [DataField(required: true), AutoNetworkedField]
     public PrototypeLayerData DecalData;
+}
+
+[Serializable, NetSerializable]
+public enum SupplyPodVisuals : byte
+{
+    /// <summary>
+    ///     Boolean
+    /// </summary>
+    Landed
 }

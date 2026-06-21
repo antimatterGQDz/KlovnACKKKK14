@@ -14,7 +14,7 @@
   description: The standard weapon of CentComm Officers though not restricted for use of standard firearm use, chambered in gods caliber .45 magnum.
   productEntity: WeaponPistolN1984
   cost:
-    Securitytoken: 8
+    Securitytoken: 12
   categories:
   - SecWeaponry
 

@@ -6,6 +6,10 @@
     name: store-preset-name-secstore
     categories:
     - SecWeaponry
+    - SecWearables
+    - SecMedical
+    - SecAmmo
+    - SecMisc
     currencyWhitelist:
     - Securitytoken
     balance:

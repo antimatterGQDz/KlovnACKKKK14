@@ -5,6 +5,7 @@
   description: You feel an overwhelming urge to shitsec upon viewing this machine.
   components:
   - type: VendingMachine
+    pack: Null
     cashSlot: Null
     offState: off
     brokenState: broken

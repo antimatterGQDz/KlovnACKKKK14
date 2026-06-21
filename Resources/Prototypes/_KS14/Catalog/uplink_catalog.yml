@@ -1,9 +1,9 @@
 - type: listing
-  id: UplinkAccessBreakersectest
-  name: uplink-access-breaker-name
-  description: uplink-access-breaker-desc
-  productEntity: AccessBreaker
+  id: SecTokenMk58
+  name: Mk58
+  description: The classic.
+  productEntity: WeaponPistolMk58
   cost:
-    Securitytoken: 12
+    Securitytoken: 5
   categories:
   - SecWeaponry

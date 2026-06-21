@@ -31,3 +31,15 @@
   - type: Store
     balance:
       Securitytoken: 0
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.45,-0.45,0.45,0.45"
+        density: 300
+        mask:
+        - MachineMask
+        layer:
+        - MidImpassable
+        - LowImpassable

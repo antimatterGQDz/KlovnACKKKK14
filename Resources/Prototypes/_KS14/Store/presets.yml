@@ -1,0 +1,12 @@
+- type: entity
+  id: StorePresetSecToken
+  abstract: true
+  components:
+  - type: Store
+    name: store-preset-name-secstore
+    categories:
+    - UplinkWeaponry
+    currencyWhitelist:
+    - Securitytoken
+    balance:
+      Securitytoken: 0

@@ -2,7 +2,7 @@
   name: Security Token
   parent: BaseItem
   id: Securitytoken
-  suffix: 20 TC
+  suffix: 20 TC, token, security
   description: A token awarded to NT personnel for turning in contraband. It can be exchanged in an security coin vending machine for a variety of law enforcement tools.
   components:
   - type: Sprite
@@ -25,7 +25,7 @@
 - type: entity # ported from mono award
   parent: Securitytoken
   id: Securitytoken1
-  suffix: 1 TC
+  suffix: 1 TC, token, security
   components:
   - type: Stack
     count: 1
@@ -33,7 +33,7 @@
 - type: entity # ported from mono award
   parent: Securitytoken
   id: Securitytoken5
-  suffix: 5 TC
+  suffix: 5 TC, token, security
   components:
   - type: Stack
     count: 5
@@ -41,7 +41,7 @@
 - type: entity # ported from mono award
   parent: Securitytoken
   id: Securitytoken10
-  suffix: 10 TC
+  suffix: 10 TC, token, security
   components:
   - type: Stack
     count: 10

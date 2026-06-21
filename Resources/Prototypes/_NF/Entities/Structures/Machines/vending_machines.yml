@@ -1,6 +1,6 @@
 - type: entity
   id: VendingMachineSecCoin
-  parent: [BaseStructure, StorePresetUplink]
+  parent: [BaseStructure, StorePresetSecToken]
   name: security coin vending machine
   components:
   - type: InteractionOutline

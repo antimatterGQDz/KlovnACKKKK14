@@ -1,5 +1,5 @@
 - type: listing
-  id: UplinkAccessBreaker
+  id: UplinkAccessBreakersectest
   name: uplink-access-breaker-name
   description: uplink-access-breaker-desc
   productEntity: AccessBreaker

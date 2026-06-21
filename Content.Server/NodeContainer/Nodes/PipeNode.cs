@@ -243,8 +243,7 @@ namespace Content.Server.NodeContainer.Nodes
 
                 foreach (var node in container.Nodes.Values)
                 {
-                    if (node is PipeNode pipe &&
-                        PipeSubtypesCanConnect(pipe) /* KS14: only same direct type can connect (plumbingnodde cant connect with pipenode) */)
+                    if (node is PipeNode pipe)
                         yield return pipe;
                 }
             }
@@ -253,10 +252,5 @@ namespace Content.Server.NodeContainer.Nodes
         PipeDirection IPipeNode.Direction => OriginalPipeDirection;
         AtmosPipeLayer IPipeNode.Layer => CurrentPipeLayer;
         // Starlight End: RPD
-
-        // KS14 Start
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-        public bool PipeSubtypesCanConnect(IPipeNode otherNode) => otherNode.GetType() == GetType();
-        // KS14 End
     }
 }

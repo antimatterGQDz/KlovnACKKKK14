@@ -28,7 +28,7 @@ sec-magazine-45-magnum-ap-desc = Gods caliber, for the N1984. This one is armor-
 sec-speedloader-45-magnum-name = Revolver Speedloader
 sec-speedloader-45-magnum-desc = Gods caliber, for the Inspector
 
-sec-speedloader-45-magnum-ap-name = Revolver Speedloader
+sec-speedloader-45-magnum-ap-name = Revolver Speedloader AP
 sec-speedloader-45-magnum-ap-desc = Gods caliber, for the Inspector. This one is armor-piercing
 
 sec-suit-hardsuit-name = Security Hardsuit

@@ -3,7 +3,7 @@
   parent: BaseItem
   id: SwissArmyKnife
   description: A multi-tool constructed out of titanium alloy, replaces the need to carry around a toolbelt. Very slow, doesnt include a welder.
-  suffix: DEBUG
+  suffix: tool, multitool
   components:
   - type: Sprite
     sprite: Objects/Tools/debug.rsi

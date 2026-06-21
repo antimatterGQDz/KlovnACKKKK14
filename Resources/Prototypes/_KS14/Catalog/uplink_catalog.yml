@@ -1,7 +1,7 @@
 - type: listing
   id: SecTokenMk58
-  name: Mk58
-  description: The classic sidearm of every self-respecting Officer, make sure to clean these well because they rust easy. Chambered in .35 auto
+  name: sec-mk58-name
+  description: sec-mk58-desc
   productEntity: WeaponPistolMk58
   cost:
     Securitytoken: 5
@@ -10,8 +10,8 @@
 
 - type: listing
   id: SecTokenN1984
-  name: N1984
-  description: The standard weapon of CentComm now given clearance for the HOS, chambered in gods caliber .45 magnum
+  name: sec-n1984-name
+  description: sec-n1984-desc
   productEntity: WeaponPistolN1984
   cost:
     Securitytoken: 12
@@ -24,8 +24,8 @@
 
 - type: listing
   id: SecTokenSvalinn
-  name: Svalinn Laser Pistol
-  description: Cheap and mass-produced laser pistol, it saves you money to use one of these instead of balistics and you can fire through windows
+  name: sec-svalinn-name
+  description: sec-svalinn-desc
   productEntity: WeaponLaserSvalinn
   cost:
     Securitytoken: 4
@@ -34,8 +34,8 @@
 
 - type: listing
   id: SecTokenInspector
-  name: Inspector Revolver
-  description: The standard revolver made across the universe, revolvers dont drop casings. Chambered in .45 magnum
+  name: sec-inspector-name
+  description: sec-inspector-desc
   productEntity: WeaponRevolverInspector
   cost:
     Securitytoken: 5
@@ -44,8 +44,8 @@
 
 - type: listing
   id: SecTokenMagazinePistol
-  name: .35 Auto Magazine
-  description: Standard magazine for standard issue pistols, nothing special
+  name: sec-magazine-35-auto-name
+  description: sec-magazine-35-auto-desc
   productEntity: MagazinePistol
   cost:
     Securitytoken: 2
@@ -54,8 +54,8 @@
 
 - type: listing
   id: SecTokenMagazinePistolIncendiary
-  name: .35 Auto Magazine Incendiary
-  description: Standard magazine for standard issue pistols, this one lights people on fire
+  name: sec-magazine-35-auto-incendiary-name
+  description: sec-magazine-35-auto-incendiary-desc
   productEntity: MagazinePistolIncendiary
   cost:
     Securitytoken: 4
@@ -64,8 +64,8 @@
 
 - type: listing
   id: SecTokenMagazineMagnum
-  name: .45 Magnum Magazine
-  description: Gods caliber, for the N1984
+  name: sec-magazine-45-magnum-name
+  description: sec-magazine-45-magnum-desc
   productEntity: MagazineMagnum
   cost:
     Securitytoken: 3
@@ -78,8 +78,8 @@
   
 - type: listing
   id: SecTokenMagazineMagnumAP
-  name: .45 Magnum Magazine AP
-  description: Gods caliber, for the N1984. This one is armor-piercing
+  name: sec-magazine-45-magnum-ap-name
+  description: sec-magazine-45-magnum-ap-desc
   productEntity: MagazineMagnumAP
   cost:
     Securitytoken: 7
@@ -92,8 +92,8 @@
 
 - type: listing
   id: SecTokenSpeedLoaderMagnum
-  name: Revolver Speedloader
-  description: Gods caliber, for revolvers
+  name: sec-speedloader-45-magnum-name
+  description: sec-speedloader-45-magnum-desc
   productEntity: SpeedLoaderMagnum
   cost:
     Securitytoken: 3
@@ -102,8 +102,8 @@
 
 - type: listing
   id: SecTokenSpeedLoaderMagnumAP
-  name: Revolver Speedloader AP
-  description: Gods caliber, for revolvers. This one is armor-piercing
+  name: sec-speedloader-45-magnum-ap-name
+  description: sec-speedloader-45-magnum-ap-desc
   productEntity: SpeedLoaderMagnumAP
   cost:
     Securitytoken: 5
@@ -112,8 +112,8 @@
   
 - type: listing
   id: SecTokenSecurityHardsuit
-  name: Security Hardsuit
-  description: Extra hardsuit for an Officer, doesnt come with an oxygen tank
+  name: sec-suit-hardsuit-name
+  description: sec-suit-hardsuit-desc
   productEntity: ClothingOuterHardsuitSecurity
   cost:
     Securitytoken: 8
@@ -122,8 +122,8 @@
 
 - type: listing
   id: SecTokenTrackingImplanter
-  name: Tracking Implant
-  description: Standard issue brainchip for tracking people via the monitor console, this was first invented by the CIA in 20ϪϪ
+  name: sec-implant-tracker-name
+  description: sec-implant-tracker-desc
   productEntity: TrackingImplanter
   cost:
     Securitytoken: 2
@@ -132,8 +132,8 @@
 
 - type: listing
   id: SecTokenMedkit
-  name: Medkit
-  description: Standard issue NT medkit, can patch a bullet wound but probably not a C4 victim
+  name: sec-medkit-name
+  description: sec-medkit-desc
   productEntity: MedkitFilled
   cost:
     Securitytoken: 2
@@ -142,8 +142,8 @@
 
 - type: listing
   id: SecTokenFireaxe
-  name: Fireaxe
-  description: A fireaxe, simple yet effective for breaching into rooms and homicide
+  name: sec-fireaxe-name
+  description: sec-fireaxe-desc
   productEntity: FireAxe
   cost:
     Securitytoken: 12
@@ -152,8 +152,8 @@
 
 - type: listing
   id: SecTokenRifleAk
-  name: AKMS
-  description: An automatic rifle chambered in .30 rifle. This was not stolen from the USSR, you will not investigate this further
+  name: sec-akms-name
+  description: sec-akms-desc
   productEntity: WeaponRifleAk
   cost:
     Securitytoken: 16
@@ -162,8 +162,8 @@
 
 - type: listing
   id: SecTokenEnergyCutlass
-  name: Energy Cutlass
-  description: The weapon of space pirates now in your hands, weaker than the syndicates energy swords and cannot melt walls effectively
+  name: sec-ecutlass-name
+  description: sec-ecutlass-desc
   productEntity: EnergyCutlass
   cost:
     Securitytoken: 10
@@ -172,8 +172,8 @@
 
 - type: listing
   id: SecTokenWantedListCartridgeBundle
-  name: New Cadets bundle
-  description: Four cadet PDAs, stun batons, flashes, and cuffs for building your personal army
+  name: sec-cadet-bundle-name
+  description: sec-cadet-bundle-desc
   productEntity: ClothingBackpackDuffelSecurityFilledWantedListCartridge
   cost:
     Securitytoken: 6
@@ -185,9 +185,9 @@
     - HeadOfSecurity
 
 - type: listing
-  id: ClothingBackpackDuffelSecurityFilledCompressiSuit
-  name: CompressiSuit bundle
-  description: Two new prototype compressing suits from NT, comes with a large number of oxygen tanks
+  id: SecTokenClothingBackpackDuffelSecurityFilledCompressiSuit
+  name: sec-compressi-bundle-name
+  description: sec-compressi-bundle-desc
   productEntity: ClothingBackpackDuffelSecurityFilledCompressiSuit
   cost:
     Securitytoken: 8
@@ -195,9 +195,9 @@
   - SecWearables
 
 - type: listing
-  id: ClothingBackpackDuffelSecurityFilledCompressiSuit
-  name: CompressiSuit bundle
-  description: A multi-tool used by mercs, this one is made of titanium alloy to allow prying doors
+  id: SecTokenSwissArmyKnife
+  name: sec-swissarmyknife-name
+  description: sec-swissarmyknife-desc
   productEntity: SwissArmyKnife
   cost:
     Securitytoken: 8

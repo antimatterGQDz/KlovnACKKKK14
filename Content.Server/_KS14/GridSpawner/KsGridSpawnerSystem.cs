@@ -2,6 +2,7 @@ using System.Numerics;
 using Content.Server.Shuttles.Systems;
 using Robust.Server.GameObjects;
 using Robust.Shared.EntitySerialization.Systems;
+using Robust.Shared.Map.Components;
 using Robust.Shared.Random;
 
 namespace Content.Server._KS14.GridSpawner;
@@ -20,8 +21,20 @@ public sealed class KsGridSpawnerSystem : EntitySystem
     {
         base.Initialize();
 
+        SubscribeLocalEvent<KsGridSpawnerComponent, MapInitEvent>(OnMapInit);
+
         SubscribeLocalEvent<KsGridSpawnerComponent, ComponentStartup>(OnStartup);
         SubscribeLocalEvent<KsGridSpawnerComponent, EntityUnpausedEvent>(OnEntityUnpaused);
+    }
+
+    // Smishing is done on map-init and not startup because
+    private void OnMapInit(Entity<KsGridSpawnerComponent> entity, ref MapInitEvent args)
+    {
+        if (entity.Comp.SpawnedGridUid is not { } gridUid ||
+            !TryComp<MapGridComponent>(gridUid, out var gridComponent))
+            return;
+
+        _shuttleSystem.Smimsh(gridUid, grid: gridComponent);
     }
 
     private void OnStartup(Entity<KsGridSpawnerComponent> entity, ref ComponentStartup args)
@@ -39,6 +52,9 @@ public sealed class KsGridSpawnerSystem : EntitySystem
 
     private void Doit(Entity<KsGridSpawnerComponent, TransformComponent?> entity)
     {
+        if (entity.Comp1.SpawnedGridUid is { })
+            return;
+
         var transformComponent = entity.Comp2 ?? Transform(entity);
         var position = _transformSystem.GetWorldPosition(transformComponent);
 
@@ -57,7 +73,7 @@ public sealed class KsGridSpawnerSystem : EntitySystem
         }
 
         if (_mapLoaderSystem.TryLoadGrid(transformComponent.MapID, entity.Comp1.Path, out var gridEntity, offset: position, rot: entity.Comp1.Rotation))
-            _shuttleSystem.Smimsh(gridEntity.Value.Owner, grid: gridEntity.Value.Comp);
+            entity.Comp1.SpawnedGridUid = gridEntity;
 
         RemComp(entity, entity.Comp1);
     }

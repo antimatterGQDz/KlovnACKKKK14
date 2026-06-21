@@ -17,10 +17,10 @@ public sealed class KsChatQuoteSystem : EntitySystem
         if (!_configurationManager.GetCVar(KsCCVars.ChatQuotesEnabled))
             return;
 
-        SubscribeLocalEvent<KsBeforeMessageSent>(OnBeforeMessageSent, after: [typeof(KsChatFilterSystem)]);
+        SubscribeLocalEvent<KsBeforeMessageSentEvent>(OnBeforeMessageSent, after: [typeof(KsChatFilterSystem)]);
     }
 
-    private void OnBeforeMessageSent(ref KsBeforeMessageSent args)
+    private void OnBeforeMessageSent(ref KsBeforeMessageSentEvent args)
     {
         if (args.Cancelled)
             return;

@@ -27,5 +27,5 @@ public sealed partial class KsCCVars
     /// </summary>
     [CVarControl(AdminFlags.Server)]
     public static readonly CVarDef<bool> SlurFilterEnabled =
-        CVarDef.Create("klovn.ic.slurfilter_enabled", false, CVar.ARCHIVE | CVar.CLIENTONLY);
+        CVarDef.Create("klovn.ic.slurfilter_enabled", true, CVar.ARCHIVE | CVar.CLIENTONLY);
 }

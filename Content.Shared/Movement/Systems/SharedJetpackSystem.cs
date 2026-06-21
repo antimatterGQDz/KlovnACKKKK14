@@ -91,7 +91,7 @@ public abstract class SharedJetpackSystem : EntitySystem
         var gridUid = transform.GridUid ?? transform.MapUid; // KS14: Fallback to map
 
         var jetpackUid = userEntity.Comp.Jetpack;
-        if (transform.GridUid == gridUid && TryComp<JetpackComponent>(jetpackUid, out var jetpackComponent))
+        if (TryComp<JetpackComponent>(jetpackUid, out var jetpackComponent))
         {
             var canFly = CanFlyOnGrid(gridUid, userEntity /* KS14: Flyer UID */);
             SetEnabled((jetpackUid, jetpackComponent), jetpackComponent.Enabled, flyIfEnabled: canFly, user: userEntity.Owner);

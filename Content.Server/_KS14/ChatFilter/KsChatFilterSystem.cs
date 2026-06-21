@@ -1,4 +1,3 @@
-using System.Linq;
 using Content.Server.Chat.Managers;
 using Content.Server.Chat.Systems;
 using Content.Shared._KS14.CCVar;
@@ -21,31 +20,36 @@ public sealed class KsChatFilterSystem : EntitySystem
         base.Initialize();
 
         if (_configurationManager.GetCVar(KsCCVars.WordFilterEnabled))
-            SubscribeLocalEvent<KsBeforeMessageSent>(OnBeforeMessageSent);
+        {
+            SubscribeLocalEvent<KsBeforeMessageSentEvent>(OnBeforeMessageSent);
+            SubscribeLocalEvent<KsSanitiseMessageEvent>(OnSanitiseMessage);
+        }
     }
 
-    private void OnBeforeMessageSent(ref KsBeforeMessageSent args)
+    // OOC and IC; prohibit words
+    private void OnBeforeMessageSent(ref KsBeforeMessageSentEvent args)
     {
         if (args.Cancelled)
             return;
 
         var message = WordFilterSystem.SkeletoniseString(WordFilterSystem.ParseToLatin(args.Message));
-
-        if (_wordFilterSystem.AnyFilterMatches(message, WordFilterCategory.Prohibited))
-        {
-            SendMessage(args.Session, "ks-word-filter-prohibited");
-            args.Cancelled = true;
+        if (!_wordFilterSystem.AnyFilterMatches(message, WordFilterCategory.Prohibited))
             return;
-        }
+
+        SendMessage(args.Session, "ks-word-filter-prohibited");
+        args.Cancelled = true;
+    }
+
+    // IC only; modify words
+    private void OnSanitiseMessage(ref KsSanitiseMessageEvent args)
+    {
+        var message = WordFilterSystem.SkeletoniseString(WordFilterSystem.ParseToLatin(args.Message));
 
         var originalMessage = message;
         _wordFilterSystem.FilterAndReplaceString(ref message, WordFilterCategory.Normal);
 
         if (originalMessage == message)
             return;
-
-        args.Cancelled |= message.Length == 0 ||
-            message.All(char.IsWhiteSpace);
 
         SendMessage(args.Session, "ks-word-filter-warn");
         args.Message = message;

@@ -57,3 +57,9 @@ sec-compressi-bundle-desc = Two new prototype compressing suits from NT, comes w
 
 sec-swissarmyknife-name = Swiss Army Knife
 sec-swissarmyknife-desc = A multi-tool used by mercs, this one is made of titanium alloy to allow prying doors
+
+sec-store-category-misc = Misc
+sec-store-category-wearables = Wearables
+sec-store-category-medical = Medical
+sec-store-category-ammo = Ammo
+sec-store-category-weapons = Weapons

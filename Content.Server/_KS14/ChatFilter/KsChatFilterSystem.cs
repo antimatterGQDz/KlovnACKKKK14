@@ -1,4 +1,3 @@
-using System.Linq;
 using Content.Server.Chat.Managers;
 using Content.Server.Chat.Systems;
 using Content.Shared._KS14.CCVar;

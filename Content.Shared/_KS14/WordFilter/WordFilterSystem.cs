@@ -1,6 +1,5 @@
 using System.Text;
 using System.Text.RegularExpressions;
-using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 

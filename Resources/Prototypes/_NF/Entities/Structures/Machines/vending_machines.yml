@@ -9,8 +9,6 @@
     offState: off
     brokenState: broken
     normalState: normal-unshaded
-  - type: Advertise
-    pack: AmmoVendAds
   - type: Sprite
     sprite: Structures/Machines/VendingMachines/ammo.rsi
     layers:

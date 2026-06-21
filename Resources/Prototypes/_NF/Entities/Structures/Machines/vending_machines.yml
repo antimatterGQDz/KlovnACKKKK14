@@ -1,37 +1,19 @@
 - type: entity
-  parent: VendingMachine
   id: VendingMachineSecCoin
-  name: Hot & Ready
-  description: You feel an overwhelming urge to shitsec upon viewing this machine.
+  parent: BaseStructure
+  name: security coin vending machine
   components:
-  - type: VendingMachine
-    pack: Null
-    cashSlot: Null
-    offState: off
-    brokenState: broken
-    normalState: normal-unshaded
-  - type: DatasetVocalizer
-    dataset: CondimentVendAds
-  - type: SpeakOnUIClosed
-    pack: GenericVendGoodbyes
+  - type: InteractionOutline
   - type: Sprite
-    sprite: Structures/Machines/VendingMachines/ammo.rsi
+    sprite: Structures/Machines/vending.rsi
     layers:
-    - state: "off"
-      map: ["enum.VendingMachineVisualLayers.Base"]
-    - state: "off"
-      map: ["enum.VendingMachineVisualLayers.BaseUnshaded"]
-      shader: unshaded
-    - state: panel
-      map: ["enum.WiresVisualLayers.MaintenancePanel"]
-  - type: UserInterface
-    interfaces:
-      enum.StoreUiKey.Key:
-        type: StoreBoundUserInterface
-  - type: ActivatableUI
-    key: enum.StoreUiKey.Key
+    - state: secure
   - type: Store
     balance:
       Telecrystal: 5 # Small initial balance
+  - type: UserInterface
+    interfaces:
+    - key: enum.StoreUiKey.Key
+      type: StoreBoundUserInterface
   - type: AccessReader
     access: [["NuclearOperative"], ["SyndicateAgent"]]

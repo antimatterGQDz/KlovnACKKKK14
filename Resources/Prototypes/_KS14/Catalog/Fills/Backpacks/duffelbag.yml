@@ -1,5 +1,5 @@
 - type: entity
-  parent: ClothingBackpackDuffelSecurityCartridge
+  parent: ClothingBackpackDuffelSecurity
   id: ClothingBackpackDuffelSecurityFilledWantedListCartridge
   name: WantedList Cartridge bundle
   description: "Five WantedList cartridges for new cadets or Officers who 'misplaced' their PDAs around the clown."

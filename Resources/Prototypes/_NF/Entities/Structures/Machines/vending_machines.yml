@@ -5,9 +5,9 @@
   components:
   - type: InteractionOutline
   - type: Sprite
-    sprite: Structures/Machines/vending.rsi
+    sprite: Structures/Machines/VendingMachines/ammo.rsi
     layers:
-    - state: secure
+    - state: off
   - type: Store
     balance:
       Telecrystal: 5 # Small initial balance

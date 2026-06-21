@@ -53,7 +53,7 @@ sec-cadet-bundle-name = New Cadets bundle
 sec-cadet-bundle-desc = Four cadet PDAs, stun batons, flashes, and cuffs for building your personal army
 
 sec-compressi-bundle-name = CompressiSuit bundle
-sec-compressi-bundle = Two new prototype compressing suits from NT, comes with a large number of oxygen tanks
+sec-compressi-bundle-desc = Two new prototype compressing suits from NT, comes with a large number of oxygen tanks
 
 sec-swissarmyknife-name = Swiss Army Knife
 sec-swissarmyknife-desc = A multi-tool used by mercs, this one is made of titanium alloy to allow prying doors

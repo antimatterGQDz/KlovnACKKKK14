@@ -25,6 +25,11 @@
   displayName: store-currency-display-dna
   canWithdraw: false
 
+- type: currency
+  id: Nanocoins
+  displayName: store-currency-display-nanocoin
+  canWithdraw: true
+
 #debug
 - type: currency
   id: DebugDollar

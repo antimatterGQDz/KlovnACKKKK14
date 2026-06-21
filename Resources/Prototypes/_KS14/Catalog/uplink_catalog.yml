@@ -1,9 +1,129 @@
 - type: listing
   id: SecTokenMk58
   name: Mk58
-  description: The classic.
+  description: The classic sidearm of every self-respecting Officer, make sure to clean these well because they rust easy. Chambered in .35 auto.
   productEntity: WeaponPistolMk58
   cost:
     Securitytoken: 5
   categories:
   - SecWeaponry
+
+- type: listing
+  id: SecTokenN1984
+  name: N1984
+  description: The standard weapon of CentComm Officers though not restricted for use of standard firearm use, chambered in gods caliber .45 magnum.
+  productEntity: WeaponPistolN1984
+  cost:
+    Securitytoken: 8
+  categories:
+  - SecWeaponry
+
+- type: listing
+  id: SecTokenSvalinn
+  name: Svalinn Laser Pistol
+  description: Cheap and mass-produced laser pistol, it saves you money to use one of these instead of balistics and you can fire through windows.
+  productEntity: WeaponLaserSvalinn
+  cost:
+    Securitytoken: 4
+  categories:
+  - SecWeaponry
+
+- type: listing
+  id: SecTokenInspector
+  name: Inspector Revolver
+  description: The standard revolver made across the universe, revolvers dont drop casings when shooting so the janitor will thank you.
+  productEntity: WeaponRevolverInspector
+  cost:
+    Securitytoken: 5
+  categories:
+  - SecWeaponry
+
+- type: listing
+  id: SecTokenMagazinePistol
+  name: .35 Auto Magazine
+  description: Standard magazine for standard issue pistols, nothing special.
+  productEntity: MagazinePistol
+  cost:
+    Securitytoken: 2
+  categories:
+  - SecAmmo
+
+- type: listing
+  id: SecTokenMagazinePistolIncendiary
+  name: .35 Auto Magazine Incendiary
+  description: Standard magazine for standard issue pistols, this one lights people on fire.
+  productEntity: MagazinePistolIncendiary
+  cost:
+    Securitytoken: 4
+  categories:
+  - SecAmmo
+
+- type: listing
+  id: SecTokenMagazineMagnum
+  name: .45 Magnum Magazine
+  description: Gods caliber, for the N1984.
+  productEntity: MagazineMagnum
+  cost:
+    Securitytoken: 3
+  categories:
+  - SecAmmo
+  
+- type: listing
+  id: SecTokenMagazineMagnumAP
+  name: .45 Magnum Magazine AP
+  description: Gods caliber, for the N1984. This one is armor-piercing.
+  productEntity: MagazineMagnumAP
+  cost:
+    Securitytoken: 7
+  categories:
+  - SecAmmo
+
+- type: listing
+  id: SecTokenSpeedLoaderMagnum
+  name: Revolver Speedloader
+  description: Gods caliber, for revolvers.
+  productEntity: SpeedLoaderMagnum
+  cost:
+    Securitytoken: 3
+  categories:
+  - SecAmmo
+
+- type: listing
+  id: SecTokenSpeedLoaderMagnumAP
+  name: Revolver Speedloader AP
+  description: Gods caliber, for revolvers. This one is armor-piercing.
+  productEntity: SpeedLoaderMagnumAP
+  cost:
+    Securitytoken: 5
+  categories:
+  - SecAmmo
+  
+- type: listing
+  id: SecTokenSecurityHardsuit
+  name: Security Hardsuit
+  description: Extra hardsuit for an Officer, doesnt come with an oxygen tank.
+  productEntity: ClothingOuterHardsuitSecurity
+  cost:
+    Securitytoken: 8
+  categories:
+  - SecWearables
+
+- type: listing
+  id: SecTokenTrackingImplanter
+  name: Tracking Implant
+  description: Standard issue brainchip for tracking peoples exact location at all times via a crew console, this was first invented by the CIA on Earth in 20ϪϪ.
+  productEntity: TrackingImplanter
+  cost:
+    Securitytoken: 2
+  categories:
+  - SecMisc
+
+- type: listing
+  id: SecTokenMedkit
+  name: Medkit
+  description: Standard issue NT medkit, can patch a bullet wound but probably not a C4 victim.
+  productEntity: MedkitFilled
+  cost:
+    Securitytoken: 2
+  categories:
+  - SecMedical

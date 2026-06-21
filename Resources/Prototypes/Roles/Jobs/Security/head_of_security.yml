@@ -52,6 +52,7 @@
     back:
     - Flash
     - MagazinePistol
+    - Securitytoken10
 
 - type: chameleonOutfit
   id: HeadOfSecurityChameleonOutfit

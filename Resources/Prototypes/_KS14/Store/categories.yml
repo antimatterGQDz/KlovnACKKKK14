@@ -2,3 +2,23 @@
   id: SecWeaponry
   name: store-category-weapons
   priority: 0
+
+- type: storeCategory
+  id: SecWearables
+  name: store-category-wearables
+  priority: 2
+
+- type: storeCategory
+  id: SecMedical
+  name: store-category-medical
+  priority: 3
+
+- type: storeCategory
+  id: SecAmmo
+  name: store-category-ammo
+  priority: 4
+
+- type: storeCategory
+  id: SecMisc
+  name: store-category-misc
+  priority: 5

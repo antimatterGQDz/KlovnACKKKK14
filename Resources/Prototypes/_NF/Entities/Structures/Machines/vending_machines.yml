@@ -8,12 +8,12 @@
     sprite: Structures/Machines/VendingMachines/ammo.rsi
     layers:
     - state: off
-  - type: Store
-    balance:
-      Telecrystal: 5 # Small initial balance
   - type: UserInterface
     interfaces:
-    - key: enum.StoreUiKey.Key
-      type: StoreBoundUserInterface
-  - type: AccessReader
-    access: [["NuclearOperative"], ["SyndicateAgent"]]
+      enum.StoreUiKey.Key:
+        type: StoreBoundUserInterface
+  - type: ActivatableUI
+    key: enum.StoreUiKey.Key
+  - type: Store
+    balance:
+      Telecrystal: 0

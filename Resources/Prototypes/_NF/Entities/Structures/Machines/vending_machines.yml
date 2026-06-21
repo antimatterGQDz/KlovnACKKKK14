@@ -1,5 +1,5 @@
 - type: entity # Mono contravend used as a base
-  parent: [BaseStructureDisableAnchoring, StorePresetUplink, VendingMachine]
+  parent: [StorePresetUplink, VendingMachine]
   id: VendingMachineSecCoin
   name: PrepareVend
   description: All the tools you need to shitsec!

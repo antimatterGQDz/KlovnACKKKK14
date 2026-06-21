@@ -1,14 +1,18 @@
-- type: entity # Mono contravend used as a base
-  parent: [StorePresetUplink, VendingMachine]
+- type: entity
+  parent: VendingMachine
   id: VendingMachineSecCoin
-  name: PrepareVend
-  description: All the tools you need to shitsec!
+  name: Hot & Ready
+  description: You feel an overwhelming urge to shitsec upon viewing this machine.
   components:
   - type: VendingMachine
     cashSlot: Null
     offState: off
     brokenState: broken
     normalState: normal-unshaded
+  - type: DatasetVocalizer
+    dataset: CondimentVendAds
+  - type: SpeakOnUIClosed
+    pack: GenericVendGoodbyes
   - type: Sprite
     sprite: Structures/Machines/VendingMachines/ammo.rsi
     layers:
@@ -19,10 +23,6 @@
       shader: unshaded
     - state: panel
       map: ["enum.WiresVisualLayers.MaintenancePanel"]
-  - type: PointLight
-    radius: 1.5
-    energy: 1.3
-    color: "#ad2c2b"
   - type: UserInterface
     interfaces:
       enum.StoreUiKey.Key:

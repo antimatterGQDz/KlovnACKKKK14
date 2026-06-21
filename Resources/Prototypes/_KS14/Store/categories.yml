@@ -1,24 +1,24 @@
 - type: storeCategory
   id: SecWeaponry
-  name: Weapons
+  name: sec-store-category-weapons
   priority: 0
 
 - type: storeCategory
   id: SecWearables
-  name: Wearables
+  name: sec-store-category-wearables
   priority: 2
 
 - type: storeCategory
   id: SecMedical
-  name: Medical
+  name: sec-store-category-medical
   priority: 3
 
 - type: storeCategory
   id: SecAmmo
-  name: Ammo
+  name: sec-store-category-ammo
   priority: 4
 
 - type: storeCategory
   id: SecMisc
-  name: Misc
+  name: sec-store-category-misc
   priority: 5

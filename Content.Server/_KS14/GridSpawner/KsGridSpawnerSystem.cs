@@ -13,19 +13,36 @@ public sealed class KsGridSpawnerSystem : EntitySystem
     [Dependency] private readonly TransformSystem _transformSystem = default!;
     [Dependency] private readonly ShuttleSystem _shuttleSystem = default!;
 
+    // Gridspawner shouldn't rely on MapInitEvent because rn its used to load saltern
+    //      via a gridspawner on its planetmap
+
     public override void Initialize()
     {
         base.Initialize();
 
-        SubscribeLocalEvent<KsGridSpawnerComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<KsGridSpawnerComponent, ComponentStartup>(OnStartup);
+        SubscribeLocalEvent<KsGridSpawnerComponent, EntityUnpausedEvent>(OnEntityUnpaused);
     }
 
-    private void OnMapInit(Entity<KsGridSpawnerComponent> entity, ref MapInitEvent args)
+    private void OnStartup(Entity<KsGridSpawnerComponent> entity, ref ComponentStartup args)
     {
-        var transformComponent = Transform(entity);
+        if (Paused(entity))
+            return;
+
+        Doit(entity);
+    }
+
+    private void OnEntityUnpaused(Entity<KsGridSpawnerComponent> entity, ref EntityUnpausedEvent args)
+    {
+        Doit(entity);
+    }
+
+    private void Doit(Entity<KsGridSpawnerComponent, TransformComponent?> entity)
+    {
+        var transformComponent = entity.Comp2 ?? Transform(entity);
         var position = _transformSystem.GetWorldPosition(transformComponent);
 
-        if (entity.Comp.SpawnRange is { } spawnRange)
+        if (entity.Comp1.SpawnRange is { } spawnRange)
         {
             var minSq = spawnRange.X * spawnRange.X;
             var maxSq = spawnRange.Y * spawnRange.Y;
@@ -39,9 +56,9 @@ public sealed class KsGridSpawnerSystem : EntitySystem
             position = new(MathF.Floor(position.X), MathF.Floor(position.Y));
         }
 
-        if (_mapLoaderSystem.TryLoadGrid(transformComponent.MapID, entity.Comp.Path, out var gridEntity, offset: position, rot: entity.Comp.Rotation))
+        if (_mapLoaderSystem.TryLoadGrid(transformComponent.MapID, entity.Comp1.Path, out var gridEntity, offset: position, rot: entity.Comp1.Rotation))
             _shuttleSystem.Smimsh(gridEntity.Value.Owner, grid: gridEntity.Value.Comp);
 
-        RemComp(entity, entity.Comp);
+        RemComp(entity, entity.Comp1);
     }
 }

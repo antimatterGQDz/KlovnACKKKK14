@@ -1,0 +1,10 @@
+- type: entity
+  parent: ClothingHeadEVAHelmetBase
+  id: ClothingHeadHelmetCompressi
+  name: Compressi Helmet
+  description: The helmet of a new softsuit developed by NT that compresses itself automatically upon removal, the helmet doesnt compress however.
+  components:
+  - type: Sprite
+    sprite: Clothing/Head/Helmets/ancientvoidsuit.rsi
+  - type: Clothing
+    sprite: Clothing/Head/Helmets/ancientvoidsuit.rsi

@@ -14,8 +14,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4.2.2
-      - name: Setup Submodule
-        run: git submodule update --init
+        with: # KS14: params
+          fetch-depth: 1 # KS14: made shallow, so its faster
+          persist-credentials: true # KS14: hidden submodules
+          token: ${{ secrets.SECREPO_PAT }} # KS14: hidden submodules
+          submodules: recursive # KS14
+
       - name: Pull engine updates
         uses: space-wizards/submodule-dependency@v0.1.5
       - name: Install Python dependencies

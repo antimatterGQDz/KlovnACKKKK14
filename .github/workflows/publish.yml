@@ -25,8 +25,11 @@ jobs:
       run: sudo apt-get install -y python3-paramiko python3-lxml
 
     - uses: actions/checkout@v4.2.2
-      with:
-        submodules: 'recursive'
+      with: # KS14: params
+        fetch-depth: 1 # KS14: made shallow, so its faster
+        persist-credentials: true # KS14: hidden submodules
+        token: ${{ secrets.SECREPO_PAT }} # KS14: hidden submodules
+        submodules: recursive # KS14
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v4.1.0
       with:

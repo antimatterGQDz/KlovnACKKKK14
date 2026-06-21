@@ -24,6 +24,7 @@ jobs:
         fetch-depth: 1 # KS14: made shallow, so its faster
         persist-credentials: true # KS14: hidden submodules
         token: ${{ secrets.SECREPO_PAT }} # KS14: hidden submodules
+        submodules: recursive # KS14
 
     - name: Setup Submodule
       run: |

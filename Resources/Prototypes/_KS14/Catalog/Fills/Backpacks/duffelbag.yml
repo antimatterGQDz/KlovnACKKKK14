@@ -13,7 +13,7 @@
 
 - type: entity
   parent: ClothingBackpackDuffelSecurityCartridge
-  id: ClothingBackpackDuffelSecurityFilledShotgun
+  id: ClothingBackpackDuffelSecurityFilledCompressiSuit
   name: CompressiSuit bundle
   description: "Comes with two CompressiSuits, six double oxygen tanks, and one nitrogen tank."
   components:

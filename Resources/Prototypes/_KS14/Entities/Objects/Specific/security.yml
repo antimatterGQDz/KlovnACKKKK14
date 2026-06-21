@@ -1,0 +1,47 @@
+- type: entity # ported from mono award
+  name: Security Token
+  parent: BaseItem
+  id: Securitytoken
+  suffix: 20 TC
+  description: A token awarded to NT personnel for turning in contraband. It can be exchanged in an security coin vending machine for a variety of law enforcement tools.
+  components:
+  - type: Sprite
+    sprite: Objects/Specific/Syndicate/telecrystal.rsi
+    state: telecrystal
+  - type: Item
+    sprite: Objects/Specific/Syndicate/telecrystal.rsi
+    size: Tiny
+  - type: Stack
+    count: 20
+    stackType: Telecrystal
+  - type: StaticPrice
+    price: 0
+  - type: StackPrice
+    price: 100
+  - type: Currency
+    price:
+      Securitytoken: 1
+
+- type: entity # ported from mono award
+  parent: SplenduriumCoin
+  id: Securitytoken1
+  suffix: 1 TC
+  components:
+  - type: Stack
+    count: 1
+
+- type: entity # ported from mono award
+  parent: SplenduriumCoin
+  id: Securitytoken5
+  suffix: 5 TC
+  components:
+  - type: Stack
+    count: 5
+
+- type: entity # ported from mono award
+  parent: SplenduriumCoin
+  id: Securitytoken10
+  suffix: 10 TC
+  components:
+  - type: Stack
+    count: 10

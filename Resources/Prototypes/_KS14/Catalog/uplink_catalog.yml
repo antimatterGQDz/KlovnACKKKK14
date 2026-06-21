@@ -11,7 +11,7 @@
 - type: listing
   id: SecTokenN1984
   name: N1984
-  description: The standard weapon of CentComm Officers though not restricted for use of standard firearm use, chambered in gods caliber .45 magnum.
+  description: The standard weapon of CentComm now given clearance for Officers, chambered in gods caliber .45 magnum.
   productEntity: WeaponPistolN1984
   cost:
     Securitytoken: 12
@@ -31,7 +31,7 @@
 - type: listing
   id: SecTokenInspector
   name: Inspector Revolver
-  description: The standard revolver made across the universe, revolvers dont drop casings when shooting so the janitor will thank you.
+  description: The standard revolver made across the universe, revolvers dont drop casings. Chambered in .45 magnum.
   productEntity: WeaponRevolverInspector
   cost:
     Securitytoken: 5
@@ -111,7 +111,7 @@
 - type: listing
   id: SecTokenTrackingImplanter
   name: Tracking Implant
-  description: Standard issue brainchip for tracking peoples exact location at all times via a crew console, this was first invented by the CIA on Earth in 20ϪϪ.
+  description: Standard issue brainchip for tracking people via the monitor console, this was first invented by the CIA in 20ϪϪ.
   productEntity: TrackingImplanter
   cost:
     Securitytoken: 2

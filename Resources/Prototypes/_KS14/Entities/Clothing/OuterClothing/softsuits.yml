@@ -1,0 +1,18 @@
+- type: entity
+  parent: ClothingOuterEVASuitBase
+  id: ClothingOuterHardsuitCompressiSuit
+  name: CompressiSuit
+  description: A new softsuit developed by NT that compresses itself automatically upon removal, may cause skin irritation.
+  components:
+  - type: Sprite
+    sprite: Clothing/OuterClothing/Suits/ancient_voidsuit.rsi
+  - type: Clothing
+    sprite: Clothing/OuterClothing/Suits/ancient_voidsuit.rsi
+  - type: ClothingSpeedModifier
+    walkModifier: 0.85
+    sprintModifier: 0.85
+  - type: HeldSpeedModifier
+  - type: Item
+    size: Large
+    shape:
+    - 0,0,2,1

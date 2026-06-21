@@ -193,3 +193,13 @@
     Securitytoken: 8
   categories:
   - SecWearables
+
+- type: listing
+  id: ClothingBackpackDuffelSecurityFilledCompressiSuit
+  name: CompressiSuit bundle
+  description: A multi-tool used by mercs, this one is made of titanium alloy to allow prying doors
+  productEntity: SwissArmyKnife
+  cost:
+    Securitytoken: 8
+  categories:
+  - SecMisc

@@ -23,7 +23,7 @@
       Securitytoken: 1
 
 - type: entity # ported from mono award
-  parent: SplenduriumCoin
+  parent: Securitytoken
   id: Securitytoken1
   suffix: 1 TC
   components:
@@ -31,7 +31,7 @@
     count: 1
 
 - type: entity # ported from mono award
-  parent: SplenduriumCoin
+  parent: Securitytoken
   id: Securitytoken5
   suffix: 5 TC
   components:
@@ -39,7 +39,7 @@
     count: 5
 
 - type: entity # ported from mono award
-  parent: SplenduriumCoin
+  parent: Securitytoken
   id: Securitytoken10
   suffix: 10 TC
   components:

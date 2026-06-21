@@ -1,0 +1,31 @@
+- type: entity
+  parent: ClothingBackpackDuffelSecurityCartridge
+  id: ClothingBackpackDuffelSecurityFilledWantedListCartridge
+  name: WantedList Cartridge bundle
+  description: "Five WantedList cartridges for new cadets or Officers who 'misplaced' their PDAs around the clown."
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: WantedListCartridge
+          amount: 5
+
+- type: entity
+  parent: ClothingBackpackDuffelSecurityCartridge
+  id: ClothingBackpackDuffelSecurityFilledShotgun
+  name: CompressiSuit bundle
+  description: "Comes with two CompressiSuits, six double oxygen tanks, and one nitrogen tank."
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: ClothingOuterHardsuitCompressiSuit
+          amount: 2
+        - id: ClothingHeadHelmetCompressi
+          amount: 2
+        - id: DoubleEmergencyOxygenTankFilled
+          amount: 6
+        - id: DoubleEmergencyNitrogenTankFilled
+          amount: 1

@@ -25,9 +25,9 @@ jobs:
         persist-credentials: true # KS14: hidden submodules
         token: ${{ secrets.SECREPO_PAT }} # KS14: hidden submodules
 
-    - name: Setup Submodule # KS14: Only include RobustToolbox submod, TODO LCDC: fix workflow
+    - name: Setup Submodule
       run: |
-        git submodule update --init --recursive RobustToolbox
+        git submodule update --init --recursive
 
     - name: Pull engine updates
       uses: space-wizards/submodule-dependency@v0.1.5

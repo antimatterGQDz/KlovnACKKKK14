@@ -11,12 +11,16 @@
 - type: listing
   id: SecTokenN1984
   name: N1984
-  description: The standard weapon of CentComm now given clearance for Officers, chambered in gods caliber .45 magnum
+  description: The standard weapon of CentComm now given clearance for the HOS, chambered in gods caliber .45 magnum
   productEntity: WeaponPistolN1984
   cost:
     Securitytoken: 12
   categories:
   - SecWeaponry
+  conditions:
+  - !type:BuyerJobCondition
+    whitelist:
+    - HeadOfSecurity
 
 - type: listing
   id: SecTokenSvalinn
@@ -67,6 +71,10 @@
     Securitytoken: 3
   categories:
   - SecAmmo
+  conditions:
+  - !type:BuyerJobCondition
+    whitelist:
+    - HeadOfSecurity
   
 - type: listing
   id: SecTokenMagazineMagnumAP
@@ -77,6 +85,10 @@
     Securitytoken: 7
   categories:
   - SecAmmo
+  conditions:
+  - !type:BuyerJobCondition
+    whitelist:
+    - HeadOfSecurity
 
 - type: listing
   id: SecTokenSpeedLoaderMagnum
@@ -160,13 +172,17 @@
 
 - type: listing
   id: SecTokenWantedListCartridgeBundle
-  name: WantedList Cartridge bundle
-  description: Five WantedList cartridges for new cadets or Officers who misplaced their PDAs around the clown
+  name: New Cadets bundle
+  description: Four cadet PDAs, stun batons, flashes, and cuffs for building your personal army
   productEntity: ClothingBackpackDuffelSecurityFilledWantedListCartridge
   cost:
-    Securitytoken: 3
+    Securitytoken: 6
   categories:
-  - SecWeaponry
+  - SecMisc
+  conditions:
+  - !type:BuyerJobCondition
+    whitelist:
+    - HeadOfSecurity
 
 - type: listing
   id: ClothingBackpackDuffelSecurityFilledCompressiSuit
@@ -176,4 +192,4 @@
   cost:
     Securitytoken: 8
   categories:
-  - SecWeaponry
+  - SecWearables

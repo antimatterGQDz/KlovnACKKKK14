@@ -229,7 +229,7 @@ namespace Content.Server.GameTicking
             // KS14 Start: dynamically get set of grids that mightve been added during mapinit
             // e.g., saltern uses this because it randomspawns the station grid (lol)
             // bleeding edge technology
-            var ksEqe = EntityQueryEnumerator<Robust.Shared.Map.Components.MapGridComponent, TransformComponent>();
+            var ksEqe = AllEntityQuery<Robust.Shared.Map.Components.MapGridComponent, TransformComponent>();
             while (ksEqe.MoveNext(out var uid, out var mapGridComponent, out var transformComponent))
             {
                 if (transformComponent.MapID != mapId)

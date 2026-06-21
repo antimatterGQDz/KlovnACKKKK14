@@ -196,6 +196,16 @@ public sealed partial class ChatSystem : SharedChatSystem
         bool shouldCapitalizeTheWordI = (!CultureInfo.CurrentCulture.IsNeutralCulture && CultureInfo.CurrentCulture.Parent.Name == "en")
             || (CultureInfo.CurrentCulture.IsNeutralCulture && CultureInfo.CurrentCulture.Name == "en");
 
+        // KS14 Start
+        if (player is { })
+        {
+            var ksEv = new KsSanitiseMessageEvent(message, player);
+            RaiseLocalEvent(ref ksEv);
+
+            message = ksEv.Message;
+        }
+        // KS14 End
+
         message = SanitizeInGameICMessage(source, message, out var emoteStr, shouldCapitalize, shouldPunctuate, shouldCapitalizeTheWordI);
 
         // Was there an emote in the message? If so, send it.
@@ -707,7 +717,7 @@ public sealed partial class ChatSystem : SharedChatSystem
             return false;
 
         // KS14 Start
-        var ksEv = new KsBeforeMessageSent(message, false, player);
+        var ksEv = new KsBeforeMessageSentEvent(message, false, player);
         RaiseLocalEvent(ref ksEv);
 
         if (ksEv.Cancelled)
@@ -889,5 +899,13 @@ public record ExpandICChatRecipientsEvent(EntityUid Source, float VoiceRange, Di
 ///     Broadcasted to check whether a message can be sent.
 /// </summary>
 [ByRefEvent]
-public record struct KsBeforeMessageSent(string Message, bool Cancelled, ICommonSession Session);
+public record struct KsBeforeMessageSentEvent(string Message, bool Cancelled, ICommonSession Session);
+// KS14 End
+
+// KS14 Start
+/// <summary>
+///     Broadcasted to mutate a message that is being sent IC or something.
+/// </summary>
+[ByRefEvent]
+public record struct KsSanitiseMessageEvent(string Message, ICommonSession Session);
 // KS14 End

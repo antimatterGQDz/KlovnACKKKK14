@@ -1,8 +1,22 @@
 - type: entity
   id: VendingMachineSecCoin
   parent: [BaseStructure, StorePresetSecToken]
-  name: security coin vending machine
+  name: Bluespace Security Vendor
+  description: State of the art bluespace teleportation vendor for obtaining security gear. It is made out plastitanium and looks almost indestructible, runs off an internal nuclear reactor.
+  suffix: sec, vendor, coin
   components:
+  - type: Anchorable
+    delay: 20
+  - type: RadiationBlocker
+    resistance: 5
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: StructuralMetallicStrong
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 1000 # Unbothered aryan machine, NT only provides ONE of these due to its cost so if syndicates manage to break it, its gone!
   - type: InteractionOutline
   - type: Sprite
     sprite: Structures/Machines/VendingMachines/ammo.rsi

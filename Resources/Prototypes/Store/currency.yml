@@ -26,8 +26,8 @@
   canWithdraw: false
 
 - type: currency
-  id: Nanocoins
-  displayName: store-currency-display-nanocoin
+  id: Securitytoken
+  displayName: store-currency-display-securitytoken
   canWithdraw: true
 
 #debug

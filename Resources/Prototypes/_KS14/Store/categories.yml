@@ -1,0 +1,4 @@
+- type: storeCategory
+  id: SecWeaponry
+  name: store-category-weapons
+  priority: 0

@@ -1,0 +1,9 @@
+- type: listing
+  id: UplinkAccessBreaker
+  name: uplink-access-breaker-name
+  description: uplink-access-breaker-desc
+  productEntity: AccessBreaker
+  cost:
+    Securitytoken: 12
+  categories:
+  - SecWeaponry

@@ -2,7 +2,7 @@
   name: MR-8C BR
   parent: [BaseWeaponRifle, BaseGunWieldable, BaseSecurityCommandContraband]
   id: WeaponRifleMR8C
-  description: The NT spin on the syndicates Hristov with an extended mag, costs thrirty thousand Spesos to manufacture the atomically perfect parts.
+  description: The NT spin on the syndicates Hristov with an extended mag, costs thirty thousand Spesos to manufacture the atomically perfect parts.
   components:
   - type: CursorOffsetRequiresWield
   - type: EyeCursorOffset

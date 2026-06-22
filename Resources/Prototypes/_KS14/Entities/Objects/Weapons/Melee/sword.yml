@@ -1,0 +1,29 @@
+- type: entity
+  name: Security Machete
+  parent: [ BaseSword, BaseSecurityContraband ]
+  id: SecMachete
+  description: A large, vicious looking blade. This one has security colors and its weight has been shifted to allow throwing.
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Melee/machete.rsi
+  - type: MeleeWeapon
+    damage:
+      types:
+        Slash: 22
+    soundHit:
+      path: /Audio/Weapons/bladeslice.ogg
+  - type: Item
+    storedSprite:
+      state: storage
+      sprite: Objects/Weapons/Melee/machete.rsi
+    shape:
+    - 0,0,0,2
+  - type: DisarmMalus
+  - type: ThrowingAngle
+    angle: 225
+  - type: LandAtCursor
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Slash: 23
+  - type: EmbeddableProjectile

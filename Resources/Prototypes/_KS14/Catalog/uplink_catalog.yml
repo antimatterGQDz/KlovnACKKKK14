@@ -225,7 +225,7 @@
   - SecWeaponry
 
   - type: listing
-  id: SecTokenMagazineDMR
+  id: SecTokenMagazineRifleMR8C
   name: sec-mr8c-magazine-name
   description: sec-mr8c-magazine-desc
   productEntity: MagazineDMR

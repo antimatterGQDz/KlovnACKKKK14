@@ -223,3 +223,13 @@
     Securitytoken: 85
   categories:
   - SecWeaponry
+
+  - type: listing
+  id: SecTokenMagazineDMR
+  name: sec-mr8c-magazine-name
+  description: sec-mr8c-magazine-desc
+  productEntity: MagazineDMR
+  cost:
+    Securitytoken: 15
+  categories:
+  - SecWeaponry

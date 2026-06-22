@@ -200,6 +200,16 @@
   description: sec-swissarmyknife-desc
   productEntity: SwissArmyKnife
   cost:
-    Securitytoken: 8
+    Securitytoken: 5
   categories:
   - SecMisc
+
+- type: listing
+  id: SecTokenSecMachete
+  name: sec-machete-name
+  description: sec-machete-desc
+  productEntity: SecMachete
+  cost:
+    Securitytoken: 8
+  categories:
+  - SecWeaponry

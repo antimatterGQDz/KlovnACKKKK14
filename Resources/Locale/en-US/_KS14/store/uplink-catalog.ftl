@@ -61,6 +61,9 @@ sec-swissarmyknife-desc = A multi-tool used by mercs, this one is made of titani
 sec-machete-name = Security Machete
 sec-machete-desc = The classic now painted in security colors, its weight has been shifted to allow throwing
 
+sec-mr8c-name = MR8C Battle Rifle
+sec-mr8c-desc = The NT take on the syndicates Hristov, having a 20 round Anti Materiel magazine
+
 sec-store-category-misc = Misc
 sec-store-category-wearables = Wearables
 sec-store-category-medical = Medical

@@ -64,6 +64,9 @@ sec-machete-desc = The classic now painted in security colors, its weight has be
 sec-mr8c-name = MR8C Battle Rifle
 sec-mr8c-desc = The NT take on the syndicates Hristov, having a 20 round Anti Materiel magazine
 
+sec-mr8c-magazine-name = MR8C Magazine
+sec-mr8c-magazine-desc = 20 round Anti Materiel magazine
+
 sec-store-category-misc = Misc
 sec-store-category-wearables = Wearables
 sec-store-category-medical = Medical

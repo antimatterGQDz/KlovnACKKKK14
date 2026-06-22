@@ -213,3 +213,13 @@
     Securitytoken: 8
   categories:
   - SecWeaponry
+
+- type: listing
+  id: SecTokenWeaponRifleMR8C
+  name: sec-mr8c-name
+  description: sec-mr8c-desc
+  productEntity: WeaponRifleMR8C
+  cost:
+    Securitytoken: 85
+  categories:
+  - SecWeaponry
